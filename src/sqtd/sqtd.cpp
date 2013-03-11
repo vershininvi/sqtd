@@ -34,11 +34,13 @@ void printMap(map <string, map<string,long long> > *inmap,ostream *outfile ){
 }
 
 int main(int argc,char**argv){
-  tlog.put(3,"Запуск программы");  
-  pid_t pid;
+  tlog.put(1,"Запуск программы");  
+  pid_t pid,sid;
+  
   bool configured;
   int confErrCount;
-  
+  int iret;  
+
   //Регистрация обработчиков сигналов;
   void (*prev_fn)(int);
   canwork= true; 
@@ -61,35 +63,62 @@ int main(int argc,char**argv){
 
   if(daemonMode){
     rlimit rl;
+    tlog.put(1,"Переход в режим демона");
+    tlog.put(2,"Получение списка открытых файлов");
     if (getrlimit(RLIMIT_NOFILE, &rl) < 0) {
       tlog.put(0, "Невозможно получить список открытых файлов");
       tlog.print(); 
       exit (1);  
     } 
     
-    if(pid=fork()<0){
+    tlog.put(2,"Запуск демона");
+    pid=fork();
+
+    if(pid<0){
       tlog.put(0, "Запуск в режиме демона невозможен");
       tlog.print(); 
-      
       exit(1);
     } 
-    else if (pid != 0)  exit(0);
-    
-    setsid();
-    for (unsigned int i = 0; i < rl.rlim_max; i++) close(i); 
+
+    if (pid > 0){
+       tlog.put(2,"Открытие файла идентификатора процесса");
+       ofstream pidfile(conf->getPidFile().c_str(),ios_base::out);
+       if (!pidfile) {
+         tlog.put(0, "Невозможно открыть файл идентификатора процесса" +conf->getPidFile() ) ; 
+         tlog.print();
+       }
+       tlog.put(2,"Вывод идентификатора процесса в файл");
+       pidfile << pid<<endl;
+       tlog.put(2,"Закрытие файла идентификатора процесса");
+       pidfile.close();
+       exit(0);
+    }
+
+    tlog.put(2,"Установка идентификатора сессии");
+    sid=setsid();
+
+    tlog.put(2,"Закрытие открытых файлов");
+    for (unsigned int i = 0; i < rl.rlim_max; i++) close(i);     
+
+    tlog.put(2,"Открытие файла лога");
     if (!tlog.setTarget(conf->getLogFile())) {
-      tlog.put(0, "Невозможно открыть файл лога") ; 
+      tlog.put(0, "Невозможно открыть файл лога"+conf->getLogFile() ) ; 
       tlog.print();
       exit(1);
 
     }
-    chdir("/");
+     
+  
+
+    tlog.put(2,"Смена текущей директории");
+
+    iret=chdir("/");
   }       
 
-
+ 
   access_log *al= trc.getAccessLog();
   al->setFileName(conf->getAccessLogFile());
-
+  
   while (canwork){
     tlog.print();
     if(!configured){
@@ -121,7 +150,7 @@ int main(int argc,char**argv){
     allowfile.close();
     
 
-    system(conf->getActionScript().c_str());
+    iret=system(conf->getActionScript().c_str());
     configured=conf->reconfig(cmd.getConfigFile())&&conf->check();
 
     

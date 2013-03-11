@@ -20,6 +20,7 @@ class tracon_conf{
   string     _actionScript;
   string     _denyFile;
   string     _logFile;
+  string     _pidFile;
   map <string,int> _keyValues;
   map< string, map <string,long long> > _limits; 
   vector <string> _allowList;
@@ -35,7 +36,7 @@ class tracon_conf{
    }
 
   bool checkKeyValue(string key ){
-    tlog.put(1, "Проверка параметра конфигурации");
+    tlog.put(1, "Проверка параметра конфигурации" + key);
     bool result;
     string message="";
     switch(_keyValues[key]){
@@ -67,6 +68,11 @@ class tracon_conf{
     case 8: 
       result=(_logFile.compare("")!=0); 
       message= "Не задано имя файла лога \nПример :  logFile /tmp/log.txt";
+      break;
+
+    case 9: 
+      result=(_pidFile.compare("")!=0); 
+      message= "Не задано имя файла процесса \nПример :  pidFile /tmp/sqtd.pid";
       break;
 
     default:
@@ -183,6 +189,7 @@ class tracon_conf{
     _keyValues["LIMIT"]=6;
     _keyValues["DENYFILE"]=7;
     _keyValues["LOGFILE"]=8;
+    _keyValues["PIDFILE"]=9;
 
     reinit();
 
@@ -238,6 +245,10 @@ class tracon_conf{
       case 8:
 	ss >> _logFile;    
 	break;
+      case 9:
+	ss >> _pidFile;    
+	break;
+
       default :
 	tlog.put(0,"Ошибка в строке конфигуационного файла " +os.str()); 
         tlog.put(0,"Неизвестное значение ключа");
@@ -269,7 +280,7 @@ class tracon_conf{
   string                                 getDenyFile       () {return _denyFile;}
   vector<string>                        *getAllowList      () {return &_allowList;}
   string                                 getLogFile        () {return _logFile;}
-
+  string                                 getPidFile        () {return _pidFile;}
 };
 #endif
 

@@ -1,0 +1,7 @@
+To install programm
+./configure
+make 
+make install
+
+To uninstall programm
+make uninstall

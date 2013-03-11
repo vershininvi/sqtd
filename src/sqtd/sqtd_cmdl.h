@@ -49,9 +49,9 @@ man tracon\n" << endl;
   bool get(int argc,char**argv){
     bool result;
     result=true;
-    tlog.
+    
 
-    tlog.put(3,"Анализ параметров командной строки");
+    tlog.put(1,"Анализ параметров командной строки");
     if (argc<2){
       tlog.setLevel(3);  
       tlog.print();
@@ -63,13 +63,13 @@ man tracon\n" << endl;
       switch(_params[argv[i]]){
       case 1:
 	if (++i < argc)  {
-          tlog.put(3, "Установка имени файла конфигурации '" +  _config_file  + "'");
+          tlog.put(2, "Установка имени файла конфигурации '" +  _config_file  + "'");
 	  _config_file=argv[i];
-          tlog.put(3, "Файла конфигурации '" +  _config_file  + "' установлен");
+          tlog.put(2, "Файла конфигурации '" +  _config_file  + "' установлен");
 	  break;
 	} 
 	else{
-          tlog.setLevel(3);  
+          tlog.setLevel(2);  
           tlog.print();
           cout << "Не указано имя файла конфигурации"<< endl;  
           cout <<"Пример:"<<  argv[0] << " " <<  argv[i-1]  <<  " /etc/tracon/tracon.conf" << endl;
@@ -77,7 +77,7 @@ man tracon\n" << endl;
 	}
       case 2:
 	if (++i < argc)  {
-          tlog.put(3, "Установка уровня отладочных сообщений (0-только ошибки,1 - предупреждения,  2 - все )") ;
+          tlog.put(2, "Установка уровня отладочных сообщений (0-только ошибки,1 - предупреждения,  2 - все )") ;
 	  debug_level=atoi(argv[i]);
           tlog.setLevel(debug_level);  
 	  break;

@@ -41,12 +41,11 @@ class tracon_log{
   }
 
   void put(int level,string message){
-    if( level <= _level){
       tmessage m;
       m.level=level;
       m.message=message;
       _messages.push_back(m);
-     }
+     
   }
 
   void setLevel(int level){_level=level;}
