@@ -1,0 +1,39 @@
+1) timestamp (unix time in ms)
+2) время обслуживания (ms), если клиент "ушел, не попрощавшись", то здесь будет время потраченное на обнаружение данного факта, а не время реального обслуживания (иногда более получаса на маленький файл)
+3)  client IP address
+4)   type/HTTP код ответа, где type:
+        TCP_HIT (верная копия объекта нашлась в кеше)
+        TCP_MEM_HIT
+        TCP_NEGATIVE_HIT
+        TCP_MISS (запрашиваемый объект не был в кеше)
+        TCP_EXPIRED (объект был в кеше, но старый)
+        TCP_CLIENT_REFRESH (клиент запросил reload - no-cache pragma)
+        TCP_REFRESH_HIT (объект в кеше был старым, был сделан IMS-запрос к источнику и тот вернул "304 Not Modified")
+        TCP_REFRESH_MISS (объект в кеше был старым, был сделан IMS-запрос к источнику и тот вернул обновленное содержание)
+        TCP_IMS_HIT (клиент выдал IMS-запрос, объект оказался в кеше и свежим)
+        TCP_IMS_MISS (клиент выдал IMS-запрос для просроченного объекта)
+        TCP_REF_FAIL_HIT (объект в кеше староват, но запросить новую копию не удалось)
+        TCP_SWAPFAIL (объект д.б. в кеше, но не смогли извлечь)
+        TCP_DENIED
+        UDP_...
+        ERR_CLIENT_ABORT
+        ERR_NO_CLIENTS
+        ERR_READ_ERROR
+        ERR_CONNECT_FAIL
+        ERR_...
+5)   размер  size (bytes to client)
+6)   метод доступа  (GET, POST, ...)
+7)    URL
+8)    идентификатор пользователя ("-", если недоступен)
+9)    hierarhy data/Hostname
+        DEAD_NEIGHTBOR
+        DEAD_PARENT
+        LOCAL_IP_DIRECT
+        FIRST_PARENT_MISS
+        FIRST_UP_PARENT
+        PARENT_HIT (UDP-запрос к parent вернулся с подтверждением)
+        SINGLE_PARENT
+        PARENT_UDP_HIT_OBJECT (объект оказался у parent и поместился в UDP-ответе)
+        DIRECT (объект был запрошен с оригинального сервера)
+        ...
+10)   тип содержимого (MIME тип/подтип)

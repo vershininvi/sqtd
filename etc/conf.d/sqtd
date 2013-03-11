@@ -1,0 +1,6 @@
+#Options for sqtd
+#There is only one option useful for daemon mode -d
+#0 - show errors only 
+#1 - show errors and warnings only
+#2 - show errors,warnings and debug messages (there is not a good idea in production mode)
+SQTD_DEBUGLEVEL="-d 0"

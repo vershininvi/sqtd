@@ -1,0 +1,14 @@
+CheckInterval 300
+
+AccessLogFile /var/log/squid/access.log
+AllowFile     /var/lib/sqtd/allow.txt  
+DenyFile      /var/lib/sqtd/deny.txt
+LogFile       /var/log/sqtd.log
+PidFile       /var/run/sqtd.pid
+ActionScript  /etc/sqtd/squid_reconf.sh
+
+
+limit 	      g:MyDomain\group1:d:20M
+
+limit 	      u:MyDomain\user1:d:100M
+limit 	      u:MyDomain\user2:m:100M
