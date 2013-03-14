@@ -1,11 +1,12 @@
 #ifndef ACCESS_LOG
 #define ACCESS_LOG
+#include "log_buffer.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
 #include <sstream>
-#include "sqtd_log.h"
+
 
 
 using namespace std;

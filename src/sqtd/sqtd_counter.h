@@ -1,15 +1,15 @@
-#ifndef TRAF_COUNTER
-#define  TRAF_COUNTER
-
+#ifndef SQTD_COUNTER
+#define  SQTD_COUNTER
+#include "log_buffer.h"
 #include "squid_accesslog.h"
 #include "sqtd_conf.h"
 #include <map>
 #include <vector>
 #include <algorithm>
-#include "sqtd_log.h"
 
 
-class traf_counter {
+
+class sqtd_counter {
  private:
   map < string, map <string, long long> > _traf;
   time_t _mbeg; 
@@ -19,7 +19,7 @@ class traf_counter {
   time_t _dbeg_old;
   time_t _hbeg_old;  
   access_log _al;
-  tracon_conf _conf;
+  sqtd_conf _conf;
   vector <string> _dl; 
 
  private:
@@ -43,19 +43,18 @@ class traf_counter {
  public:
   
   vector < string > *getDenyList(){ return &_dl;} 
-  tracon_conf * getConfig(){return &_conf;}
+  sqtd_conf * getConfig(){return &_conf;}
     
-  void calc(bool *canwork){   
+  bool calc(bool *canwork){   
+    tlog.put(2,"Список отключаемых пользователей");
     settime();
     clean();
     if (_al.open()){
-       
       while (_al.next()){
 	if(!*canwork){
 	  _al.close();
-	  return;
+	  return true;
 	}
-
     	vector<string> rec= _al.getFields();
 	stringstream field0(rec[0]);  
 	time_t logtime; 
@@ -75,13 +74,18 @@ class traf_counter {
       }
      _al.close();
      map< string, map <string,long long> > * limits= _conf.getLimits();
-     tlog.put(2,"Список отключаемых полтзователей");
+     tlog.put(2,"Список отключаемых пользователей");
      for (map <string, map<string,long long> >::iterator i=_traf.begin();i!=_traf.end();++i)
        for (map<string,long long>::iterator j= i->second.begin();j!=i->second.end();++j){
      	 if((*limits)[i->first][j->first] <=j->second )  _dl.push_back(j->first);
 	 tlog.put(2, j->first);
        }
     }
+    else {
+      tlog.put(0,"Ошибка открытия файла лога доступа squid '" + _conf.getAccessLogFile()+ "'");
+      return false;
+    }
+    return true;
   }
   
   map < string, map <string, long long> > *getTraf(){return &_traf;}
@@ -89,4 +93,4 @@ class traf_counter {
   access_log *getAccessLog(){return &_al;};
 };
 
-#endif /*TRAF_COUNTER*/
+#endif /*SQTD_COUNTER*/

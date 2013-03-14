@@ -3,21 +3,21 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-analyzer/sqtd/files/2.0/init.d/sqtd,v 0.0.0 2013/03/08 10:53:34 mattm Exp $
 
-pid_file="/var/run/sqtd/sqtd.pid"
+pid_file="/var/lib/sqtd/sqtd.pid"
 
 depend() {
-	need syslog
+	use logger
 	provide sqtd
 }
 
 start_pre() {
-	checkpath -d -m 0775 -o root:root /var/run/sqtd
+	checkpath -d -m 0775 -o root:root /var/lib/sqtd
 }
 
 start() {
 	ebegin "Starting sqtd"
 	start-stop-daemon --start --pidfile ${pid_file} \
-		--user zabbix --group zabbix --exec /usr/sbin/sqtd -- -c /etc/sqtd/sqtd.conf ${SQTD_DEBUGLEVEL}
+		--user root --group root --exec /usr/sbin/sqtd -- -c /etc/sqtd/sqtd.conf ${SQTD_DEBUGLEVEL}
 	eend $?
 }
 

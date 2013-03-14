@@ -1,5 +1,6 @@
 #ifndef TRACON_CONF
 #define TRACON_CONF
+#include "log_buffer.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -8,11 +9,11 @@
 #include <sstream>
 #include <algorithm>
 #include <grp.h>
-#include "sqtd_log.h"
+
 
 using namespace std;
 
-class tracon_conf{
+class sqtd_conf{
  private:
   string     _accessLogFile ;   
   long       _checkInterval;
@@ -36,7 +37,7 @@ class tracon_conf{
    }
 
   bool checkKeyValue(string key ){
-    tlog.put(1, "Проверка параметра конфигурации" + key);
+    tlog.put(1, "Проверка параметра конфигурации " + key);
     bool result;
     string message="";
     switch(_keyValues[key]){
@@ -180,7 +181,7 @@ class tracon_conf{
   } 
 
  public:
-  tracon_conf(){
+  sqtd_conf(){
     _keyValues[""]=1;
     _keyValues["ACCESSLOGFILE"]=2;
     _keyValues["ACTIONSCRIPT"]=3;
@@ -189,6 +190,7 @@ class tracon_conf{
     _keyValues["LIMIT"]=6;
     _keyValues["DENYFILE"]=7;
     _keyValues["LOGFILE"]=8;
+    _keyValues["PIDFILE"]=9;
     _keyValues["PIDFILE"]=9;
 
     reinit();

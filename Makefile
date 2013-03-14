@@ -33,10 +33,10 @@ am__make_dryrun = \
     esac; \
     test $$am__dry = yes; \
   }
-pkgdatadir = $(datadir)/full-package-name
-pkgincludedir = $(includedir)/full-package-name
-pkglibdir = $(libdir)/full-package-name
-pkglibexecdir = $(libexecdir)/full-package-name
+pkgdatadir = $(datadir)/sqtd
+pkgincludedir = $(includedir)/sqtd
+pkglibdir = $(libdir)/sqtd
+pkglibexecdir = $(libexecdir)/sqtd
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 install_sh_DATA = $(install_sh) -c -m 644
 install_sh_PROGRAM = $(install_sh) -c
@@ -142,18 +142,18 @@ LTLIBOBJS =
 MAKEINFO = ${SHELL} /home/vvi/projects/sqtd/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
 OBJEXT = o
-PACKAGE = full-package-name
-PACKAGE_BUGREPORT = BUG-REPORT-ADDRESS
-PACKAGE_NAME = FULL-PACKAGE-NAME
-PACKAGE_STRING = FULL-PACKAGE-NAME VERSION
-PACKAGE_TARNAME = full-package-name
+PACKAGE = sqtd
+PACKAGE_BUGREPORT = www.i_have_no_adress
+PACKAGE_NAME = sqtd
+PACKAGE_STRING = sqtd 0.0.1
+PACKAGE_TARNAME = sqtd
 PACKAGE_URL = 
-PACKAGE_VERSION = VERSION
+PACKAGE_VERSION = 0.0.1
 PATH_SEPARATOR = :
 SET_MAKE = 
 SHELL = /bin/sh
 STRIP = 
-VERSION = VERSION
+VERSION = 0.0.1
 abs_builddir = /home/vvi/projects/sqtd
 abs_srcdir = /home/vvi/projects/sqtd
 abs_top_builddir = /home/vvi/projects/sqtd
@@ -197,7 +197,8 @@ target_alias =
 top_build_prefix = 
 top_builddir = .
 top_srcdir = .
-sqtd_SOURCES = src/sqtd/sqtd.cpp src/sqtd/*.h
+sqtd_SOURCES = src/sqtd/sqtd.cpp src/sqtd/*.h config.h
+EXTRA_DIST = doc etc gentoo man
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 

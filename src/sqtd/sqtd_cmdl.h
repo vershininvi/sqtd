@@ -1,10 +1,11 @@
 #ifndef COMMAND_LINE
+#include "../../config.h" 
 #define COMMAND_LINE
-#define VERSION "0.0.0"
-#include "sqtd_log.h"
+
+#include "log_buffer.h"
 #include <map>
 #include <cstdlib>
-
+#include <sstream>
 using namespace std;
 class command_line{
   string _config_file;
@@ -19,7 +20,7 @@ class command_line{
 " КЛЮЧ]… [ФАЙЛ]… \n \
 Анализирует файл access.log прокси сервера squid.\n \
 Формирует списки доступа и списки отключения.\n\n \
--c имя_конигурационного_файла   \t использовать файл конфигурации\n \
+-c имя_конфигурационного_файла  \t использовать файл конфигурации\n \
 -d уровень_отладочных_сообщений \t установить уровень отладочных сообщений 0-2\n \
 -h                              \t вывод этой справки\n \
 -v                              \t вывод версии программы\n \
@@ -31,7 +32,7 @@ class command_line{
 Об ошибках  сообщайте по адресу Vershinin_VI@vlg-gaz.ru\n  \
 Домашняя страница:\n  \
 Справка по работе с программой:\
-man tracon\n" << endl;
+man sqtd\n" << endl;
 }
  
  public:
@@ -63,9 +64,9 @@ man tracon\n" << endl;
       switch(_params[argv[i]]){
       case 1:
 	if (++i < argc)  {
-          tlog.put(2, "Установка имени файла конфигурации '" +  _config_file  + "'");
+          tlog.put(2, "Установка имени файла конфигурации");
 	  _config_file=argv[i];
-          tlog.put(2, "Файла конфигурации '" +  _config_file  + "' установлен");
+          tlog.put(2, "Файл конфигурации '" +  _config_file  + "' установлен");
 	  break;
 	} 
 	else{
@@ -79,11 +80,15 @@ man tracon\n" << endl;
 	if (++i < argc)  {
           tlog.put(2, "Установка уровня отладочных сообщений (0-только ошибки,1 - предупреждения,  2 - все )") ;
 	  debug_level=atoi(argv[i]);
+          ostringstream os;
+          os <<  "Уровень отладочных сообщений '" <<  argv[i]  << "' установлен";
+
+	  tlog.put(2, os.str());
           tlog.setLevel(debug_level);  
 	  break;
 	} 
 	else{
-          tlog.setLevel(3);  
+          tlog.setLevel(2);  
           tlog.print();
 	  cout << "Не указан уровень отладочных соощений" << endl;  
 cout <<"Пример:"<<  argv[0] << " " <<  argv[i-1]  <<  " 2 " << endl;
