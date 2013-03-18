@@ -82,7 +82,7 @@ int main(int argc,char**argv){
     if (pid > 0)  {
       exit(0); 
     }
-    sleep(5);
+    //sleep(5);
     tlog.put(2, "Продолжение child  процесса") ; 
     tlog.put(2,"Открытие файла идентификатора процесса");
     ofstream pidfile(conf->getPidFile().c_str(),ios_base::out);
@@ -97,28 +97,12 @@ int main(int argc,char**argv){
     tlog.put(2,"Установка идентификатора сессии");
     sid=setsid();
 
-    //tlog.put(2,"Получение списка открытых файлов");
-    //if (getrlimit(RLIMIT_NOFILE, &rl) < 0) {
-    //  tlog.put(0, "Невозможно получить список открытых файлов");
-    //  tlog.print(); 
-    //  exit (1);  
-    //} 
-
-    //tlog.put(2,"Закрытие открытых файлов");
-    //rlimit rl;
-    //tlog.put(2,"Получение списка открытых файлов");
-    //if (getrlimit(RLIMIT_NOFILE, &rl) < 0) {
-    //  tlog.put(0, "Невозможно получить список открытых файлов");
-    //  tlog.print(); 
-    //  exit (1);  
-    //} 
-    //for (unsigned int i = 0; i < rl.rlim_max; i++) close(i);     
 
      
     tlog.put(2,"Смена текущей директории");
     iret=chdir("/");
-  }       
-  
+  }  else tlog.setTarget("console");
+
   access_log *al= trc.getAccessLog();
   
   tlog.put(2,"Открытие файла лога squid");
@@ -132,37 +116,52 @@ int main(int argc,char**argv){
       tlog.print();
       exit(1);
     }
-    tlog.put(2, "Заполнение файла запрета доступа") ;  
+    tlog.put(2, "Заполнение файла запрета доступа " + conf->getDenyFile()) ;  
+    vector<string> * v;
     ofstream denyfile(conf->getDenyFile().c_str(),ios_base::out);
-    if(!denyfile){
+    if(!denyfile.is_open()){
       tlog.put(0,"Ошибка открытия файла запрета доступа " + conf->getDenyFile());
       tlog.print();
       exit (1);
     }
-    denyfile<< "-" << endl;    
-    printUserList(trc.getDenyList(),&denyfile); 
+
+    v=trc.getDenyList();
+    if(v->size()>0){
+       for (vector <string>::iterator i=v->begin();i!=v->end();++i) 
+       denyfile << "acl SQTD_DENY proxy_auth -i " <<*i<<endl;
+       denyfile<< "http_access deny SQTD_DENY" << endl;      
+    }
+    else  tlog.put(2, "Список запрета доступа пуст") ;
     denyfile.close();   
 
-
-    tlog.put(2, "Заполнение файла разрешения доступа") ;  
+    tlog.put(2, "Заполнение файла разрешения доступа " +  conf->getAllowFile()) ;  
     ofstream allowfile(conf->getAllowFile().c_str(),ios_base::out);
-    if(!allowfile){
+    if(!allowfile.is_open()){
       tlog.put(0,"Ошибка открытия файла разрешения доступа  " + conf->getAllowFile());
       tlog.print();
       exit(1);
     }
-    allowfile << "-" << endl;
-    printUserList(conf->getAllowList(),&allowfile);
+    
+    v=conf->getAllowList();
+    if(v->size()>0){
+      for (vector <string>::iterator i=v->begin();i!=v->end();++i){ 
+	 allowfile << "acl SQTD_ACCESS proxy_auth -i " << *i <<endl;
+      }   
+      allowfile << "http_access allow SQTD_ACCESS " << endl;      
+    }
+    else  tlog.put(2, "Список разрешения доступа пуст") ;
     allowfile.close();
     
     tlog.put(2, "Выполнение скрипта") ;
     iret=system(conf->getActionScript().c_str());
-    configured=conf->reconfig(cmd.getConfigFile())&&conf->check();
+   
+    //tlog.put(2, "Реконфигурация программы") ; 
+    //configured=conf->reconfig(cmd.getConfigFile())&&conf->check();
 
-    tlog.put(2, "Реконфигурация программы") ;
-    if (!configured){
-      if (++confErrCount> 10) exit(-1);
-    } else  if(confErrCount!=0) confErrCount=0;
+   
+    //if (!configured){
+    //  if (++confErrCount> 10) exit(-1);
+    //} else  if(confErrCount!=0) confErrCount=0;
 
     if(tlog.getLevel()>=2){
       os.flush();
@@ -178,7 +177,7 @@ int main(int argc,char**argv){
       os.flush();
       tlog.print();
 
-      os << "Список доступа" << endl;
+      os << "Список разрешения доступа" << endl;
       printUserList(conf->getAllowList(),&os);
       tlog.put(2, os.str());
       os.flush();

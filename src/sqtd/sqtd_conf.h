@@ -26,6 +26,33 @@ class sqtd_conf{
   map< string, map <string,long long> > _limits; 
   vector <string> _allowList;
 
+  bool canReadFile(string filename){
+    ifstream ifs;
+    ifs.open(filename.c_str());
+      if(ifs.is_open()){
+	tlog.put(1,  "Файл доступен для чтения " + filename); 	
+        ifs.close();
+	return true;
+      }   
+      else {
+	tlog.put(0,  "Невозможно открыть файл " + filename); 	
+	return false;
+      }	
+  }
+
+  bool canWriteFile(string filename){
+      ofstream ofs;
+      ofs.open(filename.c_str(),ios::app);
+      if(ofs.is_open()){
+	tlog.put(1,  "Файл доступен для записи " + filename); 	
+        ofs.close();
+	return true;
+      }   
+      else {
+	tlog.put(0,  "Невозможно открыть файл для записи " + filename); 	
+	return false;
+      }	
+    }
   
   long long tokenToLong(string token ){
     long long result;
@@ -38,50 +65,73 @@ class sqtd_conf{
 
   bool checkKeyValue(string key ){
     tlog.put(1, "Проверка параметра конфигурации " + key);
-    bool result;
-    string message="";
     switch(_keyValues[key]){
     case 2:
-      result= (_accessLogFile.compare("")!=0);
-      message= "Не задан файл лога squid  \nПример :  AccesLogFile /var/log/squid.access.log";  
-      break;
-        
-    case 3:
-      result=(_actionScript.compare("")!=0);
-      message= "Не задан файл скрипта \nПример :  ActionScript /etc/tracon/action.sh \\"; 
-      break;
-    case 4:
-      result=(_checkInterval>0);
-      message= "Не задан интервал проверок (c) \nПример :  CheckInterval 300"; 
-      break;
-    case 5:
-      result=(_allowFile.compare("")!=0);
-      message= "Не задан файл групы  доступа ( \nПример :  AllowFile   /tmp/allow.txt  ";
-      break;
-    case 6:
-      result=(!_limits.empty()) ; 
-      message=  "Не заданы лимиты \nПример : Limit    g:MyDomain\\GroupName:d:20M";
-      break;
-    case 7: 
-      result=(_denyFile.compare("")!=0); 
-      message= "Не задано имя группы запрета доступа \nПример :  DenyFile /tmp/deny.txt";
-      break;
-    case 8: 
-      result=(_logFile.compare("")!=0); 
-      message= "Не задано имя файла лога \nПример :  logFile /tmp/log.txt";
-      break;
-
-    case 9: 
-      result=(_pidFile.compare("")!=0); 
-      message= "Не задано имя файла процесса \nПример :  pidFile /tmp/sqtd.pid";
-      break;
-
-    default:
-      result = true;
-    }
-    if(!result) tlog.put(0,message);
-    return result;
-  }  
+      if  (_accessLogFile.compare("")==0){
+	tlog.put(1,  "Не задан файл лога squid\n \
+Пример :  AccesLogFile /var/log/squid/access.log\n \
+Установлено значение по умолчанию  '/var/log/squid/access.log'");
+	 _accessLogFile="/var/log/squid/access.log";
+      } 
+      return canReadFile(_accessLogFile);	 
+      case 3:
+	if(_actionScript.compare("")==0){
+	    tlog.put(1,"Не задан файл скрипта \n  \
+Пример :  ActionScript /etc/sqtd/action.sh  \
+Имя файла скрипта установлено по умолчанию в /etc/sqtd/action.sh");
+	    _actionScript= "/etc/sqtd/action.sh";}
+	return canReadFile(_actionScript);
+      case 4:
+	if(_checkInterval<=0){
+	  tlog.put(1,"Не задан интервал проверок (c)\n \
+Пример :  CheckInterval 300\n \
+Интервал проверок установлен по умолчанию на 5 мин (300с))");
+	  _checkInterval = 300;
+	}  
+	
+	return true;
+      case 5:
+	if(_allowFile.compare("")==0){
+	  tlog.put(1, "Не задан файл групы  доступа\n \
+Пример :  AllowFile   /var/lib/sqtd/allow.lst");
+	  _allowFile= "/var/lib/sqtd/allow.lst";
+	} 
+	 return canWriteFile(_allowFile);
+      case 6:
+	if(_limits.empty()) { 
+	tlog.put(0, "Не заданы лимиты \n \
+Пример : Limit    g:MyDomain\\GroupName:d:20M");
+	return false;
+	 }
+	 return true;	 
+      case 7: 
+	 if (_denyFile.compare("")==0){ 
+	   tlog.put(1, "Не задано имя файла группы запрета доступа \n\
+Пример :  DenyFile /var/lib/sqtd/deny.lst\n \
+Установлено значение по умолчанию /var/lib/sqtd/deny.lst\n");		    
+	   _denyFile = "/var/lib/sqtd/deny.lst";
+	 }
+	 return canWriteFile(_denyFile);
+      case 8: 
+        if (_logFile.compare("")==0){ 
+	  tlog.put(1,"Не задано имя файла лога\n \
+Пример :  logFile /var/log/sqtd.log)\n \
+Установлено значение по умолчанию /var/log/sqtd.log\n");
+	  _logFile="/var/log/sqtd.log";
+        }
+        return canWriteFile(_logFile);
+      case 9: 
+	 if(_pidFile.compare("")==0){
+      	  tlog.put(1, "Не задано имя файла идентификатора процесса \n \
+Пример :  pidFile /var/lib/sqtd.pid\n \
+Установлено значение по умолчанию /var/lib/sqtd/sqtd.pid");
+	  _pidFile="/var/lib/sqtd/sqtd.pid";
+         }
+        return canWriteFile(_pidFile);
+      default:
+	return  true;
+      }
+    }  
    
   bool addLimit(string limit){
     tlog.put (1,"Добавление лимита ");
@@ -191,10 +241,7 @@ class sqtd_conf{
     _keyValues["DENYFILE"]=7;
     _keyValues["LOGFILE"]=8;
     _keyValues["PIDFILE"]=9;
-    _keyValues["PIDFILE"]=9;
-
     reinit();
-
   }
 
   bool reconfig(string filename){

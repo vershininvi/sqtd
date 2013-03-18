@@ -46,7 +46,7 @@ class sqtd_counter {
   sqtd_conf * getConfig(){return &_conf;}
     
   bool calc(bool *canwork){   
-    tlog.put(2,"Список отключаемых пользователей");
+    tlog.put(2,"Рассчет траффика\n");
     settime();
     clean();
     if (_al.open()){
@@ -73,6 +73,7 @@ class sqtd_counter {
 	}
       }
      _al.close();
+     tlog.put(2,"Получение списка отключаемых пользователей\n");
      map< string, map <string,long long> > * limits= _conf.getLimits();
      tlog.put(2,"Список отключаемых пользователей");
      for (map <string, map<string,long long> >::iterator i=_traf.begin();i!=_traf.end();++i)

@@ -37,8 +37,9 @@ class log_buffer{
   }
 
   bool setTarget(string target){ 
-    string co="";
+    string co="console";
     string sy="syslog";
+
     if(target.compare(co)==0){
       _target=0;
       return true;
