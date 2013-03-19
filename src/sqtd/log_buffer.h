@@ -93,7 +93,7 @@ class log_buffer{
 	syslog(_logLevels[i->level],"%s",i->message.c_str());
 	if(_cout_buf.str().length()){
     	   syslog(_logLevels[i->level],"%s",_cout_buf.str().c_str());
-	   _cout_buf.flush();
+	   _cout_buf.str("");
 	}  
 	break;
       case 2: //file

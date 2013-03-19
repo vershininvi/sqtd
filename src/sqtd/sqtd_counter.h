@@ -79,10 +79,15 @@ class sqtd_counter {
      tlog.put(2,"Список отключаемых пользователей");
      for (map <string, map<string,long long> >::iterator i=_traf.begin();i!=_traf.end();++i)
        for (map<string,long long>::iterator j= i->second.begin();j!=i->second.end();++j){
+         if((*limits)[i->first][j->first]==0) {
+             tlog.put(2, "Траффик пользователя (" +i->first+") "  + j->first +" не ограничен"); 
+	     continue;
+         }  
+ 
      	 if((*limits)[i->first][j->first] <=j->second){
 	   if (find(_dl.begin(),_dl.end(),j->first)==_dl.end()) {
 	     ostringstream os;  
-	     os << "Отключение " << j->first << "\tлимит (" << i->first <<") :"    << (*limits)[i->first][j->first] << "\t траффик:" <<   j->second <<endl;    
+	     os << "Отключение " << j->first << "\tлимит (" << i->first <<") :"    << (*limits)[i->first][j->first] << "\t\tтраффик:" <<   j->second;    
 	     _dl.push_back(j->first);
              tlog.put(2, os.str()); 
 	   }

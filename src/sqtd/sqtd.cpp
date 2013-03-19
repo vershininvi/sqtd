@@ -180,10 +180,9 @@ int main(int argc,char**argv){
       }
     } else  if(confErrCount!=0) confErrCount=0;
 
-    if(tlog.getLevel()>=2){
-    }
     os<< "Ожидание " <<conf->getCheckInterval() <<"с";
     tlog.put(2, os.str());
+    os.str("");
     tlog.print();
     sleep(conf->getCheckInterval());
   }

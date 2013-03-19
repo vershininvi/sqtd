@@ -119,7 +119,8 @@ class sqtd_conf{
 Установлено значение по умолчанию /var/log/sqtd.log\n");
 	  _logFile="/var/log/sqtd.log";
         }
-        if(_logFile.compare("console")==0) return true; 
+        if(_logFile.compare("console")==0) return true;
+        if(_logFile.compare("syslog")==0) return true; 
         return  canWriteFile(_logFile);
       case 9: 
 	 if(_pidFile.compare("")==0){
@@ -172,6 +173,7 @@ class sqtd_conf{
 	break;
       case 4:
 	lcount=tokenToLong(token);
+	if (lcount==0);
 	break;
       default:
 	tlog.put(0, "Игнорирование лишних полей лимита") ;
@@ -262,7 +264,7 @@ class sqtd_conf{
       ++lineNom;
       ostringstream os;
       os <<lineNom; 
-      if(confline[0]='#') {
+      if(confline[0]=='#') {
         tlog.put(2,"Пропуск комментария, строка " + os.str());
 	continue;
       }       
