@@ -25,7 +25,8 @@ class sqtd_counter {
  private:
   void settime(){
     time_t tis =time(NULL);
-    struct tm tbd= *gmtime(&tis);
+    struct tm tbd;
+    localtime_r(&tis,&tbd);
     tbd.tm_sec=0 ; 
     tbd.tm_min=0 ;  _hbeg=mktime(&tbd);
     tbd.tm_hour=0 ; _dbeg=mktime(&tbd);
@@ -78,8 +79,14 @@ class sqtd_counter {
      tlog.put(2,"Список отключаемых пользователей");
      for (map <string, map<string,long long> >::iterator i=_traf.begin();i!=_traf.end();++i)
        for (map<string,long long>::iterator j= i->second.begin();j!=i->second.end();++j){
-     	 if((*limits)[i->first][j->first] <=j->second )  _dl.push_back(j->first);
-	 tlog.put(2, j->first);
+     	 if((*limits)[i->first][j->first] <=j->second){
+	   if (find(_dl.begin(),_dl.end(),j->first)==_dl.end()) {
+	     ostringstream os;  
+	     os << "Отключение " << j->first << "\tлимит (" << i->first <<") :"    << (*limits)[i->first][j->first] << "\t траффик:" <<   j->second <<endl;    
+	     _dl.push_back(j->first);
+             tlog.put(2, os.str()); 
+	   }
+         }
        }
     }
     else {

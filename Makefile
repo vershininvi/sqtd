@@ -54,7 +54,7 @@ subdir = .
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/config.h.in \
 	$(top_srcdir)/configure AUTHORS COPYING ChangeLog INSTALL NEWS \
-	depcomp install-sh missing
+	TODO depcomp install-sh missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -145,15 +145,15 @@ OBJEXT = o
 PACKAGE = sqtd
 PACKAGE_BUGREPORT = www.i_have_no_adress
 PACKAGE_NAME = sqtd
-PACKAGE_STRING = sqtd 0.0.1
+PACKAGE_STRING = sqtd 0.0.2
 PACKAGE_TARNAME = sqtd
 PACKAGE_URL = 
-PACKAGE_VERSION = 0.0.1
+PACKAGE_VERSION = 0.0.2
 PATH_SEPARATOR = :
 SET_MAKE = 
 SHELL = /bin/sh
 STRIP = 
-VERSION = 0.0.1
+VERSION = 0.0.2
 abs_builddir = /home/vvi/projects/sqtd
 abs_srcdir = /home/vvi/projects/sqtd
 abs_top_builddir = /home/vvi/projects/sqtd

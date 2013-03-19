@@ -16,7 +16,7 @@ start_pre() {
 
 start() {
 	ebegin "Starting sqtd"
-	start-stop-daemon --start --pidfile ${pid_file} \
+	start-stop-daemon --start --wait 1000 \
 		--user root --group root --exec /usr/sbin/sqtd -- -c /etc/sqtd/sqtd.conf ${SQTD_DEBUGLEVEL}
 	eend $?
 }

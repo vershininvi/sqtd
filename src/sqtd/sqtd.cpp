@@ -35,7 +35,7 @@ void printMap(map <string, map<string,long long> > *inmap,ostream *outfile ){
 }
 
 int main(int argc,char**argv){
-  tlog.put(1,"Запуск программы");  
+  tlog.put(2,"Запуск программы");  
   ostringstream os; 
   pid_t pid,sid;
   
@@ -64,51 +64,54 @@ int main(int argc,char**argv){
   }
   
   if(daemonMode){
-    tlog.put(2,"Открытие файла лога");
-    if (!tlog.setTarget(conf->getLogFile())) {
-      tlog.put(0, "Невозможно открыть файл лога "+conf->getLogFile() ) ; 
-      tlog.print();
-      exit(1);
-    }
-    tlog.setFilterOn(true);
     tlog.put(1,"Переход в режим демона");    
     tlog.put(2,"Запуск демона");
     pid=fork();
+    if (pid > 0)  {
+      exit(0); 
+    }
     if(pid<0){
       tlog.put(0, "Запуск в режиме демона невозможен");
       tlog.print(); 
       exit(1);
     } 
-    if (pid > 0)  {
-      exit(0); 
-    }
-    //sleep(5);
-    tlog.put(2, "Продолжение child  процесса") ; 
-    tlog.put(2,"Открытие файла идентификатора процесса");
-    ofstream pidfile(conf->getPidFile().c_str(),ios_base::out);
-    if (!pidfile) {
-      tlog.put(0, "Невозможно открыть файл идентификатора процесса " +conf->getPidFile() ) ; 
-    }
-    else {
-      tlog.put(2,"Вывод идентификатора процесса в файл");
-      pidfile << getpid()<<endl;
-    }
+  }
+  tlog.put(2, "Продолжение child  процесса") ; 
+  tlog.put(2,"Открытие файла лога");
+  if (!tlog.setTarget(conf->getLogFile())) {
+    tlog.put(0, "Невозможно открыть файл лога "+conf->getLogFile() ) ; 
+    tlog.print();
+    exit(1);
+  }
+
+  tlog.setFilterOn(true);
+  tlog.put(2,"Открытие файла идентификатора процесса");
+  ofstream pidfile(conf->getPidFile().c_str(),ios_base::out);
+  if (!pidfile) {
+    tlog.put(0, "Невозможно открыть файл идентификатора процесса " +conf->getPidFile() ) ; 
+  }
+  else {
+    tlog.put(2,"Вывод идентификатора процесса в файл");
+    pidfile << getpid()<<endl;
+    pidfile.close();
+  }
         
-    tlog.put(2,"Установка идентификатора сессии");
-    sid=setsid();
+  tlog.put(2,"Установка идентификатора сессии");
+  sid=setsid();
 
 
      
-    tlog.put(2,"Смена текущей директории");
-    iret=chdir("/");
-  }  else tlog.setTarget("console");
+  tlog.put(2,"Смена текущей директории");
+  iret=chdir("/");
 
   access_log *al= trc.getAccessLog();
   
-  tlog.put(2,"Открытие файла лога squid");
+  tlog.put(2,"Открытие файла лога squid " + conf->getAccessLogFile());
   al->setFileName(conf->getAccessLogFile());
   tlog.print(); 
+  
   while (canwork){
+
     tlog.put(2, "Рассчет данных") ; 
     //Расчет траффика
     if(!trc.calc(&canwork)) {
@@ -127,11 +130,12 @@ int main(int argc,char**argv){
 
     v=trc.getDenyList();
     if(v->size()>0){
-       for (vector <string>::iterator i=v->begin();i!=v->end();++i) 
-       denyfile << "acl SQTD_DENY proxy_auth -i " <<*i<<endl;
-       denyfile<< "http_access deny SQTD_DENY" << endl;      
+      for (vector <string>::iterator i=v->begin();i!=v->end();++i) 
+	denyfile << "acl SQTD_DENY proxy_auth -i " <<*i<<endl;
+      denyfile<< "http_access deny SQTD_DENY" << endl;      
+      
     }
-    else  tlog.put(2, "Список запрета доступа пуст") ;
+    else  tlog.put(1, "Список запрета доступа пуст") ;
     denyfile.close();   
 
     tlog.put(2, "Заполнение файла разрешения доступа " +  conf->getAllowFile()) ;  
@@ -145,54 +149,41 @@ int main(int argc,char**argv){
     v=conf->getAllowList();
     if(v->size()>0){
       for (vector <string>::iterator i=v->begin();i!=v->end();++i){ 
-	 allowfile << "acl SQTD_ACCESS proxy_auth -i " << *i <<endl;
+	allowfile << "acl SQTD_ACCESS proxy_auth -i " << *i <<endl;
       }   
       allowfile << "http_access allow SQTD_ACCESS " << endl;      
     }
-    else  tlog.put(2, "Список разрешения доступа пуст") ;
+    else  tlog.put(1, "Список разрешения доступа пуст") ;
     allowfile.close();
     
-    tlog.put(2, "Выполнение скрипта") ;
-    iret=system(conf->getActionScript().c_str());
-   
-    //tlog.put(2, "Реконфигурация программы") ; 
-    //configured=conf->reconfig(cmd.getConfigFile())&&conf->check();
 
+    tlog.put(2, "Выполнение скрипта");
+    FILE *fpipe;     
+    char buf[255];
+    string s="";
+    fpipe=popen(conf->getActionScript().c_str(),"r");  
+    if (!fpipe) tlog.put(0,"Ошибка выполнения скрипта " + conf->getActionScript());
+    while(fgets(buf,sizeof(buf)-1,fpipe)) s+=buf;
+    tlog.put(1, s);
+    pclose(fpipe);
+
+      
+    tlog.put(2, "Реконфигурация программы") ; 
+    configured=conf->reconfig(cmd.getConfigFile())&&conf->check();
+    
    
-    //if (!configured){
-    //  if (++confErrCount> 10) exit(-1);
-    //} else  if(confErrCount!=0) confErrCount=0;
+    if (!configured){
+      if (++confErrCount> 10){
+         
+	tlog.print();
+	exit(1);
+      }
+    } else  if(confErrCount!=0) confErrCount=0;
 
     if(tlog.getLevel()>=2){
-      os.flush();
-      os << "Лимиты пользователей" << endl;
-      printMap(conf->getLimits(),&os);
-      tlog.put(2, os.str());
-      os.flush();
-      tlog.print();
-     
-      os << "Трафик  пользователей" << endl;
-      printMap(trc.getTraf(),&os);
-      tlog.put(2, os.str());
-      os.flush();
-      tlog.print();
-
-      os << "Список разрешения доступа" << endl;
-      printUserList(conf->getAllowList(),&os);
-      tlog.put(2, os.str());
-      os.flush();
-      tlog.print();
-      
-      os << "Список запрета доступа" << endl;
-      printUserList(trc.getDenyList(),&os);
-      tlog.put(2, os.str());
-      os.flush();
-      tlog.print();     
-
     }
-    
-    os<< "Ожидание " <<conf->getCheckInterval() <<"с" << endl;
-    tlog.put(1, os.str());
+    os<< "Ожидание " <<conf->getCheckInterval() <<"с";
+    tlog.put(2, os.str());
     tlog.print();
     sleep(conf->getCheckInterval());
   }

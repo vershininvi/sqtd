@@ -4,8 +4,8 @@ AccessLogFile /var/log/squid/access.log
 AllowFile     /var/lib/sqtd/allow.txt  
 DenyFile      /var/lib/sqtd/deny.txt
 LogFile       /var/log/sqtd.log
-PidFile       /var/run/sqtd.pid
-ActionScript  /etc/sqtd/squid_reconf.sh
+PidFile       /var/lib/sqtd.pid
+ActionScript  /etc/sqtd/action.sh
 
 
 limit 	      g:MyDomain\group1:d:20M

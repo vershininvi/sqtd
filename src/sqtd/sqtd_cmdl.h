@@ -53,13 +53,6 @@ man sqtd\n" << endl;
     
 
     tlog.put(1,"Анализ параметров командной строки");
-    if (argc<2){
-      tlog.setLevel(3);  
-      tlog.print();
-      cout << "Ошибка: Недостаточное количестово аргументов"<<endl ;
-      usage(argv[0]);
-      exit(1);
-    }  
     for (int i=1;i<argc;i++){
       switch(_params[argv[i]]){
       case 1:
@@ -73,7 +66,7 @@ man sqtd\n" << endl;
           tlog.setLevel(2);  
           tlog.print();
           cout << "Не указано имя файла конфигурации"<< endl;  
-          cout <<"Пример:"<<  argv[0] << " " <<  argv[i-1]  <<  " /etc/tracon/tracon.conf" << endl;
+          cout <<"Пример:"<<  argv[0] << " " <<  argv[i-1]  <<  " /etc/sqtd/sqtd.conf" << endl;
 	  exit(1);
 	}
       case 2:
@@ -110,14 +103,7 @@ cout <<"Пример:"<<  argv[0] << " " <<  argv[i-1]  <<  " 2 " << endl;
 	exit(0);
       }
     }
-    if(_config_file.compare("")==0){
-      tlog.setLevel(3);  
-      tlog.print();
-      cout << "Не задано имя конфигурационного файла" << endl;
-      cout <<"Пример:"<<  argv[0] <<  "  -c /etc/tracon/tracon.conf" << endl;
-      usage(argv[0]);
-      exit(1);
-    }  
+    if(_config_file.compare("")==0)  _config_file="/etc/sqtd/sqtd.conf";
     return result;
   }
   string getConfigFile(){return _config_file;}

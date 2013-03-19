@@ -64,11 +64,11 @@ class sqtd_conf{
    }
 
   bool checkKeyValue(string key ){
-    tlog.put(1, "Проверка параметра конфигурации " + key);
+    tlog.put(2, "Проверка параметра конфигурации " + key);
     switch(_keyValues[key]){
     case 2:
       if  (_accessLogFile.compare("")==0){
-	tlog.put(1,  "Не задан файл лога squid\n \
+	tlog.put(2,  "Не задан файл лога squid\n \
 Пример :  AccesLogFile /var/log/squid/access.log\n \
 Установлено значение по умолчанию  '/var/log/squid/access.log'");
 	 _accessLogFile="/var/log/squid/access.log";
@@ -76,14 +76,14 @@ class sqtd_conf{
       return canReadFile(_accessLogFile);	 
       case 3:
 	if(_actionScript.compare("")==0){
-	    tlog.put(1,"Не задан файл скрипта \n  \
+	    tlog.put(2,"Не задан файл скрипта \n  \
 Пример :  ActionScript /etc/sqtd/action.sh  \
 Имя файла скрипта установлено по умолчанию в /etc/sqtd/action.sh");
 	    _actionScript= "/etc/sqtd/action.sh";}
 	return canReadFile(_actionScript);
       case 4:
 	if(_checkInterval<=0){
-	  tlog.put(1,"Не задан интервал проверок (c)\n \
+	  tlog.put(2,"Не задан интервал проверок (c)\n \
 Пример :  CheckInterval 300\n \
 Интервал проверок установлен по умолчанию на 5 мин (300с))");
 	  _checkInterval = 300;
@@ -92,7 +92,7 @@ class sqtd_conf{
 	return true;
       case 5:
 	if(_allowFile.compare("")==0){
-	  tlog.put(1, "Не задан файл групы  доступа\n \
+	  tlog.put(2, "Не задан файл групы  доступа\n \
 Пример :  AllowFile   /var/lib/sqtd/allow.lst");
 	  _allowFile= "/var/lib/sqtd/allow.lst";
 	} 
@@ -106,7 +106,7 @@ class sqtd_conf{
 	 return true;	 
       case 7: 
 	 if (_denyFile.compare("")==0){ 
-	   tlog.put(1, "Не задано имя файла группы запрета доступа \n\
+	   tlog.put(2, "Не задано имя файла группы запрета доступа \n\
 Пример :  DenyFile /var/lib/sqtd/deny.lst\n \
 Установлено значение по умолчанию /var/lib/sqtd/deny.lst\n");		    
 	   _denyFile = "/var/lib/sqtd/deny.lst";
@@ -119,10 +119,11 @@ class sqtd_conf{
 Установлено значение по умолчанию /var/log/sqtd.log\n");
 	  _logFile="/var/log/sqtd.log";
         }
-        return canWriteFile(_logFile);
+        if(_logFile.compare("console")==0) return true; 
+        return  canWriteFile(_logFile);
       case 9: 
 	 if(_pidFile.compare("")==0){
-      	  tlog.put(1, "Не задано имя файла идентификатора процесса \n \
+      	  tlog.put(2, "Не задано имя файла идентификатора процесса \n \
 Пример :  pidFile /var/lib/sqtd.pid\n \
 Установлено значение по умолчанию /var/lib/sqtd/sqtd.pid");
 	  _pidFile="/var/lib/sqtd/sqtd.pid";
@@ -181,7 +182,7 @@ class sqtd_conf{
       transform(lname.begin(),lname.end(),lname.begin(),::tolower);
       ostringstream os;
       os<<lcount;  
-      tlog.put(2,"Добавление лимита пользователя " + lperiod + " "+ os.str() + " " +lname);
+      tlog.put(2,"Добавление лимита пользователя " + lperiod + " "+ os.str() + "\t " +lname);
       _limits[lperiod][lname]=lcount; 
       _allowList.push_back(lname);
       
@@ -196,7 +197,7 @@ class sqtd_conf{
           ostringstream os;
           os<<lcount;  
 	  transform(t.begin(),t.end(),t.begin(),::tolower);
-	  tlog.put(2,"Добавлен лимит пользователя " + lperiod  + " " +  os.str() +  " " +  t); 
+	  tlog.put(2,"Добавлен лимит пользователя " + lperiod  + " " +  os.str() +  "\t" +  t); 
           _allowList.push_back(t);  
 	  _limits[lperiod][t]=lcount;  
 	  ++usercount;
@@ -228,6 +229,7 @@ class sqtd_conf{
     _actionScript="";
     _denyFile="";
     _limits.clear();
+    _allowList.clear();
   } 
 
  public:
@@ -250,23 +252,29 @@ class sqtd_conf{
     ifstream conf(filename.c_str());
     if(!conf) {
       tlog.put(0, "Ошибка открытия конфигурационного файла '" + filename +"'");
+      tlog.print();
       exit(1) ;
     }	
     int lineNom=0;
     string confline;
-    tlog.put(2,"Конфигурация программы");
+    tlog.put(1,"Конфигурация программы");
     while(getline(conf,confline)){
       ++lineNom;
       ostringstream os;
       os <<lineNom; 
+      if(confline[0]='#') {
+        tlog.put(2,"Пропуск комментария, строка " + os.str());
+	continue;
+      }       
       stringstream ss(confline);
+      
       string key;
       string value; 
       ss >> key;
       transform(key.begin(),key.end(),key.begin(),::toupper);
       switch (_keyValues[key]) {
       case 1:
-	tlog.put(1,"Пропуск пустой строки " +os.str());
+	tlog.put(2,"Пропуск пустой строки " +os.str());
 	break;
       case 2:
 	ss >> _accessLogFile;
