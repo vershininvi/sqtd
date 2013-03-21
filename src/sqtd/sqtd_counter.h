@@ -47,6 +47,7 @@ class sqtd_counter {
   sqtd_conf * getConfig(){return &_conf;}
     
   bool calc(bool *canwork){   
+    ostringstream os;
     tlog.put(2,"Рассчет траффика\n");
     settime();
     clean();
@@ -57,11 +58,16 @@ class sqtd_counter {
 	  return true;
 	}
     	vector<string> rec= _al.getFields();
+	 
 	stringstream field0(rec[0]);  
 	time_t logtime; 
 	field0>>logtime;
 	long long bytes= atoll(rec[4].c_str()); 
 	string username= rec[7];
+        string result=rec[3];
+
+	if (result.compare("TCP_MISS/200")!=0) continue;  
+
 	transform(username.begin(),username.end(),username.begin(),::tolower);
 	if (logtime >=_mbeg) {
 	  _traf["m"][username]+=bytes;
@@ -79,19 +85,22 @@ class sqtd_counter {
      tlog.put(2,"Список отключаемых пользователей");
      for (map <string, map<string,long long> >::iterator i=_traf.begin();i!=_traf.end();++i)
        for (map<string,long long>::iterator j= i->second.begin();j!=i->second.end();++j){
+	 os.str("");
+         os <<   "Траффик пользователя (" << i->first << ") "  <<  j->first << ": " <<  j->second;
+	 tlog.put(2,os.str());
          if((*limits)[i->first][j->first]==0) {
-             tlog.put(2, "Траффик пользователя (" +i->first+") "  + j->first +" не ограничен"); 
-	     continue;
+           tlog.put(2, "Траффик пользователя (" +i->first+") "  + j->first +" не ограничен");
+	    continue;
          }  
- 
      	 if((*limits)[i->first][j->first] <=j->second){
 	   if (find(_dl.begin(),_dl.end(),j->first)==_dl.end()) {
-	     ostringstream os;  
+             os.str("");  
 	     os << "Отключение " << j->first << "\tлимит (" << i->first <<") :"    << (*limits)[i->first][j->first] << "\t\tтраффик:" <<   j->second;    
 	     _dl.push_back(j->first);
-             tlog.put(2, os.str()); 
+             tlog.put(1, os.str()); 
 	   }
          }
+	 
        }
     }
     else {
