@@ -34,9 +34,9 @@ class sqtd_counter {
   } 
    
   void clean() {
-    if(_hbeg!=_hbeg_old) _traf["h"].clear();_hbeg_old=_hbeg;
-    if(_dbeg!=_dbeg_old) _traf["d"].clear();_dbeg_old=_dbeg;
-    if(_mbeg!=_mbeg_old) _traf["m"].clear();_mbeg_old=_mbeg;
+    if(_hbeg!=_hbeg_old) {_traf["h"].clear();_hbeg_old=_hbeg;}
+    if(_dbeg!=_dbeg_old) {_traf["d"].clear();_dbeg_old=_dbeg;}
+    if(_mbeg!=_mbeg_old) {_traf["m"].clear();_mbeg_old=_mbeg;}
     _dl.clear();
   } 
 
