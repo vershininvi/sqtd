@@ -38,12 +38,12 @@ public:
   void setRecord(string record){_record=record;}  
   string getRecord(){return _record;} 
 
-  bool open(){
+  int open(){
     tlog.put(2,"Открытие файла " + _filename );
     _file= new  ifstream(_filename.c_str());
     if(!_file){
       tlog.put(0,"Ошибка открытия файла " +_filename);
-      return false;
+      return 0;
     }
     if (_pos!=0){
        _file->seekg(_pos);
@@ -51,10 +51,10 @@ public:
        ostringstream os;
        if (getline(*_file,newrec)){ 
 	 if (newrec.compare(_record)==0){
-	   _pos=_file->tellg();
+	   //_pos=_file->tellg();
             os<<_pos;  
 	    tlog.put(2,"Обработка будет продолжена с  позиции: " + os.str() );
-	   return true;
+	   return 1;
 	 }  
          else{	  
             os<<_pos;  
@@ -65,6 +65,7 @@ public:
 	    _file->seekg(0);
 	    _pos=0;
 	    _record="";
+	    return 2;
           } 
        }
     }

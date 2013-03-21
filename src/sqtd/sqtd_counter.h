@@ -51,8 +51,9 @@ class sqtd_counter {
     tlog.put(2,"Рассчет траффика\n");
     settime();
     clean();
-    if (_al.open()){
+    if (int iret=_al.open()){
       while (_al.next()){
+	if (iret==2) _traf.clear();
 	if(!*canwork){
 	  _al.close();
 	  return true;
