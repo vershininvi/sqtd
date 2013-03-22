@@ -51,7 +51,7 @@ public:
        ostringstream os;
        if (getline(*_file,newrec)){ 
 	 if (newrec.compare(_record)==0){
-	   //_pos=_file->tellg();
+	    _pos=_file->tellg();
             os<<_pos;  
 	    tlog.put(2,"Обработка будет продолжена с  позиции: " + os.str() );
 	   return 1;
@@ -82,9 +82,11 @@ public:
   bool next(){
     if(_file){
       string newrec;
-      _pos=_file->tellg();
+      ifstream::pos_type pos;
+      pos=_file->tellg();
       if (getline(*_file,newrec)){ 
           _record=newrec;
+	  _pos=pos;
           return true;
       }
       else return false;
