@@ -33,7 +33,7 @@ public:
   void setFileName(string name){_filename=name;};
 
   void setPos(ifstream::pos_type position){ _pos=position;}
-  ifstream::pos_type getpos(){return _pos;} 
+  ifstream::pos_type getPos(){return _pos;} 
 
   void setRecord(string record){_record=record;}  
   string getRecord(){return _record;} 
@@ -87,6 +87,7 @@ public:
       if (getline(*_file,newrec)){ 
           _record=newrec;
 	  _pos=pos;
+          ostringstream os;
           return true;
       }
       else return false;
@@ -95,12 +96,16 @@ public:
   };
   
   vector<string> getFields(){
-    vector <string> tokens;
-    stringstream ss(_record); 
-    string token;
-    while (ss >> token)  tokens.push_back(token);
-    return tokens;
+    try {
+      vector <string> tokens;
+      stringstream ss(_record); 
+      string token;
+      while (ss >> token)  tokens.push_back(token);
+      return tokens;
+    }
+    catch(...){
+      throw 1;
+    }  
   };
-
 };
 #endif  /* ACCESS_LOG */

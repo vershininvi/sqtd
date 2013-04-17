@@ -52,34 +52,40 @@ class sqtd_counter {
     settime();
     clean();
     if (int iret=_al.open()){
+      if (iret==2) _traf.clear();
       while (_al.next()){
-	if (iret==2) _traf.clear();
 	if(!*canwork){
 	  _al.close();
 	  return true;
 	}
-    	vector<string> rec= _al.getFields();
-	 
-	stringstream field0(rec[0]);  
-	time_t logtime; 
-	field0>>logtime;
-	long long bytes= atoll(rec[4].c_str()); 
-	string username= rec[7];
-        string result=rec[3];
-
-	if (result.compare("TCP_MISS/200")!=0) continue;  
-
-	transform(username.begin(),username.end(),username.begin(),::tolower);
-	if (logtime >=_mbeg) {
-	  _traf["m"][username]+=bytes;
-	}
-	if (logtime >=_dbeg){
-	  _traf["d"][username]+=bytes;
-	}
-	if (logtime >=_hbeg){
-	  _traf["h"][username]+=bytes;
-	}
-      }
+	try { 
+	  vector<string> rec= _al.getFields();
+	  stringstream field0(rec[0]);  
+	  time_t logtime; 
+	  field0>>logtime;
+	  long long bytes= atoll(rec[4].c_str()); 
+	  string username= rec[7];
+	  string result=rec[3];
+	  if (result.compare("TCP_MISS/200")!=0) continue;  
+	  transform(username.begin(),username.end(),username.begin(),::tolower);
+	  if (logtime >=_mbeg) {
+	    _traf["m"][username]+=bytes;
+	  }
+	  if (logtime >=_dbeg){
+	    _traf["d"][username]+=bytes;
+	  }
+	  if (logtime >=_hbeg){
+	    _traf["h"][username]+=bytes;
+	  }
+        }
+	catch(...){
+          os.str("");
+	  os << "Ошибка в записи " << _al.getPos() << endl << _al.getRecord();
+	  tlog.put(1,os.str());
+	  tlog.print();
+	  exit(0);
+	}  
+     }
      _al.close();
      tlog.put(2,"Получение списка отключаемых пользователей\n");
      map< string, map <string,long long> > * limits= _conf.getLimits();
