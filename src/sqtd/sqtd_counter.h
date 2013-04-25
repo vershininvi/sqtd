@@ -59,13 +59,20 @@ class sqtd_counter {
 	  return true;
 	}
 	try { 
+	  
 	  vector<string> rec= _al.getFields();
+          if (rec.size()!= 10) throw 0;
 	  stringstream field0(rec[0]);  
 	  time_t logtime; 
 	  field0>>logtime;
-	  long long bytes= atoll(rec[4].c_str()); 
+	  
+          long long bytes= atoll(rec[4].c_str()); 
+	  
 	  string username= rec[7];
+	  
 	  string result=rec[3];
+
+          
 	  if (result.compare("TCP_MISS/200")!=0) continue;  
 	  transform(username.begin(),username.end(),username.begin(),::tolower);
 	  if (logtime >=_mbeg) {
@@ -76,14 +83,15 @@ class sqtd_counter {
 	  }
 	  if (logtime >=_hbeg){
 	    _traf["h"][username]+=bytes;
-	  }
+	  } 
+          
+	  ;
         }
 	catch(...){
           os.str("");
 	  os << "Ошибка в записи " << _al.getPos() << endl << _al.getRecord();
 	  tlog.put(1,os.str());
 	  tlog.print();
-	  exit(0);
 	}  
      }
      _al.close();
