@@ -39,8 +39,13 @@ class sqtd_counter {
     if(_mbeg!=_mbeg_old) {_traf["m"].clear();_mbeg_old=_mbeg;}
     _dl.clear();
   } 
-
-
+  
+  void replace(string *source ,string pattern ,string replacement){
+    size_t pos = source->find(pattern);
+    if ( pos != string::npos ) 
+      source->replace( pos, pattern.length(),replacement  );  
+  }
+ 
  public:
   
   vector < string > *getDenyList(){ return &_dl;} 
@@ -54,66 +59,72 @@ class sqtd_counter {
     if (int iret=_al.open()){
       if (iret==2) _traf.clear();
       while (_al.next()){
-	if(!*canwork){
-	  _al.close();
-	  return true;
-	}
-	try { 
-	  
-	  vector<string> rec= _al.getFields();
+    	if(!*canwork){
+    	  _al.close();
+    	  return true;
+    	}
+    	try {
+    	  vector<string> rec= _al.getFields();
           if (rec.size()!= 10) throw 0;
-	  stringstream field0(rec[0]);  
-	  time_t logtime; 
-	  field0>>logtime;
-	  
-          long long bytes= atoll(rec[4].c_str()); 
-	  
-	  string username= rec[7];
-	  
-	  string result=rec[3];
+    	  stringstream field0(rec[0]);
+    	  time_t logtime;
+    	  field0>>logtime;
+          long long bytes= atoll(rec[4].c_str());
+    	  string username= rec[7];
+    	  string result=rec[3];
 
           
-	  if (result.compare("TCP_MISS/200")!=0) continue;  
-	  transform(username.begin(),username.end(),username.begin(),::tolower);
-	  if (logtime >=_mbeg) {
-	    _traf["m"][username]+=bytes;
-	  }
-	  if (logtime >=_dbeg){
-	    _traf["d"][username]+=bytes;
-	  }
-	  if (logtime >=_hbeg){
-	    _traf["h"][username]+=bytes;
-	  } 
+    	  if (result.compare("TCP_MISS/200")!=0) continue;
+    	  transform(username.begin(),username.end(),username.begin(),::tolower);
+          replace(&username,"\\\\","\\");
+
           
-	  ;
+
+    	  if (logtime >=_mbeg) {
+    	    _traf["m"][username]+=bytes;
+    	  }
+    	  if (logtime >=_dbeg){
+    	    _traf["d"][username]+=bytes;
+    	  }
+    	  if (logtime >=_hbeg){
+    	    _traf["h"][username]+=bytes;
+    	  }
+          
+    	  ;
         }
-	catch(...){
+    	catch(...){
           os.str("");
-	  os << "Ошибка в записи " << _al.getPos() << endl << _al.getRecord();
-	  tlog.put(1,os.str());
-	  tlog.print();
-	}  
+    	  os << "Ошибка в записи " << _al.getPos() << endl << _al.getRecord();
+    	  tlog.put(1,os.str());
+    	  tlog.print();
+    	}
      }
      _al.close();
      tlog.put(2,"Получение списка отключаемых пользователей\n");
-     map< string, map <string,long long> > * limits= _conf.getLimits();
+     map< string, map <string,long long> > *limits= _conf.getLimits();
      tlog.put(2,"Список отключаемых пользователей");
-     for (map <string, map<string,long long> >::iterator i=_traf.begin();i!=_traf.end();++i)
-       for (map<string,long long>::iterator j= i->second.begin();j!=i->second.end();++j){
-	 os.str("");
-         os <<   "Траффик пользователя (" << i->first << ") "  <<  j->first << ": " <<  j->second;
-	 tlog.put(2,os.str());
+        
+     for (map <string, map<string,long long> >::iterator i=_traf.begin();i!=_traf.end();++i) 
+        for (map<string,long long>::iterator j= i->second.begin();j!=i->second.end();++j){ 
+     	 os.str(""); 
+         os <<   "Траффик пользователя (" << i->first << ") "  <<  j->first << ": " <<  j->second;    
+         tlog.put(2,os.str()); 
+         os.str(""); 
+     	 os <<   "Лимит пользователя   (" << i->first << ") "  <<  j->first << ": " <<(*limits)[i->first][j->first];  
+     	 tlog.put(2,os.str()); 
+
          if((*limits)[i->first][j->first]==0) {
-           tlog.put(2, "Траффик пользователя (" +i->first+") "  + j->first +" не ограничен");
-	    continue;
-         }  
+           tlog.put(2, "Траффик пользователя (" +i->first+") "  + j->first + " (не ограничен)");
+    	    continue;
+         }
+
      	 if((*limits)[i->first][j->first] <=j->second){
-	   if (find(_dl.begin(),_dl.end(),j->first)==_dl.end()) {
-             os.str("");  
-	     os << "Отключение " << j->first << "\tлимит (" << i->first <<") :"    << (*limits)[i->first][j->first] << "\t\tтраффик:" <<   j->second;    
-	     _dl.push_back(j->first);
-             tlog.put(1, os.str()); 
-	   }
+    	   if (find(_dl.begin(),_dl.end(),j->first)==_dl.end()) {
+             os.str("");
+    	     os << "Отключение " << j->first << "\tлимит (" << i->first <<") :"    << (*limits)[i->first][j->first] << "\t\tтраффик:" <<   j->second;
+    	     _dl.push_back(j->first);
+             tlog.put(1, os.str());
+    	   }
          }
 	 
        }

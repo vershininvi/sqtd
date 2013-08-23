@@ -22,6 +22,8 @@ class sqtd_conf{
   string     _denyFile;
   string     _logFile;
   string     _pidFile;
+  string     _systemDomainDelimiter
+  
   map <string,int> _keyValues;
   map< string, map <string,long long> > _limits; 
   vector <string> _allowList;
@@ -331,7 +333,7 @@ class sqtd_conf{
     return result;
   }
 
-  map <string, map<string, long long> > *getLimits()          {return &_limits;}
+  map <string, map<string, long long> > *getLimits()          {return  &_limits;}
   string                                 getAccessLogFile  () {return  _accessLogFile ;} 
   long                                   getCheckInterval  () {return  _checkInterval;}
   string                                 getAllowFile      () {return  _allowFile;} 
