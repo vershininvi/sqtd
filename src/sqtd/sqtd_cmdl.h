@@ -1,112 +1,78 @@
 #ifndef COMMAND_LINE
 #include "../../config.h" 
 #define COMMAND_LINE
-
 #include "log_buffer.h"
 #include <map>
 #include <cstdlib>
 #include <sstream>
+#include <getopt.h>
+
 using namespace std;
+const char*  const  short_options="c:hnv"; 
+const struct option long_options[]={
+    {"config"        , 0, NULL, 'c'},  
+    {"help"          , 0, NULL, 'h'},   
+    {"no-daemon"     , 0, NULL, 'n'}, 
+    {"version"       , 0, NULL, 'v'},
+    {NULL            , 0, NULL, 0  }
+}; 
+
 class command_line{
-  string _config_file;
-  string _pid_file;
-  int debug_level;
-
-  map <string,int> _params; 
  private:
-  void usage (char *progname){
+  string _programm_name;      
+  string _config_file;
+  int     _no_daemon;
 
-  cout << "Использование\n" << progname <<   
-" КЛЮЧ]… [ФАЙЛ]… \n \
-Анализирует файл access.log прокси сервера squid.\n \
-Формирует списки доступа и списки отключения.\n\n \
--c имя_конфигурационного_файла  \t использовать файл конфигурации\n \
--d уровень_отладочных_сообщений \t установить уровень отладочных сообщений 0-2\n \
--h                              \t вывод этой справки\n \
--v                              \t вывод версии программы\n \
--t                              \t запуск в консоли \n\n \
-Коды выхода:\n\n \
- 0  нормальное завершение работы\n \
- 1  небольшие проблемы\n \
- 2  серьёзная проблема\n\n \
-Об ошибках  сообщайте по адресу Vershinin_VI@vlg-gaz.ru\n  \
-Домашняя страница:\n  \
-Справка по работе с программой:\
-man sqtd\n" << endl;
-}
- 
- public:
-  command_line(){
-    string config_file="";
-    string pid_file="";
-    int debug_level=0;
-    _params["-c"]=1;
-    _params["-d"]=2;
-    _params["-h"]=3;
-    _params["-v"]=4;
-    _params["-t"]=5; 
+  void print_usage (ostream *dest,int exit_code){
+    *dest <<  "Usage: " << _programm_name << " [OPTIONS] " << endl
+	  <<  " -c --config filename      full path to configuration file" << endl
+	  <<  " -h --help                 Display this usage information." << endl
+      	  <<  " -n --no-daemon            do not start as daemon, output log to console" << endl
+	  <<  " -v --version              Print version messages."<<endl<<endl 
+	  <<  "The more information about programm:\n\t man sqtd" << endl;
+    exit (exit_code);
   }
   
-  bool get(int argc,char**argv){
-    bool result;
-    result=true;
-    
-
-    tlog.put(1,"Анализ параметров командной строки");
-    for (int i=1;i<argc;i++){
-      switch(_params[argv[i]]){
-      case 1:
-	if (++i < argc)  {
-          tlog.put(2, "Установка имени файла конфигурации");
-	  _config_file=argv[i];
-          tlog.put(2, "Файл конфигурации '" +  _config_file  + "' установлен");
-	  break;
-	} 
-	else{
-          tlog.setLevel(2);  
-          tlog.print();
-          cout << "Не указано имя файла конфигурации"<< endl;  
-          cout <<"Пример:"<<  argv[0] << " " <<  argv[i-1]  <<  " /etc/sqtd/sqtd.conf" << endl;
-	  exit(1);
-	}
-      case 2:
-	if (++i < argc)  {
-          tlog.put(2, "Установка уровня отладочных сообщений (0-только ошибки,1 - предупреждения,  2 - все )") ;
-	  debug_level=atoi(argv[i]);
-          ostringstream os;
-          os <<  "Уровень отладочных сообщений '" <<  argv[i]  << "' установлен";
-
-	  tlog.put(2, os.str());
-          tlog.setLevel(debug_level);  
-	  break;
-	} 
-	else{
-          tlog.setLevel(2);  
-          tlog.print();
-	  cout << "Не указан уровень отладочных соощений" << endl;  
-cout <<"Пример:"<<  argv[0] << " " <<  argv[i-1]  <<  " 2 " << endl;
-	  usage(argv[0]);
-	  exit(1);
-	}
-      case 3:
-	usage(argv[0]);
-	exit(0);
-     
-      case 4:
-	cout <<argv[0] << " версия " <<   VERSION << endl;
-	exit(0);
-      case 5:
-	result=false;
-	break;
-      default:
-	usage(argv[0]);
-	exit(0);
-      }
-    }
-    if(_config_file.compare("")==0)  _config_file="/etc/sqtd/sqtd.conf";
-    return result;
+  void print_version(){
+    cout <<_programm_name <<  endl 
+         << "Version : "  <<   VERSION << endl;
+    exit(0);
   }
-  string getConfigFile(){return _config_file;}
 
+ public:
+  command_line(int argc, char** argv){
+    _programm_name=argv[0];      
+    _config_file="";
+    _no_daemon=0;
+    int next_option;
+      do{
+	next_option = getopt_long (argc, argv, short_options, long_options, NULL);
+	switch (next_option) {
+	case 'c':   
+	  _config_file  = optarg;
+	  break;
+	case 'h':  
+	  print_usage (&cout, 0);
+	case 'n':   
+	  _no_daemon=1;
+	  break;
+	case 'v':  
+	  print_version();
+	case '?': 
+	  print_usage (&cerr, 1);
+	case -1:    
+	  break;
+	default:    
+	  abort ();
+	}
+      }
+      while (next_option != -1);
+      if (_config_file.compare("")==0) _config_file="/etc/sqtd/sqtd.conf";
+  }
+
+  string*  getProgrammName()  {return &_programm_name;}
+  string*  getConfigFileName(){return &_config_file; }
+  int    getNoDaemonMode()    {return _no_daemon;}
+  
 };
 #endif  /*COMMAND_LINE */

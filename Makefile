@@ -49,7 +49,7 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = sqtd$(EXEEXT)
+bin_PROGRAMS = sqtd$(EXEEXT) sqtc$(EXEEXT)
 subdir = .
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/config.h.in \
@@ -67,6 +67,9 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
+am_sqtc_OBJECTS = sqtc.$(OBJEXT)
+sqtc_OBJECTS = $(am_sqtc_OBJECTS)
+sqtc_LDADD = $(LDADD)
 am_sqtd_OBJECTS = sqtd.$(OBJEXT)
 sqtd_OBJECTS = $(am_sqtd_OBJECTS)
 sqtd_LDADD = $(LDADD)
@@ -83,8 +86,8 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(sqtd_SOURCES)
-DIST_SOURCES = $(sqtd_SOURCES)
+SOURCES = $(sqtc_SOURCES) $(sqtd_SOURCES)
+DIST_SOURCES = $(sqtc_SOURCES) $(sqtd_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -137,7 +140,7 @@ INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LDFLAGS = 
 LIBOBJS = 
-LIBS = 
+LIBS = -lpthread 
 LTLIBOBJS = 
 MAKEINFO = ${SHELL} /home/vvi/projects/sqtd/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
@@ -145,15 +148,15 @@ OBJEXT = o
 PACKAGE = sqtd
 PACKAGE_BUGREPORT = www.i_have_no_adress
 PACKAGE_NAME = sqtd
-PACKAGE_STRING = sqtd 0.0.7
+PACKAGE_STRING = sqtd 0.1.0
 PACKAGE_TARNAME = sqtd
 PACKAGE_URL = 
-PACKAGE_VERSION = 0.0.7
+PACKAGE_VERSION = 0.1.0
 PATH_SEPARATOR = :
 SET_MAKE = 
 SHELL = /bin/sh
 STRIP = 
-VERSION = 0.0.7
+VERSION = 0.1.0
 abs_builddir = /home/vvi/projects/sqtd
 abs_srcdir = /home/vvi/projects/sqtd
 abs_top_builddir = /home/vvi/projects/sqtd
@@ -198,6 +201,7 @@ top_build_prefix =
 top_builddir = .
 top_srcdir = .
 sqtd_SOURCES = src/sqtd/sqtd.cpp src/sqtd/*.h config.h
+sqtc_SOURCES = src/sqtc/sqtc.cpp config.h
 EXTRA_DIST = doc etc gentoo man
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -293,6 +297,9 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+sqtc$(EXEEXT): $(sqtc_OBJECTS) $(sqtc_DEPENDENCIES) $(EXTRA_sqtc_DEPENDENCIES) 
+	@rm -f sqtc$(EXEEXT)
+	$(CXXLINK) $(sqtc_OBJECTS) $(sqtc_LDADD) $(LIBS)
 sqtd$(EXEEXT): $(sqtd_OBJECTS) $(sqtd_DEPENDENCIES) $(EXTRA_sqtd_DEPENDENCIES) 
 	@rm -f sqtd$(EXEEXT)
 	$(CXXLINK) $(sqtd_OBJECTS) $(sqtd_LDADD) $(LIBS)
@@ -303,6 +310,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/sqtc.Po
 include ./$(DEPDIR)/sqtd.Po
 
 .cpp.o:
@@ -318,6 +326,20 @@ include ./$(DEPDIR)/sqtd.Po
 #	source='$<' object='$@' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+sqtc.o: src/sqtc/sqtc.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT sqtc.o -MD -MP -MF $(DEPDIR)/sqtc.Tpo -c -o sqtc.o `test -f 'src/sqtc/sqtc.cpp' || echo '$(srcdir)/'`src/sqtc/sqtc.cpp
+	$(am__mv) $(DEPDIR)/sqtc.Tpo $(DEPDIR)/sqtc.Po
+#	source='src/sqtc/sqtc.cpp' object='sqtc.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o sqtc.o `test -f 'src/sqtc/sqtc.cpp' || echo '$(srcdir)/'`src/sqtc/sqtc.cpp
+
+sqtc.obj: src/sqtc/sqtc.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT sqtc.obj -MD -MP -MF $(DEPDIR)/sqtc.Tpo -c -o sqtc.obj `if test -f 'src/sqtc/sqtc.cpp'; then $(CYGPATH_W) 'src/sqtc/sqtc.cpp'; else $(CYGPATH_W) '$(srcdir)/src/sqtc/sqtc.cpp'; fi`
+	$(am__mv) $(DEPDIR)/sqtc.Tpo $(DEPDIR)/sqtc.Po
+#	source='src/sqtc/sqtc.cpp' object='sqtc.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o sqtc.obj `if test -f 'src/sqtc/sqtc.cpp'; then $(CYGPATH_W) 'src/sqtc/sqtc.cpp'; else $(CYGPATH_W) '$(srcdir)/src/sqtc/sqtc.cpp'; fi`
 
 sqtd.o: src/sqtd/sqtd.cpp
 	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT sqtd.o -MD -MP -MF $(DEPDIR)/sqtd.Tpo -c -o sqtd.o `test -f 'src/sqtd/sqtd.cpp' || echo '$(srcdir)/'`src/sqtd/sqtd.cpp

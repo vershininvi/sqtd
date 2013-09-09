@@ -9,15 +9,15 @@
 
 
 
-using namespace std;
+//using namespace std;
 
 class access_log{
 private:
   ifstream * _file;
   ifstream::pos_type _pos;
   string _record; 
-  string _filename;
-
+  log_buffer * _tlog;
+  sqtd_conf*   _conf;
 public:
   access_log(){
     _pos=0;
@@ -29,8 +29,10 @@ public:
   ~access_log(){
     close();
   };
+
+  void setLog(log_buffer * tlog){_tlog=tlog;}
+  void setConf(sqtd_conf * conf){_conf=conf;}
   
-  void setFileName(string name){_filename=name;};
 
   void setPos(ifstream::pos_type position){ _pos=position;}
   ifstream::pos_type getPos(){return _pos;} 
@@ -39,10 +41,11 @@ public:
   string getRecord(){return _record;} 
 
   int open(){
-    tlog.put(2,"Открытие файла " + _filename );
-    _file= new  ifstream(_filename.c_str());
+    string filename= _conf->getAccessLogFile()->c_str();
+    _tlog->put(2,"Открытие файла" + filename );
+    _file= new  ifstream(filename.c_str());
     if(!_file){
-      tlog.put(0,"Ошибка открытия файла " +_filename);
+      _tlog->put(0,"Ошибка открытия файла " +filename);
       return 0;
     }
     if (_pos!=0){
@@ -53,15 +56,15 @@ public:
 	 if (newrec.compare(_record)==0){
 	    _pos=_file->tellg();
             os<<_pos;  
-	    tlog.put(2,"Обработка будет продолжена с  позиции: " + os.str() );
+	    _tlog->put(2,"Обработка будет продолжена с  позиции: " + os.str() );
 	   return 1;
 	 }  
          else{	  
             os<<_pos;  
-	    tlog.put(2,"Запись на позиции "+ os.str()+ "  не соответсвует последней обработанной записи");
-	    tlog.put(2, "Последняя запись : " + _record);
-	    tlog.put(2, "Запись на позиции: " + newrec );
-	    tlog.put(2, "Обработка с начала файла");
+	    _tlog->put(2,"Запись на позиции "+ os.str()+ "  не соответсвует последней обработанной записи");
+	    _tlog->put(2, "Последняя запись : " + _record);
+	    _tlog->put(2, "Запись на позиции: " + newrec );
+	    _tlog->put(2, "Обработка с начала файла");
 	    _file->seekg(0);
 	    _pos=0;
 	    _record="";

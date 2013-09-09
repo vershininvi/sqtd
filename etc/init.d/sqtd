@@ -1,7 +1,8 @@
 #!/sbin/runscript
 # Copyright Vladimir Vershinin, Russia, Volgograd
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/sqtd/files/2.0/init.d/sqtd,v 0.0.0 2013/03/08 10:53:34 mattm Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-analyzer/sqtd/files/2.0/init.d/sqtd,v 0.2.0 2013/09/09 10:53:34 mattm Exp $
+#
 
 pid_file="/var/lib/sqtd/sqtd.pid"
 
@@ -17,7 +18,7 @@ start_pre() {
 start() {
 	ebegin "Starting sqtd"
 	start-stop-daemon --start --wait 1000 \
-		--user root --group root --exec /usr/sbin/sqtd -- -c /etc/sqtd/sqtd.conf ${SQTD_DEBUGLEVEL}
+		--user root --group root --exec /usr/sbin/sqtd -- -c /etc/sqtd/sqtd.conf ${SQTD_OPTIONS}
 	eend $?
 }
 

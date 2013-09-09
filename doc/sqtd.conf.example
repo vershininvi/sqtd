@@ -1,14 +1,14 @@
 CheckInterval 300
+DebugLevel    2
 
 AccessLogFile /var/log/squid/access.log
-AllowFile     /var/lib/sqtd/allow.txt  
-DenyFile      /var/lib/sqtd/deny.txt
 LogFile       /var/log/sqtd.log
-PidFile       /var/lib/sqtd.pid
-ActionScript  /etc/sqtd/action.sh
+PidFile       /var/lib/sqtd/sqtd.pid
+SockFile      /var/lib/sqtd/sqtd.sock
 
-
-limit 	      g:MyDomain\group1:d:20M
-
-limit 	      u:MyDomain\user1:d:100M
-limit 	      u:MyDomain\user2:m:100M
+limit         g:DOMAIN\proxy_20M:d:20M
+limit         g:DOMAIN\proxy_50M:d:50M
+limit         g:DOMAIN\proxy_100M:d:100M
+limit         g:DOMAIN\proxy_200M:d:200M
+limit         g:DOMAIN\proxy_500M:d:500M
+limit         g:DOMAIN\proxy_unlim:d:0

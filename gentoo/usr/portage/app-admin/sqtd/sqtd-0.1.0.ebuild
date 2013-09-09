@@ -38,25 +38,21 @@ src_install() {
                /etc/sqtd \
 	       /var/lib  \
                /var/lib/sqtd
-          
-#	keepdir \
-#               /etc/sqtd \  
-#	       /var/lib/sqtd 
+
 
 	insinto /etc/sqtd
 	doins \
-	       ${S}/doc/sqtd.conf.example \
-	       ${S}/doc/squid_reconfig.sh.example
+	       ${S}/doc/sqtd.conf.example 
 	doinitd \
 		${S}/etc/init.d/sqtd
         doconfd \
 		${S}/etc/conf.d/sqtd
 	dosbin \
-		sqtd
-
+		sqtd \
+		sqtc
 	dodoc README INSTALL NEWS ChangeLog \
-		${S}/doc/sqtd.conf.example \
-		${S}/doc/squid_reconfig.sh.example 
-
-	doman  	${S}/man/sqtd.ru.1
+		${S}/doc/sqtd.conf.example 
+	doman  	${S}/man/sqtd.ru.1 \
+	        ${S}/man/sqtc.ru.1
+	
 }
