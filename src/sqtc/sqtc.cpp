@@ -17,6 +17,25 @@ int interactive;
 string lightmode;
 ofstream debug_stream;
 
+string url_decode(string input){
+  ostringstream os;
+  for (string::iterator i= input.begin();i!=input.end();++i){
+    if(*i=='%'){
+      stringstream ss; 
+      string nom;  
+      if(++i!=input.end()) nom=*i;
+      if(++i!=input.end()) nom+=*i;
+      ss<<std::hex<< nom;
+      int inom ;
+      ss >> inom; 
+      os << (char) inom;
+    }
+    else os << *i;
+  }
+  return os.str();
+}
+
+
 void print_usage (ostream *dest , int exit_code){
   *dest <<  "Usage: " << program_name << " options " << endl;
   *dest <<  " -i --interactive             ineractive mode"<<endl 
@@ -142,6 +161,7 @@ public:
     char* responce=NULL;
     responce=get(&responce);
     if(responce){
+      if(debug_stream.is_open()) debug_stream << "\t\t\t\tResponce :"<< responce << endl;
 	  cout << responce <<endl;
 	  free (responce); 
     }
@@ -254,8 +274,8 @@ int main(int argc,char** argv){
   }
   //Not Interactive mode
   else while (getline(cin , input)){
-      if (debug_file) debug_stream << input << endl; 
-     con.showUser(input);
+      if (debug_file) debug_stream <<"Query :"<< input; 
+      con.showUser(url_decode(input));
   }
   
   con.Disconnect();
