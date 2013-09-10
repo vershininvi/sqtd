@@ -7,6 +7,7 @@
 #include <sys/un.h>
 #include <map>
 #include <sstream>
+#include <fstream>
 #include <algorithm>
 
 using namespace std;
@@ -14,13 +15,15 @@ using namespace std;
 const char* program_name;
 int interactive;
 string lightmode;
+ofstream debug_stream;
 
 void print_usage (ostream *dest , int exit_code){
   *dest <<  "Usage: " << program_name << " options " << endl;
   *dest <<  " -i --interactive             ineractive mode"<<endl 
         <<  " -h --help                    Display this usage information." << endl
         <<  " -l --light-mode              Return OK on error"              << endl
-        <<  " -s --socket   filename       the sqtd socket file to connect" << endl;
+        <<  " -s --socket   filename       the sqtd socket file to connect (default /var/lib/sqtd/sqtd.sock)" << endl
+        <<  " -d --debug    filename       the output debug info to specified file " << endl;
         
   exit (exit_code);
 }
@@ -152,9 +155,10 @@ public:
 
 int main(int argc,char** argv){
   /*Анализ параметров командной строки*/
-  const char*  const  short_options="ihls:"; 
+  const char*  const  short_options="d:ihls:"; 
   const struct option long_options[]={
-    {"interactive"   , 0, NULL, 'h'  },
+    {"debug"         , 1, NULL, 'd'  },
+    {"interactive"   , 0, NULL, 'i'  },
     {"help"          , 0, NULL, 'h'  },
     {"light-mode"    , 1, NULL, 'l'  },
     {"socket"        , 1, NULL, 's'  },
@@ -162,6 +166,7 @@ int main(int argc,char** argv){
   };
   
   char* socket_file= NULL;
+  char* debug_file=NULL;
   interactive=0;
   lightmode="ERR";
   program_name=argv[0];
@@ -169,6 +174,9 @@ int main(int argc,char** argv){
   do{
     next_option = getopt_long (argc, argv, short_options, long_options, NULL);
     switch (next_option){
+      case 'd':   
+	debug_file = optarg;
+	break;
       case 'i':   
 	interactive = 1;
 	break;
@@ -193,6 +201,10 @@ int main(int argc,char** argv){
     cerr << "Socket file not specified";
     print_usage (&cerr, 1);
   } 
+  if(debug_file){
+    debug_stream.open(debug_file,ios::app);
+    if (!debug_stream.is_open()) debug_file==NULL;
+  }
   filesock_client con(socket_file,interactive,lightmode);
   string input;
   /*Iteractive mode*/
@@ -243,8 +255,13 @@ int main(int argc,char** argv){
     }  
   }
   //Not Interactive mode
-  else while (getline(cin , input)) con.showUser(input);
+  else while (getline(cin , input)){
+      if (debug_file) debug_stream << input << endl; 
+     con.showUser(input);
+  }
+  
   con.Disconnect();
+  if(debug_stream.is_open())debug_stream.close();
   return 0;
 }
 
