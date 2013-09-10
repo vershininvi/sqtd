@@ -54,11 +54,11 @@ private:
   int _verbose;
   string _default;
 public: 
-  filesock_client(char* socket_file,int verbose,string default_responce){
+  filesock_client(string socket_file,int verbose,string default_responce){
     _isConnected=false;
     _sock_fd = socket (PF_LOCAL, SOCK_STREAM, 0);
     _serv_addr.sun_family = AF_LOCAL;
-    strcpy (_serv_addr.sun_path, socket_file); 
+    strcpy (_serv_addr.sun_path, socket_file.c_str()); 
     _verbose=verbose;
     _default=default_responce;
   }
@@ -165,7 +165,7 @@ int main(int argc,char** argv){
     {NULL            , 0, NULL, 0    }
   };
   
-  char* socket_file= NULL;
+  string socket_file;
   char* debug_file=NULL;
   interactive=0;
   lightmode="ERR";
@@ -197,8 +197,8 @@ int main(int argc,char** argv){
       }
   }
   while (next_option != -1);
-  if (!socket_file){
-    cerr << "Socket file not specified";
+  if (socket_file.compare("")==0){
+    socket_file="/var/lib/sqtd/sqtd.sock";
     print_usage (&cerr, 1);
   } 
   if(debug_file){
