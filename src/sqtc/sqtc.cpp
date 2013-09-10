@@ -197,10 +197,8 @@ int main(int argc,char** argv){
       }
   }
   while (next_option != -1);
-  if (socket_file.compare("")==0){
-    socket_file="/var/lib/sqtd/sqtd.sock";
-    print_usage (&cerr, 1);
-  } 
+  if (socket_file.compare("")==0)  socket_file="/var/lib/sqtd/sqtd.sock";
+
   if(debug_file){
     debug_stream.open(debug_file,ios::app);
     if (!debug_stream.is_open()) debug_file==NULL;
