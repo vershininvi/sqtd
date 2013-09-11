@@ -12,6 +12,11 @@
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <string>
+
+#include <pwd.h>
+#include <grp.h>
+#include <sys/stat.h>
+
 using namespace std;
 
 bool canwork;
@@ -23,6 +28,36 @@ const char* const OK="OK";
 const char* const ERR="ERR";
 
 
+uid_t getUid(string* username){
+  struct passwd   pwd;
+  struct passwd*  result;
+  char* buf;
+  size_t bufsize;
+  int s;
+  bufsize = sysconf(_SC_GETPW_R_SIZE_MAX);
+  if (bufsize == -1)          
+      bufsize = 16384;        
+  buf = (char*)malloc(bufsize);
+  if (buf == NULL) return -1;
+  s = getpwnam_r(username->c_str(), &pwd, buf, bufsize, &result);
+  if (result == NULL) {
+    free(buf); 
+    return -1;
+  }
+  return pwd.pw_uid;
+}
+
+gid_t getGid(string* groupname){
+  struct group  *group=getgrnam(groupname->c_str());
+  if(!group) return -1;
+  else return group->gr_gid;
+}
+
+void chMod(string* filename,string* mode ){
+  if (mode->compare("")==0) return;
+  int i= strtol(mode->c_str(),0,8);
+  chmod(filename->c_str(),i);
+}
 
 void my_terminate (int param){
   canwork=false;
@@ -31,8 +66,6 @@ void my_terminate (int param){
 bool write_int(int sock,int message){
   return (write(sock,&message,sizeof(int)) !=-1);
 }
-
-
 
 int  read_string(int sock,int length,string* result ){
   if (length>0){
@@ -161,27 +194,25 @@ void* keep_connection(void* unused){
 int main(int argc,char**argv){
   //Разбор параметров командной строки
   command_line cmdl(argc,argv);
-
   //Настройка лога
   log_buffer tlog;
-
   //Конфигурация программы
   sqtd_conf conf(&cmdl,&tlog);
-
-  
+  if (!conf.reconfig()){
+    tlog.print();
+    exit(1);
+  }
   tlog.put(2,"Starting" + *(cmdl.getProgrammName()));  
   ostringstream os; 
   pid_t pid,sid;
   bool configured;
   int confErrCount;
   int iret;  
-
   //Регистрация обработчиков сигналов;
   void (*prev_fn)(int);
   canwork= true; 
   prev_fn = signal (SIGTERM,my_terminate);
   prev_fn = signal (SIGABRT,my_terminate);
-
   //Демонизация процессв
   if(!cmdl.getNoDaemonMode()){
       tlog.put(1,"Starting in daemon mode");    
@@ -195,8 +226,9 @@ int main(int argc,char**argv){
 	exit(1);
       } 
   }
- 
+  //Настройка лога
   tlog.setFilterOn(true);
+  //Запись pid в файл
   if(!cmdl.getNoDaemonMode()){
      tlog.put(2,"Opening pid file");
      ofstream pidfile(conf.getPidFile()->c_str(),ios_base::out);
@@ -215,14 +247,11 @@ int main(int argc,char**argv){
   sid=setsid();
   tlog.put(2,"Changing working dir");
   iret=chdir("/");
-
   //Настройка счетчика
   trc.setConf(&conf);
   trc.setLog(&tlog);
-
-
-
   /*Открытие сокета*/
+  unlink(conf.getSockFile()->c_str());
   serv_sock=socket(PF_LOCAL,SOCK_STREAM,0);
   struct sockaddr_un  serv_addr;  
   serv_addr.sun_family=AF_LOCAL;
@@ -232,14 +261,12 @@ int main(int argc,char**argv){
     tlog.print();
     exit(1);
   }
+  int ret =chown(conf.getSockFile()->c_str(),getUid(conf.getSockUser()),getGid(conf.getSockGroup()));
+  chMod(conf.getSockFile(),conf.getSockMod());
   listen(serv_sock,10);
-
-  
-   
   /*Запуск треда  процесса прослушивания сокета*/ 
   pthread_t connection_thread;
   pthread_create(&connection_thread,NULL,&keep_connection,NULL);
-
   /* Рассчет траффика */ 
   while (canwork){
     tlog.put(2, "Calculate user traffic") ; 
@@ -249,25 +276,20 @@ int main(int argc,char**argv){
       tlog.print();
       exit(1);
     }
-         
     tlog.put(2, "Reconfiguring ") ; 
     configured=conf.reconfig()&&conf.check();
-    
-   
     if (!configured){
       if (++confErrCount> 10){
 	tlog.print();
 	exit(1);
       }
     } else  if(confErrCount!=0) confErrCount=0;
-
     os<< "Waiting " <<conf.getCheckInterval() <<"с";
     tlog.put(2, os.str());
     os.str("");
     tlog.print();
     sleep(conf.getCheckInterval());
   }
-
   close(serv_sock);
   unlink(conf.getPidFile()->c_str());
   unlink(conf.getSockFile()->c_str());

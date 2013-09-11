@@ -17,13 +17,18 @@ class sqtd_conf{
   command_line *                        _cmdl;
   string                                _accessLogFile;   
   long                                  _checkInterval;
-  string                                _actionScript;
   int                                   _debug_level;
   string                                _log_file;
   string                                _pid_file;
   string                                _sock_file;
+  string                                _sock_user;
+  string                                _sock_group;
+  string                                _sock_mod;
   string                                _systemDomainDelimiter;
+  string                                _squidDomainDelimiter;
+
   log_buffer*                           _tlog; 
+
   map <string,int> _keyValues;
   map< string, map <string,long long> > _limits; 
 
@@ -72,39 +77,48 @@ class sqtd_conf{
 	_accessLogFile="/var/log/squid/access.log";
       } 
       return canReadFile(_accessLogFile.c_str());	 
-
     case 3:
       if(_checkInterval<=0){
 	_tlog->put(2,"Check interval is not specified");
 	_checkInterval = 300;
       }  
       return true;
-
     case 4:
       _tlog->setLevel(_debug_level);
       return true;
-
     case 5:
       if(_log_file.compare("")==0){
 	_tlog->put(2,"Log file is not specified")  ;
       }  
       _tlog->setLogFile(&_log_file,_cmdl->getNoDaemonMode());
       return true;
-
     case 6:
       if(_pid_file.compare("")==0) { 
 	_tlog->put(0, "No pid file specified ");
 	_pid_file="/var/lib/sqtd/sqtd.pid";
       }
       return true;	 
-
     case 7:
       if(_sock_file.compare("")==0) { 
 	_tlog->put(0, "No sock file specified ");
 	_sock_file="/var/lib/sqtd/sqtd.sock";
       }
       return true; 
-
+    case 8:
+      if(_sock_user.compare("")==0) _tlog->put(0, "The SockOwner not specified");
+      return true; 
+    case 9:
+      if(_sock_group.compare("")==0) _tlog->put(0, "The SockGroup not specified ");
+      return true; 
+    case 10:
+      if(_sock_mod.compare("")==0) _tlog->put(2, "The SockMod not specified" );
+      return true;
+    case 11:
+      if(_systemDomainDelimiter.compare("")==0) _tlog->put(2, "The SystemDomainDelimiter not specified" );
+      return true;
+    case 12:
+      if(_squidDomainDelimiter.compare("")==0) _tlog->put(2, "The SquidDomainDelimiter  not specified" );
+      return true;
     default:
       return  true;
     }
@@ -140,7 +154,6 @@ class sqtd_conf{
 	  _tlog->put(0,"Error in limit's period  (h - hour,d - day,m - month), period='" + lperiod + "'");
 	  return false;
         }
-        
         if (periods.find(lperiod)==string::npos) {
 	  _tlog->put(0,"Error in limit's period  (h - hour,d - day,m - month), period='" + lperiod + "'");
 	  return false;
@@ -150,7 +163,6 @@ class sqtd_conf{
 	lcount=tokenToLong(token);
 	if (lcount==0);
 	break;
-
       default:
 	_tlog->put(0, "Ignoring all other fields of limit") ;
 	break;
@@ -185,7 +197,6 @@ class sqtd_conf{
 	  ostringstream os;
 	  os<<usercount; 
 	  _tlog->put(2,"The count of user in group  " + lname +" is " + os.str());
-
         }
       }
       else {
@@ -206,11 +217,14 @@ class sqtd_conf{
   sqtd_conf(command_line* cmdl,log_buffer* log){
     _cmdl=cmdl;
     _accessLogFile="";   
-    _actionScript="";
     _log_file="";
     _pid_file="";
     _sock_file="";
+    _sock_user="";
+    _sock_group="";
+    _sock_mod="";
     _systemDomainDelimiter="";
+    _squidDomainDelimiter="";
     _tlog=log; 
     _keyValues[""]=1;
     _keyValues["ACCESSLOGFILE"]=2;
@@ -219,9 +233,13 @@ class sqtd_conf{
     _keyValues["LOGFILE"]=5;
     _keyValues["PIDFILE"]=6;
     _keyValues["SOCKFILE"]=7;
-    _keyValues["LIMIT"]=8;
+    _keyValues["SOCKUSER"]=8;
+    _keyValues["SOCKGROUP"]=9;
+    _keyValues["SOCKMOD"]=10;
+    _keyValues["SYSTEMDOMAINDELIMITER"]=11;
+    _keyValues["SQUIDDOMAINDELIMITER"]=12;
+    _keyValues["LIMIT"]=13;
     _tlog=log;
-    reconfig();
   }
 
   bool reconfig(){
@@ -272,7 +290,22 @@ class sqtd_conf{
       case 7:	
 	ss>> _sock_file;
         break; 
-      case 8:
+      case 8:	
+	ss>> _sock_user;
+        break; 
+     case 9:	
+	ss>> _sock_group;
+        break; 
+     case 10:	
+	ss>> _sock_mod;
+        break; 
+     case 11:	
+	ss>> _systemDomainDelimiter;
+        break; 
+      case 12:	
+	ss>> _squidDomainDelimiter;
+        break; 
+      case 13:
 	ss >> value;
 	if(!addLimit(value)){
 	  _tlog->put(0, "Error adding limit in config file line  " + os.str()) ; 
@@ -296,24 +329,25 @@ class sqtd_conf{
 
   bool check() {
     bool result=true;
-    _tlog->put (2, "Checing configuration... ");
+    _tlog->put (2, "Checking configuration... ");
     for( map<string,int>::iterator i=_keyValues.begin();i!=_keyValues.end();++i)
       result=checkKeyValue(i->first) && result;
     return result;
   }
 
-  //  string       _systemDomainDelimiter;
-  
-
-  string*                                getAccessLogFile  () {return  & _accessLogFile ;} 
-  long                                   getCheckInterval  () {return    _checkInterval;}
-  string*                                getActionScript   () {return  & _actionScript;}
-  long                                   getDebugLevel     () {return    _debug_level;} 
-  string*                                getLogFile        () {return  & _log_file;}
-  string*                                getPidFile        () {return  & _pid_file;}
-  string*                                getSockFile       () {return  & _sock_file;}
-  map <string, map<string, long long> >* getLimits()          {return  & _limits;}
-  command_line *                         getCommendLine    () {return _cmdl;};  
+  string* getAccessLogFile(){return  & _accessLogFile ;} 
+  long getCheckInterval(){return    _checkInterval;}
+  long getDebugLevel(){return    _debug_level;} 
+  string* getLogFile(){return  & _log_file;}
+  string* getPidFile(){return  & _pid_file;}
+  string* getSockFile(){return  & _sock_file;}
+  string* getSockUser(){return  & _sock_user;}
+  string* getSockGroup(){return  & _sock_group;}
+  string* getSockMod(){return  & _sock_mod;}
+  string* getSquidDomainDelimiter(){return  & _squidDomainDelimiter;}
+  string* getSystemDomainDelimiter(){return  & _systemDomainDelimiter;}
+  map <string, map<string, long long> >* getLimits(){return  & _limits;}
+  command_line* getCommendLine    () {return _cmdl;};  
 };
 #endif
 

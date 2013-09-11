@@ -19,7 +19,10 @@ class sqtd_counter {
   access_log _al;
   log_buffer* _tlog;
   sqtd_conf* _conf;
+  
+  
   map < string, map <string, long long> > _traf;
+
 
   void settime(){
     time_t tis =time(NULL);
@@ -40,10 +43,10 @@ class sqtd_counter {
 	i->second["m"]=0;_hbeg_old=_hbeg;}
   } 
   
-  void replace(string *source ,string pattern ,string replacement){
-    size_t pos = source->find(pattern);
+  void replace(string *source ,string* pattern ,string* replacement){
+    size_t pos = source->find(*pattern);
     if ( pos != string::npos ) 
-      source->replace( pos, pattern.length(),replacement  );  
+      source->replace( pos, pattern->length(),*replacement  );  
   }
  
  public:
@@ -71,7 +74,8 @@ class sqtd_counter {
     	  string result=rec[3];
     	  if (result.compare("TCP_MISS/200")!=0) continue;
     	  transform(username.begin(),username.end(),username.begin(),::tolower);
-          replace(&username,"\\\\","\\");
+          if(_conf->getSquidDomainDelimiter()->compare("")!=0 && _conf->getSystemDomainDelimiter()->compare("")!=0)
+          replace(&username,_conf->getSquidDomainDelimiter(),_conf->getSystemDomainDelimiter());
     	  if (logtime >=_mbeg) {
     	    _traf[username]["m"]+=bytes;
     	  }

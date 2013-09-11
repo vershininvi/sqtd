@@ -5,6 +5,11 @@ AccessLogFile /var/log/squid/access.log
 LogFile       /var/log/sqtd.log
 PidFile       /var/lib/sqtd/sqtd.pid
 SockFile      /var/lib/sqtd/sqtd.sock
+SockUser      root
+SockGroup     squid
+SockMod       770
+SystemDomainDelimiter \
+SquidDomeinDelimiter  \\
 
 limit         g:DOMAIN\proxy_20M:d:20M
 limit         g:DOMAIN\proxy_50M:d:50M
