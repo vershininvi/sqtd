@@ -9,7 +9,7 @@ SockUser      root
 SockGroup     squid
 SockMod       770
 SystemDomainDelimiter \
-SquidDomeinDelimiter  \\
+SquidDomainDelimiter  \\
 
 limit         g:DOMAIN\proxy_20M:d:20M
 limit         g:DOMAIN\proxy_50M:d:50M
