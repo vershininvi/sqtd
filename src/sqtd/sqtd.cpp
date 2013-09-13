@@ -273,7 +273,7 @@ int main(int argc,char**argv){
       }
     } else  if(confErrCount!=0) confErrCount=0;
     os<< "Waiting " <<conf.getCheckInterval() <<"с";
-    logger.put(2, os.str());
+    logger.put(1, os.str());
     os.str("");
     sleep(conf.getCheckInterval());
   }
