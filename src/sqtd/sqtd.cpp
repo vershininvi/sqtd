@@ -112,7 +112,7 @@ void* responce (void*  client_sock){
       if (!write_string(sock,responce)) break;
     }
     else {
-      string configFile=*(counter.getConf()->getCommendLine()->getConfigFileName());
+      string configFile=*(counter.getConf()->getCommandLine()->getConfigFileName());
       ifstream conf(configFile.c_str());
       string confline;
       map < string, map<string, long long > >* limits;
@@ -191,12 +191,13 @@ void* keep_connection(void* unused){
 }
 
 int main(int argc,char**argv){
-  logger.setFilterOn(true);
   //Разбор параметров командной строки
   command_line cmdl(argc,argv);
   //Конфигурация программы
   sqtd_conf conf(&cmdl);
   if (!conf.reconfig())  exit(1);
+  logger.setTarget(conf.getLogFile(),cmdl.getNoDaemonMode());
+
   logger.put(2,"Starting" + *(cmdl.getProgrammName()));  
   ostringstream os; 
   pid_t pid,sid;
@@ -267,7 +268,7 @@ int main(int argc,char**argv){
     configured=conf.reconfig();
     if (!configured){
       if (++confErrCount> 10){
-        
+        logger.put(0,"Can not reconfig sqtd");
 	exit(1);
       }
     } else  if(confErrCount!=0) confErrCount=0;

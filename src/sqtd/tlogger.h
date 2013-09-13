@@ -14,7 +14,6 @@ using namespace std;
 
 class tlogger{
  private:
-  bool _filterOn;            //Не принимать сообщения с уровнем лога выше _level, по умолчанию false
   int _level;                //Уровень отображаемых сообщений, по умолчанию 0 
   int _target;               //Приемник сообщений 0 - cout, 1 - syslog,2 - файл
   ofstream _logfile;         //Файловый поток  
@@ -23,7 +22,6 @@ class tlogger{
  public:
 
   tlogger(){
-    _filterOn = false;
     _level=0;
     _target=0;
     _logLevels[0] =LOG_ERR;
@@ -44,7 +42,7 @@ class tlogger{
     ostringstream timestamp;
     timestamp << buff.tm_year+1900 <<"-"<<buff.tm_mon+1<<"-"<<buff.tm_mday<<" " << 
       buff.tm_hour<<":"<<buff.tm_min<<":"<<buff.tm_sec;
-    if (_filterOn &&(level > _level)) return; 
+    if (level > _level) return; 
       switch (_target){
       case 0: //cout
 	cout << timestamp.str() << " " << message << endl;
@@ -65,9 +63,7 @@ class tlogger{
 
   int getLevel(){return _level;} 
 
-  bool getFilterOn(){return _filterOn;}
-
-  void setFilterOn(bool filteron){ _filterOn=filteron;}
+ 
 
   void setTarget(string* logFile, int noDaemon){
     if(noDaemon)  _target=0;

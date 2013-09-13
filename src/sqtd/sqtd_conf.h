@@ -34,7 +34,7 @@ class sqtd_conf{
     ifstream ifs;
     ifs.open(filename);
     if(ifs.is_open()){
-      logger.put(1,  "Reading " + string(filename) + "... OK"); 	    
+      logger.put(2,  "Reading " + string(filename) + "... OK"); 	    
       ifs.close();
       return true;
     }   
@@ -48,7 +48,7 @@ class sqtd_conf{
     ofstream ofs;
     ofs.open(filename.c_str(),ios::app);
     if(ofs.is_open()){
-      logger.put(1,  "Writing filename " + filename +"... OK"); 	    ofs.close();
+      logger.put(2,  "Writing filename " + filename +"... OK"); 	    ofs.close();
       return true;
     }   
     else {
@@ -71,13 +71,13 @@ class sqtd_conf{
     switch(_keyValues[key]){
     case 2:
       if  (_accessLogFile.compare("")==0){
-	logger.put(2, "The squid access log file not specified" );
+	logger.put(1, "The squid access log file not specified" );
 	_accessLogFile="/var/log/squid/access.log";
       } 
       return canReadFile(_accessLogFile.c_str());	 
     case 3:
       if(_checkInterval<=0){
-	logger.put(2,"Check interval is not specified");
+	logger.put(1,"Check interval is not specified");
 	_checkInterval = 300;
       }  
       return true;
@@ -86,36 +86,35 @@ class sqtd_conf{
       return true;
     case 5:
       if(_log_file.compare("")==0){
-	logger.put(2,"Log file is not specified")  ;
+	logger.put(1,"Log file is not specified")  ;
       }  
-      logger.setTarget(&_log_file,_cmdl->getNoDaemonMode());
       return true;
     case 6:
       if(_pid_file.compare("")==0) { 
-	logger.put(0, "No pid file specified ");
+	logger.put(1, "No pid file specified ");
 	_pid_file="/var/lib/sqtd/sqtd.pid";
       }
       return true;	 
     case 7:
       if(_sock_file.compare("")==0) { 
-	logger.put(0, "No sock file specified ");
+	logger.put(1, "No sock file specified ");
 	_sock_file="/var/lib/sqtd/sqtd.sock";
       }
       return true; 
     case 8:
-      if(_sock_user.compare("")==0) logger.put(0, "The SockOwner not specified");
+      if(_sock_user.compare("")==0) logger.put(1, "The SockOwner not specified");
       return true; 
     case 9:
-      if(_sock_group.compare("")==0) logger.put(0, "The SockGroup not specified ");
+      if(_sock_group.compare("")==0) logger.put(1, "The SockGroup not specified ");
       return true; 
     case 10:
-      if(_sock_mod.compare("")==0) logger.put(2, "The SockMod not specified" );
+      if(_sock_mod.compare("")==0) logger.put(1, "The SockMod not specified" );
       return true;
     case 11:
-      if(_systemDomainDelimiter.compare("")==0) logger.put(2, "The SystemDomainDelimiter not specified" );
+      if(_systemDomainDelimiter.compare("")==0) logger.put(1, "The SystemDomainDelimiter not specified" );
       return true;
     case 12:
-      if(_squidDomainDelimiter.compare("")==0) logger.put(2, "The SquidDomainDelimiter  not specified" );
+      if(_squidDomainDelimiter.compare("")==0) logger.put(1, "The SquidDomainDelimiter  not specified" );
       return true;
     default:
       return  true;
@@ -123,7 +122,7 @@ class sqtd_conf{
   }  
    
   bool addLimit(string limit){
-    logger.put (1,"Adding limit");
+    logger.put (2,"Adding limit");
     stringstream ss(limit);
     int pos=0,ltype=0 ;
     string token,lname,lperiod;
@@ -344,7 +343,7 @@ class sqtd_conf{
   string* getSquidDomainDelimiter(){return  & _squidDomainDelimiter;}
   string* getSystemDomainDelimiter(){return  & _systemDomainDelimiter;}
   map <string, map<string, long long> >* getLimits(){return  &  _limits;}
-  command_line* getCommendLine    () {return _cmdl;};  
+  command_line* getCommandLine    () {return _cmdl;};  
 };
 #endif
 

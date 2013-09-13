@@ -63,6 +63,9 @@ class tcounter {
 	if (rec->at(3).compare("TCP_MISS/200")!=0) continue;
 	if (rec->size()!= 10) {
 	  logger.put(0,"Error reading record from access.log"); 
+          os.str("");
+          os << "Wrong record " << _parser.getPos() << endl << _parser.getRecord();
+          logger.put(0,os.str());
 	  continue;
         }
 	stringstream ints(rec->at(0));
