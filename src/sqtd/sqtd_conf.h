@@ -1,6 +1,6 @@
 #ifndef SQTD_CONF
 #define SQTD_CONF
-#include "log_buffer.h"
+#include "tlogger.h"
 #include <iostream>
 #include <fstream>
 #include <string>

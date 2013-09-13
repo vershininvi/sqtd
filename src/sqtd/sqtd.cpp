@@ -1,8 +1,8 @@
-#include "log_buffer.h"
+#include "tlogger.h"
 #include "sqtd_cmdl.h"
 #include "sqtd_conf.h"
-#include "squid_accesslog.h"
-#include "sqtd_counter.h"
+#include "tlogparser.h"
+#include "tcounter.h"
 #include <signal.h>
 #include <unistd.h>
 #include <sys/resource.h>
@@ -22,7 +22,7 @@ using namespace std;
 bool canwork;
 bool daemonMode;
 int  serv_sock;
-sqtd_counter trc;
+tcounter counter;
 
 const char* const OK="OK";
 const char* const ERR="ERR";
@@ -108,12 +108,12 @@ void* responce (void*  client_sock){
       string t(text);
       free(text);
       string  responce;
-      if (trc.checkUser(&t))responce="OK";  
+      if (counter.checkUser(&t))responce="OK";  
       else responce="ERR";
       if (!write_string(sock,responce)) break;
     }
     else {
-      string configFile=*(trc.getConf()->getCommendLine()->getConfigFileName());
+      string configFile=*(counter.getConf()->getCommendLine()->getConfigFileName());
       ifstream conf(configFile.c_str());
       string confline;
       map < string, map<string, long long > >* limits;
@@ -129,7 +129,7 @@ void* responce (void*  client_sock){
 	if(result==-1) return NULL;
 	result=read_string(sock,length,&username);
 	if(result==-1) return NULL;
-          limits=  trc.getConf()->getLimits();
+          limits=  counter.getConf()->getLimits();
 	if (username.compare("")==0){
 	  for( map< string, map <string,long long> >::iterator i=limits->begin(); i!=limits->end();++i)
 	    for(map< string,long long>::iterator j=i->second.begin(); j!=i->second.end();++j){ 
@@ -153,7 +153,7 @@ void* responce (void*  client_sock){
 	if(result==-1) return NULL;
 	result=read_string(sock,length,&username);
 	if(result==-1) return NULL;
-        limits=  trc.getTraf();
+        limits=  counter.getTraf();
 	if (username.compare("")==0){
 	  for( map< string, map <string,long long> >::iterator i=limits->begin(); i!=limits->end();++i)
 	    for(map< string,long long>::iterator j=i->second.begin(); j!=i->second.end();++j){ 
@@ -248,8 +248,8 @@ int main(int argc,char**argv){
   tlog.put(2,"Changing working dir");
   iret=chdir("/");
   //Настройка счетчика
-  trc.setConf(&conf);
-  trc.setLog(&tlog);
+  counter.setConf(&conf);
+  counter.setLog(&tlog);
   /*Открытие сокета*/
   unlink(conf.getSockFile()->c_str());
   serv_sock=socket(PF_LOCAL,SOCK_STREAM,0);
@@ -271,7 +271,7 @@ int main(int argc,char**argv){
   while (canwork){
     tlog.put(2, "Calculate user traffic") ; 
     //Расчет траффика
-    if(!trc.calc(&canwork)) {
+    if(!counter.calc(&canwork)) {
       tlog.put(0,"Can not calculate user traffic");
       tlog.print();
       exit(1);

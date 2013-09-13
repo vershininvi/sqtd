@@ -1,7 +1,6 @@
 #ifndef COMMAND_LINE
 #include "../../config.h" 
 #define COMMAND_LINE
-#include "log_buffer.h"
 #include <map>
 #include <cstdlib>
 #include <sstream>
