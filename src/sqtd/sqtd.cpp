@@ -20,7 +20,6 @@
 using namespace std;
 
 bool canwork;
-bool daemonMode;
 int  serv_sock;
 tcounter counter;
 
@@ -192,9 +191,9 @@ void* keep_connection(void* unused){
 }
 
 int main(int argc,char**argv){
+  logger.setFilterOn(true);
   //Разбор параметров командной строки
   command_line cmdl(argc,argv);
-
   //Конфигурация программы
   sqtd_conf conf(&cmdl);
   if (!conf.reconfig())  exit(1);
@@ -221,22 +220,19 @@ int main(int argc,char**argv){
 	exit(1);
       } 
   }
-  //Настройка лога
-  logger.setFilterOn(true);
-  //Запись pid в файл
-  if(!cmdl.getNoDaemonMode()){
-     logger.put(2,"Opening pid file");
-     ofstream pidfile(conf.getPidFile()->c_str(),ios_base::out);
-     if (!pidfile) {
+   //Запись pid в файл
+  logger.put(2,"Opening pid file");
+  ofstream pidfile(conf.getPidFile()->c_str(),ios_base::out);
+  if (!pidfile) {
        logger.put(0, "Can not open pid file " +*(conf.getPidFile()) ) ; 
        exit(1);
-     }
-     else {
-       logger.put(2,"Priting pid into the pid file");
-       pidfile << getpid()<<endl;
-       pidfile.close();
-      }
   }
+  else {
+    logger.put(2,"Priting pid into the pid file");
+     pidfile << getpid()<<endl;
+     pidfile.close();
+  }
+  
   logger.put(2,"Set session id");
   sid=setsid();
   logger.put(2,"Changing working dir");
@@ -262,16 +258,16 @@ int main(int argc,char**argv){
   pthread_create(&connection_thread,NULL,&keep_connection,NULL);
   /* Рассчет траффика */ 
   while (canwork){
-    logger.put(2, "Calculate user traffic") ; 
     //Расчет траффика
     if(!counter.calc(&canwork)) {
       logger.put(0,"Can not calculate user traffic");
       exit(1);
     }
     logger.put(2, "Reconfiguring ") ; 
-    configured=conf.reconfig()&&conf.check();
+    configured=conf.reconfig();
     if (!configured){
       if (++confErrCount> 10){
+        
 	exit(1);
       }
     } else  if(confErrCount!=0) confErrCount=0;

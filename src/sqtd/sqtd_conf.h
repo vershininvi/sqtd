@@ -237,6 +237,8 @@ class sqtd_conf{
     _keyValues["SQUIDDOMAINDELIMITER"]=12;
     _keyValues["LIMIT"]=13;
   }
+  
+
 
   bool reconfig(){
     reinit(); 
@@ -341,7 +343,7 @@ class sqtd_conf{
   string* getSockMod(){return  & _sock_mod;}
   string* getSquidDomainDelimiter(){return  & _squidDomainDelimiter;}
   string* getSystemDomainDelimiter(){return  & _systemDomainDelimiter;}
-  map <string, map<string, long long> >* getLimits(){return  & _limits;}
+  map <string, map<string, long long> >* getLimits(){return  &  _limits;}
   command_line* getCommendLine    () {return _cmdl;};  
 };
 #endif
