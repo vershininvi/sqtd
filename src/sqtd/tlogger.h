@@ -37,19 +37,25 @@ class tlogger{
     if(_logfile.is_open()) _logfile.close();  
   }
 
-  void put(int level,string* message){
+  void put(int level,string message){
+    time_t tis = time(NULL);
+    struct tm  buff;
+    localtime_r(&tis,&buff);
+    ostringstream timestamp;
+    timestamp << buff.tm_year+1900 <<"-"<<buff.tm_mon+1<<"-"<<buff.tm_mday<<" " << 
+      buff.tm_hour<<":"<<buff.tm_min<<":"<<buff.tm_sec;
     if (_filterOn &&(level > _level)) return; 
       switch (_target){
       case 0: //cout
-	cout << timestamp.str() << " " << i->_message << endl;
+	cout << timestamp.str() << " " << message << endl;
 	break;
       case 1: //syslog
 	if(level>2)level=2;
 	if(level<0)level=0;
-	syslog(_logLevels[level],"%s",message->c_str());
+	syslog(_logLevels[level],"%s",message.c_str());
 	break;
       case 2: //file
-	_logfile << timestamp.str() << " " << i->_message << endl;      
+	_logfile << timestamp.str() << " "<< message << endl;      
 	_logfile.flush();
 	break;
       } 

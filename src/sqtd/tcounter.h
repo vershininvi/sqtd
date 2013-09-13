@@ -17,7 +17,6 @@ class tcounter {
   time_t _dbeg_old;
   time_t _hbeg_old;  
   tlogparser  _parser;
-  log_buffer* _tlog;
   sqtd_conf* _conf;
   map < string, map <string, long long> > _traf;
 
@@ -50,7 +49,7 @@ class tcounter {
   
   bool calc(bool *canwork){   
     ostringstream os;
-    _tlog->put(2,"Рассчет траффика");
+    logger.put(2,"Рассчет траффика");
     settime();
     clean();
     if (int iret=_parser.open()){
@@ -87,14 +86,13 @@ class tcounter {
     	catch(...){
           os.str("");
     	  os << "Wrong record " << _parser.getPos() << endl << _parser.getRecord();
-    	  _tlog->put(1,os.str());
-    	  _tlog->print();
+    	  logger.put(1,os.str());
     	}
      }
      _parser.close();
     }
     else {
-      _tlog->put(0,"Can not open  squid acces log file" );
+      logger.put(0,"Can not open  squid acces log file" );
       return false;
     }
     return true;
@@ -116,7 +114,7 @@ class tcounter {
 
   void setConf(sqtd_conf* conf){_conf=conf;_parser.setConf(_conf); }
   sqtd_conf* getConf(){return _conf;}
-  void setLog (log_buffer* log){_tlog=log;_parser.setLog(_tlog);}
+
 };
 
 #endif /*SQTD_COUNTER*/

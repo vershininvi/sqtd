@@ -194,15 +194,11 @@ void* keep_connection(void* unused){
 int main(int argc,char**argv){
   //Разбор параметров командной строки
   command_line cmdl(argc,argv);
-  //Настройка лога
-  log_buffer tlog;
+
   //Конфигурация программы
-  sqtd_conf conf(&cmdl,&tlog);
-  if (!conf.reconfig()){
-    tlog.print();
-    exit(1);
-  }
-  tlog.put(2,"Starting" + *(cmdl.getProgrammName()));  
+  sqtd_conf conf(&cmdl);
+  if (!conf.reconfig())  exit(1);
+  logger.put(2,"Starting" + *(cmdl.getProgrammName()));  
   ostringstream os; 
   pid_t pid,sid;
   bool configured;
@@ -215,41 +211,39 @@ int main(int argc,char**argv){
   prev_fn = signal (SIGABRT,my_terminate);
   //Демонизация процессв
   if(!cmdl.getNoDaemonMode()){
-      tlog.put(1,"Starting in daemon mode");    
+      logger.put(1,"Starting in daemon mode");    
       pid=fork();
       if (pid > 0)  {
 	exit(0); 
       }
       if(pid<0){
-	tlog.put(0, "Can not start as daemon");
-	tlog.print(); 
+	logger.put(0, "Can not start as daemon");
 	exit(1);
       } 
   }
   //Настройка лога
-  tlog.setFilterOn(true);
+  logger.setFilterOn(true);
   //Запись pid в файл
   if(!cmdl.getNoDaemonMode()){
-     tlog.put(2,"Opening pid file");
+     logger.put(2,"Opening pid file");
      ofstream pidfile(conf.getPidFile()->c_str(),ios_base::out);
      if (!pidfile) {
-       tlog.put(0, "Can not open pid file " +*(conf.getPidFile()) ) ; 
-       tlog.print();
+       logger.put(0, "Can not open pid file " +*(conf.getPidFile()) ) ; 
        exit(1);
      }
      else {
-       tlog.put(2,"Priting pid into the pid file");
+       logger.put(2,"Priting pid into the pid file");
        pidfile << getpid()<<endl;
        pidfile.close();
       }
   }
-  tlog.put(2,"Set session id");
+  logger.put(2,"Set session id");
   sid=setsid();
-  tlog.put(2,"Changing working dir");
+  logger.put(2,"Changing working dir");
   iret=chdir("/");
   //Настройка счетчика
   counter.setConf(&conf);
-  counter.setLog(&tlog);
+  
   /*Открытие сокета*/
   unlink(conf.getSockFile()->c_str());
   serv_sock=socket(PF_LOCAL,SOCK_STREAM,0);
@@ -257,8 +251,7 @@ int main(int argc,char**argv){
   serv_addr.sun_family=AF_LOCAL;
   strcpy(serv_addr.sun_path,conf.getSockFile()->c_str()) ;
   if (bind(serv_sock,(struct sockaddr *)&serv_addr,SUN_LEN(&serv_addr))){
-    tlog.put(2,"Can not create  socket " + *conf.getSockFile() );
-    tlog.print();
+    logger.put(2,"Can not create  socket " + *conf.getSockFile() );
     exit(1);
   }
   int ret =chown(conf.getSockFile()->c_str(),getUid(conf.getSockUser()),getGid(conf.getSockGroup()));
@@ -269,32 +262,28 @@ int main(int argc,char**argv){
   pthread_create(&connection_thread,NULL,&keep_connection,NULL);
   /* Рассчет траффика */ 
   while (canwork){
-    tlog.put(2, "Calculate user traffic") ; 
+    logger.put(2, "Calculate user traffic") ; 
     //Расчет траффика
     if(!counter.calc(&canwork)) {
-      tlog.put(0,"Can not calculate user traffic");
-      tlog.print();
+      logger.put(0,"Can not calculate user traffic");
       exit(1);
     }
-    tlog.put(2, "Reconfiguring ") ; 
+    logger.put(2, "Reconfiguring ") ; 
     configured=conf.reconfig()&&conf.check();
     if (!configured){
       if (++confErrCount> 10){
-	tlog.print();
 	exit(1);
       }
     } else  if(confErrCount!=0) confErrCount=0;
     os<< "Waiting " <<conf.getCheckInterval() <<"с";
-    tlog.put(2, os.str());
+    logger.put(2, os.str());
     os.str("");
-    tlog.print();
     sleep(conf.getCheckInterval());
   }
   close(serv_sock);
   unlink(conf.getPidFile()->c_str());
   unlink(conf.getSockFile()->c_str());
-  tlog.put(0,"Exit..." + string(*cmdl.getProgrammName()));
-  tlog.print();
+  logger.put(0,"Exit..." + string(*cmdl.getProgrammName()));
   return 0;  
 }
 

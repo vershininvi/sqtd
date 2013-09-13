@@ -14,7 +14,6 @@ private:
   ifstream * _file;
   ifstream::pos_type _pos;
   string _record; 
-  log_buffer * _tlog;
   sqtd_conf*   _conf;
   vector <string> _tokens;
 public:
@@ -29,7 +28,7 @@ public:
     close();
   };
 
-  void setLog(log_buffer * tlog){_tlog=tlog;}
+
   void setConf(sqtd_conf * conf){_conf=conf;}
   void setPos(ifstream::pos_type position){ _pos=position;}
   ifstream::pos_type getPos(){return _pos;} 
@@ -38,10 +37,10 @@ public:
 
   int open(){
     string filename= _conf->getAccessLogFile()->c_str();
-    _tlog->put(2,"Opening the file " + filename );
+    logger.put(2,"Opening the file " + filename );
     _file= new  ifstream(filename.c_str());
     if(!_file){
-      _tlog->put(0,"Can not open file " +filename);
+      logger.put(0,"Can not open file " +filename);
       return 0;
     }
     if (_pos!=0){
@@ -52,15 +51,15 @@ public:
 	 if (newrec.compare(_record)==0){
 	    _pos=_file->tellg();
             os<<_pos;  
-	    _tlog->put(2,"Start from position pos: " + os.str() );
+	    logger.put(2,"Start from position pos: " + os.str() );
 	   return 1;
 	 }  
          else{	  
             os<<_pos;  
-	    _tlog->put(2,"The record at pos "+ os.str()+ "  is not a last read  record ");
-	    _tlog->put(2, "Thelast read record : " + _record);
-	    _tlog->put(2, "The record at pos   : " + newrec );
-	    _tlog->put(2, "Starting read from begin of the file ");
+	    logger.put(2,"The record at pos "+ os.str()+ "  is not a last read  record ");
+	    logger.put(2, "Thelast read record : " + _record);
+	    logger.put(2, "The record at pos   : " + newrec );
+	    logger.put(2, "Starting read from begin of the file ");
 	    _file->seekg(0);
 	    _pos=0;
 	    _record="";
