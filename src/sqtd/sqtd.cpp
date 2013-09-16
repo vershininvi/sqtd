@@ -69,7 +69,8 @@ bool write_int(int sock,int message){
 int  read_string(int sock,int length,string* result ){
   if (length>0){
       char* text=(char*)malloc(length);
-      int res=read(sock,text, length);
+      size_t res= recv(sock,&length,sizeof(length),0);
+      //int res=read(sock,text, length);
       if (res==-1){
 	free(text);
 	return res;
@@ -95,11 +96,14 @@ void* responce (void*  client_sock){
     int length=0;
     char* text=NULL;     
     ssize_t result;
-    result=read(sock,&length,sizeof(length));
+    
+    result= recv(sock,&length, sizeof(length),0);
+    //result=read(sock,&length,sizeof(length));
     if (result==-1) break;		
     if (length>0){
       text=(char*)malloc(length);
-      result=read(sock,text, length);
+      result= recv(sock,text, length,0);
+      //result= read(sock,text, length);
       if (result==-1){
 	free(text);
 	break;
@@ -124,10 +128,11 @@ void* responce (void*  client_sock){
 	write_int(sock,0); 
 	break;
       case 2:
-	result=read(sock,&length,sizeof(length));
-	if(result==-1) return NULL;
+        result= recv(sock,&length,sizeof(length),0);
+	//result=read(sock,&length,sizeof(length));
+	if(result==-1) goto closesock;
 	result=read_string(sock,length,&username);
-	if(result==-1) return NULL;
+	if(result==-1) goto closesock;
           limits=  counter.getConf()->getLimits();
 	if (username.compare("")==0){
 	  for( map< string, map <string,long long> >::iterator i=limits->begin(); i!=limits->end();++i)
@@ -148,10 +153,11 @@ void* responce (void*  client_sock){
         write_int(sock,0);
 	break;
       case 3:
-	result=read(sock,&length,sizeof(length));
-	if(result==-1) return NULL;
+        result= recv(sock,&length,sizeof(length),0);
+	//result=read(sock,&length,sizeof(length));
+	if(result==-1) goto closesock;
 	result=read_string(sock,length,&username);
-	if(result==-1) return NULL;
+	if(result==-1) goto closesock;
         limits=  counter.getTraf();
 	if (username.compare("")==0){
 	  for( map< string, map <string,long long> >::iterator i=limits->begin(); i!=limits->end();++i)
@@ -174,6 +180,8 @@ void* responce (void*  client_sock){
       }
     }
   }
+ closesock:
+  close(sock);
 }
 
 void* keep_connection(void* unused){
@@ -228,6 +236,7 @@ int main(int argc,char**argv){
        logger.put(0, "Can not open pid file " +*(conf.getPidFile()) ) ; 
        exit(1);
   }
+
   else {
     logger.put(2,"Priting pid into the pid file");
      pidfile << getpid()<<endl;
@@ -272,7 +281,7 @@ int main(int argc,char**argv){
 	exit(1);
       }
     } else  if(confErrCount!=0) confErrCount=0;
-    os<< "Waiting " <<conf.getCheckInterval() <<"с";
+    os<< "Waiting " <<conf.getCheckInterval() <<"s";
     logger.put(1, os.str());
     os.str("");
     sleep(conf.getCheckInterval());

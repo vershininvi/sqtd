@@ -57,7 +57,7 @@ public:
          else{	  
             os<<_pos;  
 	    logger.put(2,"The record at pos "+ os.str()+ "  is not a last read  record ");
-	    logger.put(2, "Thelast read record : " + _record);
+	    logger.put(2, "The last read record : " + _record);
 	    logger.put(2, "The record at pos   : " + newrec );
 	    logger.put(2, "Starting read from begin of the file ");
 	    _file->seekg(0);

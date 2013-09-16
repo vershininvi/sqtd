@@ -31,12 +31,18 @@ class tcounter {
   } 
    
   void clean() {
-    if(_hbeg!=_hbeg_old) {for(map<string, map<string,long long> >::iterator i=_traf.begin();i!=_traf.end();++i) 
-	i->second["h"]=0;_hbeg_old=_hbeg;}
-    if(_dbeg!=_dbeg_old) {for(map<string, map<string,long long> >::iterator i=_traf.begin();i!=_traf.end();++i) 
-	i->second["d"]=0;_hbeg_old=_hbeg;}
-    if(_mbeg!=_mbeg_old) {for(map<string, map<string,long long> >::iterator i=_traf.begin();i!=_traf.end();++i) 
-	i->second["m"]=0;_hbeg_old=_hbeg;}
+    if(_hbeg!=_hbeg_old) {
+        for(map<string, map<string,long long> >::iterator i=_traf.begin();i!=_traf.end();++i)i->second["h"]=0;
+        _hbeg_old=_hbeg;
+    }
+    if(_dbeg!=_dbeg_old) {
+      for(map<string, map<string,long long> >::iterator i=_traf.begin();i!=_traf.end();++i)i->second["d"]=0;
+      _dbeg_old=_dbeg;
+    }
+    if(_mbeg!=_mbeg_old) {
+      for(map<string, map<string,long long> >::iterator i=_traf.begin();i!=_traf.end();++i) i->second["m"]=0;
+       _mbeg_old=_mbeg;
+    }
   } 
   
   void replace(string *source ,string* pattern ,string* replacement){
@@ -52,8 +58,7 @@ class tcounter {
     logger.put(2,"Calculating user traffic");
     settime();
     clean();
-    if (int iret=_parser.open()){
-      if (iret==2) _traf.clear();
+    if (_parser.open()){
       while (_parser.next()){
     	if(!*canwork){
     	  _parser.close();
