@@ -24,7 +24,6 @@ tcounter counter;
 const char* const OK="OK";
 const char* const ERR="ERR";
 
-
 uid_t getUid(string* username){
   struct passwd   pwd;
   struct passwd*  result;
@@ -33,7 +32,7 @@ uid_t getUid(string* username){
   int s;
   bufsize = sysconf(_SC_GETPW_R_SIZE_MAX);
   if (bufsize == -1)          
-      bufsize = 16384;        
+    bufsize = 16384;        
   buf = (char*)malloc(bufsize);
   if (buf == NULL) return -1;
   s = getpwnam_r(username->c_str(), &pwd, buf, bufsize, &result);
@@ -60,123 +59,128 @@ void my_terminate (int param){
   canwork=false;
 }
 
-bool write_int(int sock,int message){
-  return (write(sock,&message,sizeof(int)) !=-1);
+
+class sock_exception: public exception{
+  virtual const char* what() const throw()  {
+    return "Error reading socket";
+  }
+};
+
+
+size_t write_int(int sock,int message){
+  size_t result=write(sock,&message,sizeof(int));
+  if(result<=0) throw  sock_exception(); 
+  return result;
 }
 
-bool  read_string(int sock,int length,string* result ){
+
+size_t write_string(int sock,string message){
+  size_t length=message.size()+1;
+  write_int(sock,length);
+  size_t result=write(sock,message.c_str(),length);   
+  if(result<=0) throw  sock_exception(); 
+}
+
+
+size_t read_int(int sock,int* output){
+  size_t result= recv(sock,output, sizeof(int),0);
+  if (result<=0) throw  sock_exception();
+  return result;   
+}
+
+size_t read_string(int sock,int length,string* output ){
   if (length>0){
-      char* text=(char*)malloc(length);
-      size_t res= recv(sock,&length,sizeof(length),0);
-      if (res==0) return false;
-      if (res==-1){
-	free(text);
-	return false;
-      }
-      *result=text;
+    char* text=(char*)malloc(length);
+    size_t result= recv(sock,text,length,0);
+    if (result<=0){
       free(text);
-      return res;
+      throw  sock_exception(); 
+    }
+    *output=text;
+    free(text);
+    return result;
   }
   else return true;
 }
 
-bool write_string(int sock,string message){
-    int length=message.size()+1;
-    if(!write_int(sock,length)) return false;
-    return (write(sock,message.c_str(),length)!=-1);   
+
+void write_User(int sock,int length){
+  string username;
+  size_t result=read_string(sock,length,&username); 
+  string  responce;
+  if (counter.checkUser(&username))responce="OK";  
+  else responce="ERR";
+  write_string(sock,responce);
+}
+
+void write_Conf(int sock,string* configFile){
+  size_t result;
+  ifstream conf(configFile->c_str());
+  string confline;
+  if(conf){
+    while (getline(conf,confline)) result=write_string(sock,confline); 
+  }
+  else {
+    confline="Can not open config file " + *configFile;
+    result=write_string(sock,confline);
+  } 
+  result=write_int(sock,0); 
+}
+
+void write_Map(int sock, map < string, map<string, long long > >* limits){
+  int length;
+  string username;
+  ostringstream os;
+  size_t result= read_int(sock,&length);
+  result=read_string(sock,length,&username);
+  if (username.compare("")==0){
+    for( map< string, map <string,long long> >::iterator i=limits->begin(); i!=limits->end();++i)
+      for(map< string,long long>::iterator j=i->second.begin(); j!=i->second.end();++j){ 
+        os.str("");
+        os <<i->first << "\t\t" << j->first << "\t" <<j->second;
+        write_string(sock,os.str());
+      }
+  }
+  else if(limits->count(username)!=0){
+    map<string, long long> userlimit=limits->at(username);
+    for (map<string,long long>::iterator i=userlimit.begin();i!=userlimit.end();++i){
+      os.str("");
+      os<<username<<"\t\t"<<i->first<<"\t"<< i->second; 
+      write_string(sock,os.str());
+    }
+  }
+  write_int(sock,0);
 }
 
 void* responce (void*  client_sock){
   int sock=*((int*)client_sock);
   free(client_sock);
-  /*Чтение запроса клиента*/
-  while(canwork){
-    int length=0;
-    char* text=NULL;     
-    ssize_t result;
-    result= recv(sock,&length, sizeof(length),0);
-    if (result<=0)  break; //0 - сокет закрыт, -1 ошибка чтения  
-    if (length>0){
-      text=(char*)malloc(length);
-      result= recv(sock,text, length,0);
-      if (result<=0){
-	free(text);
-	break;
-      }
-      string t = text;
-      free(text);
-      string  responce;
-      if (counter.checkUser(&t))responce="OK";  
-      else responce="ERR";
-      if (!write_string(sock,responce)) break;
-    }
-    else {
-      string configFile=*(counter.getConf()->getCommandLine()->getConfigFileName());
-      ifstream conf(configFile.c_str());
-      string confline;
-      map < string, map<string, long long > >* limits;
-      string username;
-      ostringstream os;
-      switch(-length){
-      case 1:
-	if(conf) while (getline(conf,confline))	 write_string(sock,confline); 
-	write_int(sock,0); 
-	break;
-      case 2:
-        result= recv(sock,&length,sizeof(length),0);
-	//result=read(sock,&length,sizeof(length));
-	if(result<=0) goto closesock;
-	result=read_string(sock,length,&username);
-	if(result<=0) goto closesock;
-          limits=  counter.getConf()->getLimits();
-	if (username.compare("")==0){
-	  for( map< string, map <string,long long> >::iterator i=limits->begin(); i!=limits->end();++i)
-	    for(map< string,long long>::iterator j=i->second.begin(); j!=i->second.end();++j){ 
-	      os.str("");
-	      os <<i->first << "\t\t" << j->first << "\t" <<j->second;
-  	      write_string(sock,os.str());
-	    }
+  int length=0;
+  string text;     
+  ssize_t result;
+  try {
+    while(canwork){
+      result= read_int(sock,&length);
+      if (length>0) write_User(sock,length);
+      else switch(-length){
+	case 1:
+          write_Conf(sock,counter.getConf()->getCommandLine()->getConfigFileName());
+	  break;
+        case 2:
+          write_Map(sock,counter.getConf()->getLimits());	   
+	  break;
+        case 3:
+          write_Map(sock, counter.getTraf()); 
+	  break;
 	}
-	else if(limits->count(username)!=0){
-	  map<string, long long> userlimit=limits->at(username);
-	  for (map<string,long long>::iterator i=userlimit.begin();i!=userlimit.end();++i){
-	    os.str("");
-	    os<<username<<"\t\t"<<i->first<<"\t"<< i->second; 
-	    write_string(sock,os.str());
-	  }
-	}
-        write_int(sock,0);
-	break;
-      case 3:
-        result= recv(sock,&length,sizeof(length),0);
-	//result=read(sock,&length,sizeof(length));
-	if(result<=0) goto closesock;
-	result=read_string(sock,length,&username);
-	if(result<=0) goto closesock;
-        limits=  counter.getTraf();
-	if (username.compare("")==0){
-	  for( map< string, map <string,long long> >::iterator i=limits->begin(); i!=limits->end();++i)
-	    for(map< string,long long>::iterator j=i->second.begin(); j!=i->second.end();++j){ 
-	      os.str("");
-	      os <<i->first << "\t\t" << j->first << "\t" <<j->second;
-  	      write_string(sock,os.str());
-	    }
-	}
-	else if(limits->count(username)!=0){
-	  map<string, long long> userlimit=limits->at(username);
-	  for (map<string,long long>::iterator i=userlimit.begin();i!=userlimit.end();++i){
-	    os.str("");
-	    os<<username<<"\t\t"<<i->first<<"\t"<< i->second; 
-	    write_string(sock,os.str());
-	  }
-	}
-        write_int(sock,0);
-	break;
-      }
     }
   }
- closesock:
+  catch (sock_exception& e){ 
+    close(sock);
+    return NULL;
+  }
   close(sock);
+  return NULL;
 }
 
 void* keep_connection(void* unused){
@@ -214,28 +218,28 @@ int main(int argc,char**argv){
   prev_fn = signal (SIGABRT,my_terminate);
   //Демонизация процессв
   if(!cmdl.getNoDaemonMode()){
-      logger.put(1,"Starting in daemon mode");    
-      pid=fork();
-      if (pid > 0)  {
-	exit(0); 
-      }
-      if(pid<0){
-	logger.put(0, "Can not start as daemon");
-	exit(1);
-      } 
+    logger.put(1,"Starting in daemon mode");    
+    pid=fork();
+    if (pid > 0)  {
+      exit(0); 
+    }
+    if(pid<0){
+      logger.put(0, "Can not start as daemon");
+      exit(1);
+    } 
   }
-   //Запись pid в файл
+  //Запись pid в файл
   logger.put(2,"Opening pid file");
   ofstream pidfile(conf.getPidFile()->c_str(),ios_base::out);
   if (!pidfile) {
-       logger.put(0, "Can not open pid file " +*(conf.getPidFile()) ) ; 
-       exit(1);
+    logger.put(0, "Can not open pid file " +*(conf.getPidFile()) ) ; 
+    exit(1);
   }
 
   else {
     logger.put(2,"Priting pid into the pid file");
-     pidfile << getpid()<<endl;
-     pidfile.close();
+    pidfile << getpid()<<endl;
+    pidfile.close();
   }
   
   logger.put(2,"Set session id");
