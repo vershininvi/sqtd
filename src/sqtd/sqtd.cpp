@@ -1,6 +1,6 @@
 #include "tlogger.h"
-#include "sqtd_cmdl.h"
-#include "sqtd_conf.h"
+#include "commandline.h"
+#include "configfile.h"
 #include "tlogparser.h"
 #include "tcounter.h"
 #include <signal.h>
@@ -8,11 +8,9 @@
 #include <sys/resource.h>
 #include <sstream>
 #include <pthread.h> 
-
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <string>
-
 #include <pwd.h>
 #include <grp.h>
 #include <sys/stat.h>
@@ -66,20 +64,20 @@ bool write_int(int sock,int message){
   return (write(sock,&message,sizeof(int)) !=-1);
 }
 
-int  read_string(int sock,int length,string* result ){
+bool  read_string(int sock,int length,string* result ){
   if (length>0){
       char* text=(char*)malloc(length);
       size_t res= recv(sock,&length,sizeof(length),0);
-      //int res=read(sock,text, length);
+      if (res==0) return false;
       if (res==-1){
 	free(text);
-	return res;
+	return false;
       }
       *result=text;
       free(text);
       return res;
   }
-  else return -1;
+  else return true;
 }
 
 bool write_string(int sock,string message){
@@ -96,19 +94,16 @@ void* responce (void*  client_sock){
     int length=0;
     char* text=NULL;     
     ssize_t result;
-    
     result= recv(sock,&length, sizeof(length),0);
-    //result=read(sock,&length,sizeof(length));
-    if (result==-1) break;		
+    if (result<=0)  break; //0 - сокет закрыт, -1 ошибка чтения  
     if (length>0){
       text=(char*)malloc(length);
       result= recv(sock,text, length,0);
-      //result= read(sock,text, length);
-      if (result==-1){
+      if (result<=0){
 	free(text);
 	break;
       }
-      string t(text);
+      string t = text;
       free(text);
       string  responce;
       if (counter.checkUser(&t))responce="OK";  
@@ -130,9 +125,9 @@ void* responce (void*  client_sock){
       case 2:
         result= recv(sock,&length,sizeof(length),0);
 	//result=read(sock,&length,sizeof(length));
-	if(result==-1) goto closesock;
+	if(result<=0) goto closesock;
 	result=read_string(sock,length,&username);
-	if(result==-1) goto closesock;
+	if(result<=0) goto closesock;
           limits=  counter.getConf()->getLimits();
 	if (username.compare("")==0){
 	  for( map< string, map <string,long long> >::iterator i=limits->begin(); i!=limits->end();++i)
@@ -155,9 +150,9 @@ void* responce (void*  client_sock){
       case 3:
         result= recv(sock,&length,sizeof(length),0);
 	//result=read(sock,&length,sizeof(length));
-	if(result==-1) goto closesock;
+	if(result<=0) goto closesock;
 	result=read_string(sock,length,&username);
-	if(result==-1) goto closesock;
+	if(result<=0) goto closesock;
         limits=  counter.getTraf();
 	if (username.compare("")==0){
 	  for( map< string, map <string,long long> >::iterator i=limits->begin(); i!=limits->end();++i)
@@ -202,7 +197,7 @@ int main(int argc,char**argv){
   //Разбор параметров командной строки
   command_line cmdl(argc,argv);
   //Конфигурация программы
-  sqtd_conf conf(&cmdl);
+  config_file conf(&cmdl);
   if (!conf.reconfig())  exit(1);
   logger.setTarget(conf.getLogFile(),cmdl.getNoDaemonMode());
 

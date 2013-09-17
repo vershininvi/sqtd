@@ -7,7 +7,7 @@
 #include <cstring>
 #include <sstream>
 #include <syslog.h>
-#include "sqtd_cmdl.h"
+#include "commandline.h"
 
 using namespace std;
 

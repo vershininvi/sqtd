@@ -2,7 +2,7 @@
 #define  TCOUNTER
 #include "tlogger.h"
 #include "tlogparser.h"
-#include "sqtd_conf.h"
+#include "configfile.h"
 #include <map>
 #include <vector>
 #include <algorithm>
@@ -17,7 +17,7 @@ class tcounter {
   time_t _dbeg_old;
   time_t _hbeg_old;  
   tlogparser  _parser;
-  sqtd_conf* _conf;
+  config_file* _conf;
   map < string, map <string, long long> > _traf;
 
   void settime(){
@@ -116,8 +116,8 @@ bool checkUser(string* username){
   return true;//Пользователь в списке, траффик либо не ограничен либо не указан 
 }
 
-void setConf(sqtd_conf* conf){_conf=conf;_parser.setConf(_conf); }
-sqtd_conf* getConf(){return _conf;}
+void setConf(config_file* conf){_conf=conf;_parser.setConf(_conf); }
+config_file* getConf(){return _conf;}
 
 };
 

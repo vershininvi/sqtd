@@ -169,6 +169,7 @@ public:
       cout <<"Return default value (can be changed with --lightmode option)" << endl; 
       cout << lightmode << endl;
     }
+    
  }
 
 };

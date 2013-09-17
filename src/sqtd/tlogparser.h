@@ -14,7 +14,7 @@ private:
   ifstream * _file;
   ifstream::pos_type _pos;
   string _record; 
-  sqtd_conf*   _conf;
+  config_file*   _conf;
   vector <string> _tokens;
 public:
   tlogparser(){
@@ -29,7 +29,7 @@ public:
   };
 
 
-  void setConf(sqtd_conf * conf){_conf=conf;}
+  void setConf(config_file * conf){_conf=conf;}
   void setPos(ifstream::pos_type position){ _pos=position;}
   ifstream::pos_type getPos(){return _pos;} 
   void setRecord(string record){_record=record;}  
