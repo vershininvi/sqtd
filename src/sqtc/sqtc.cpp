@@ -9,6 +9,11 @@
 #include <sstream>
 #include <fstream>
 #include <algorithm>
+#include "../../config.h"
+#include <libintl.h>
+#include <locale.h>
+#define _(STRING)    gettext(STRING)
+
 
 using namespace std;
 
@@ -16,6 +21,13 @@ const char* program_name;
 int interactive;
 string lightmode;
 ofstream debug_stream;
+
+
+void print_version(){
+    cout <<program_name <<  endl 
+         << _("Version : ")  <<   VERSION << endl;
+    exit(0);
+  }
 
 string url_decode(string input){
   ostringstream os;
@@ -37,27 +49,26 @@ string url_decode(string input){
 
 
 void print_usage (ostream *dest , int exit_code){
-  *dest <<  "Usage: " << program_name << " options " << endl;
-  *dest <<  " -i --interactive             ineractive mode"<<endl 
-        <<  " -h --help                    Display this usage information." << endl
-        <<  " -l --light-mode              Return OK on error"              << endl
-        <<  " -s --socket   filename       the sqtd socket file to connect (default /var/lib/sqtd/sqtd.sock)" << endl
-        <<  " -d --debug    filename       the output debug info to specified file " << endl;
+  *dest <<  _("Usage: ") << program_name <<_(" options ") << endl;
+  *dest <<  _(" -i --interactive             Ineractive mode.")<<endl 
+        <<  _(" -h --help                    Display this usage information.") << endl
+        <<  _(" -l --light-mode              Return OK on error.")              << endl
+        <<  _(" -s --socket   filename       The sqtd socket file to connect (default /var/lib/sqtd/sqtd.sock).") << endl
+        <<  _(" -d --debug    filename       The output debug info to specified file. ") << endl;
         
   exit (exit_code);
 }
 
 void help(){
-
-  cout << "Enter command" << endl
-       << "The avaiable commands is" << endl
-       << "help               - show this help"  << endl
-       << "config             - show current sqtd config" << endl
-       << "limits [USERNAME]  - show limits  for all or for one user"   << endl       
-       << "traf   [USERNAME]  - show traffic for all or for one user"   << endl       
-       << "user    USERNAME   - check user status (OK -can access , ERR -can not acess)"<< endl       
-       << "quit               - exit programm"   << endl
-       << "Format of USERNAME : domain\\login, where \\ is domain delimiter" << endl;  
+  cout << _("Enter command") << endl
+       << _("The avaiable commands is") << endl
+       << _("help               - show this help")  << endl
+       << _("config             - show current sqtd config") << endl
+       << _("limits [USERNAME]  - show limits  for all or for one user")   << endl       
+       << _("traf   [USERNAME]  - show traffic for all or for one user")   << endl       
+       << _("user    USERNAME   - check user status (OK -can access , ERR -can not acess)")<< endl       
+       << _("quit               - exit programm")   << endl
+       << _("Format of USERNAME : domain\\login, where \\ is domain delimiter") << endl;  
 }
 
 void prompt(){
@@ -85,8 +96,8 @@ public:
   bool Connect(){  
     if(_isConnected) return _isConnected;
     if ( connect (_sock_fd, (struct sockaddr *)&_serv_addr, SUN_LEN (&_serv_addr))==0) _isConnected=true;
-    else if(_verbose) cerr << "Can not connect to the socket " << _serv_addr.sun_path 
-                           << "check the sqtd is started and socket file exists"<< endl;
+    else if(_verbose) cerr << _("Can not connect to the socket ") << _serv_addr.sun_path  << endl
+                           << _("Check the sqtd is started and socket file exists")<< endl;
     return _isConnected;
   }
 
@@ -149,24 +160,24 @@ public:
   void showUser(string username){ 
     transform(username.begin(),username.end(),username.begin(),::tolower);
     if(!Connect()) {
-      if(_verbose)cout <<"Return default value (can be changed with --lightmode option)" << endl; 
+      if(_verbose)cout <<_("Return default value (can be changed with --lightmode option)") << endl; 
       cout <<  _default << endl;
       return;
     } 
     if(!put(username.c_str())) {
-      if(_verbose)cout <<"Return default value (can be changed with --lightmode option)" << endl; 
+      if(_verbose)cout <<_("Return default value (can be changed with --lightmode option)") << endl; 
       cout <<_default<<endl;
       return;
     }
     char* responce=NULL;
     responce=get(&responce);
     if(responce){
-      if(debug_stream.is_open()) debug_stream << "\t\t\t\tResponce :"<< responce << endl;
+      if(debug_stream.is_open()) debug_stream << _("\t\t\t\tResponce :")<< responce << endl;
 	  cout << responce <<endl;
 	  free (responce); 
     }
     else {
-      cout <<"Return default value (can be changed with --lightmode option)" << endl; 
+      cout <<_("Return default value (can be changed with --lightmode option)") << endl; 
       cout << lightmode << endl;
     }
     
@@ -175,14 +186,21 @@ public:
 };
 
 int main(int argc,char** argv){
+   program_name=argv[0];
+   setlocale( LC_ALL, "" );
+   bindtextdomain( "sqtd", "/usr/share/locale" );
+   textdomain( "sqtd" );
+
+
   /*Анализ параметров командной строки*/
-  const char*  const  short_options="d:ihls:"; 
+  const char*  const  short_options="d:ihls:v"; 
   const struct option long_options[]={
     {"debug"         , 1, NULL, 'd'  },
     {"interactive"   , 0, NULL, 'i'  },
     {"help"          , 0, NULL, 'h'  },
     {"light-mode"    , 1, NULL, 'l'  },
     {"socket"        , 1, NULL, 's'  },
+    {"version"       , 1, NULL, 'v'  },
     {NULL            , 0, NULL, 0    }
   };
   
@@ -208,6 +226,9 @@ int main(int argc,char** argv){
       break;
       case 's':   
 	socket_file  = optarg;
+	break;
+      case 'v':   
+	print_version();
 	break;
       case '?': 
 	print_usage (&cerr, 1);
@@ -275,7 +296,7 @@ int main(int argc,char** argv){
   }
   //Not Interactive mode
   else while (getline(cin , input)){
-      if (debug_file) debug_stream <<"Query :"<< input; 
+      if (debug_file) debug_stream <<_("Query :")<< input; 
       con.showUser(url_decode(input));
   }
   

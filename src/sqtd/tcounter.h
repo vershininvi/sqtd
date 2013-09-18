@@ -8,6 +8,12 @@
 #include <algorithm>
 
 
+#include <libintl.h>
+#include <locale.h>
+#define _(STRING)    gettext(STRING)
+
+
+
 class tcounter {
  private:
   time_t _mbeg; 
@@ -55,7 +61,7 @@ class tcounter {
   
   bool calc(bool *canwork){   
     ostringstream os;
-    logger.put(2,"Calculating user traffic");
+    logger.put(2,_("Calculating user traffic"));
     settime();
     clean();
     if (_parser.open()){
@@ -67,9 +73,9 @@ class tcounter {
 	vector<string>* rec= _parser.getFields();
 	if (rec->at(3).compare("TCP_MISS/200")!=0) continue;
 	if (rec->size()!= 10) {
-	  logger.put(0,"Error reading record from access.log"); 
+	  logger.put(0,_("Error reading record from access.log")); 
           os.str("");
-          os << "Wrong record " << _parser.getPos() << endl << _parser.getRecord();
+          os << _("Wrong record ") << _parser.getPos() << endl << _parser.getRecord();
           logger.put(0,os.str());
 	  continue;
         }
@@ -96,7 +102,7 @@ class tcounter {
     _parser.close();
   }
   else {
-    logger.put(0,"Can not open  squid acces log file" );
+    logger.put(0,_("Can not open  squid acces log file" ));
     return false;
   }
   return true;

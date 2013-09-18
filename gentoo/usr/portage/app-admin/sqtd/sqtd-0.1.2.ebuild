@@ -48,8 +48,11 @@ src_install() {
         doconfd \
 		${S}/etc/conf.d/sqtd
 	dosbin \
-		sqtd \
-		sqtc
+		${S}/src/sqtd/sqtd \
+		${S}/src/sqtc/sqtc
+	domo \
+		${S}/po/ru.gmo 
+
 	dodoc README INSTALL NEWS ChangeLog \
 		${S}/doc/sqtd.conf.example 
 	doman  	${S}/man/sqtd.ru.1 \

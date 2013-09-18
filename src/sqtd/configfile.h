@@ -10,6 +10,9 @@
 #include <algorithm>
 #include <grp.h>
 
+
+
+
 using namespace std;
 
 class config_file{
@@ -34,12 +37,12 @@ class config_file{
     ifstream ifs;
     ifs.open(filename);
     if(ifs.is_open()){
-      logger.put(2,  "Reading " + string(filename) + "... OK"); 	    
+      logger.put(2,  _("Reading ") + string(filename) + _("... OK")); 	    
       ifs.close();
       return true;
     }   
     else {
-      logger.put(0,  "Error reading " + string(filename)); 	
+      logger.put(0,  _("Error reading ") + string(filename)); 	
       return false;
     }	
   }
@@ -48,11 +51,11 @@ class config_file{
     ofstream ofs;
     ofs.open(filename.c_str(),ios::app);
     if(ofs.is_open()){
-      logger.put(2,  "Writing filename " + filename +"... OK"); 	    ofs.close();
+      logger.put(2,  _("Writing filename ") + filename +_("... OK")); 	    ofs.close();
       return true;
     }   
     else {
-      logger.put(0,"Error reading " + filename); 	
+      logger.put(0,_("Error reading ") + filename); 	
       return false;
     }	
   }
@@ -67,17 +70,17 @@ class config_file{
   }
 
   bool checkKeyValue(string key ){
-    logger.put(2, "Checking configuration key " + key);
+    logger.put(2, _("Checking configuration key ") + key);
     switch(_keyValues[key]){
     case 2:
       if  (_accessLogFile.compare("")==0){
-	logger.put(1, "The squid access log file not specified" );
+	logger.put(1, _("The squid access log file not specified") );
 	_accessLogFile="/var/log/squid/access.log";
       } 
       return canReadFile(_accessLogFile.c_str());	 
     case 3:
       if(_checkInterval<=0){
-	logger.put(1,"Check interval is not specified");
+	logger.put(1,_("Check interval is not specified"));
 	_checkInterval = 300;
       }  
       return true;
@@ -86,35 +89,35 @@ class config_file{
       return true;
     case 5:
       if(_log_file.compare("")==0){
-	logger.put(1,"Log file is not specified")  ;
+	logger.put(1,_("Log file is not specified"))  ;
       }  
       return true;
     case 6:
       if(_pid_file.compare("")==0) { 
-	logger.put(1, "No pid file specified ");
+	logger.put(1, _("No pid file specified "));
 	_pid_file="/var/lib/sqtd/sqtd.pid";
       }
       return true;	 
     case 7:
       if(_sock_file.compare("")==0) { 
-	logger.put(1, "No sock file specified ");
+	logger.put(1, _("No sock file specified "));
 	_sock_file="/var/lib/sqtd/sqtd.sock";
       }
       return true; 
     case 8:
-      if(_sock_user.compare("")==0) logger.put(1, "The SockOwner not specified");
+      if(_sock_user.compare("")==0) logger.put(1, _("The SockOwner not specified"));
       return true; 
     case 9:
-      if(_sock_group.compare("")==0) logger.put(1, "The SockGroup not specified ");
+      if(_sock_group.compare("")==0) logger.put(1, _("The SockGroup not specified "));
       return true; 
     case 10:
-      if(_sock_mod.compare("")==0) logger.put(1, "The SockMod not specified" );
+      if(_sock_mod.compare("")==0) logger.put(1, _("The SockMod not specified") );
       return true;
     case 11:
-      if(_systemDomainDelimiter.compare("")==0) logger.put(1, "The SystemDomainDelimiter not specified" );
+      if(_systemDomainDelimiter.compare("")==0) logger.put(1, _("The SystemDomainDelimiter not specified") );
       return true;
     case 12:
-      if(_squidDomainDelimiter.compare("")==0) logger.put(1, "The SquidDomainDelimiter  not specified" );
+      if(_squidDomainDelimiter.compare("")==0) logger.put(1, _("The SquidDomainDelimiter  not specified") );
       return true;
     default:
       return  true;
@@ -122,7 +125,7 @@ class config_file{
   }  
    
   bool addLimit(string limit){
-    logger.put (2,"Adding limit");
+    logger.put (2, _("Adding limit"));
     stringstream ss(limit);
     int pos=0,ltype=0 ;
     string token,lname,lperiod;
@@ -137,8 +140,8 @@ class config_file{
 	if (token.compare("u")==0) ltype=1;
         else if(token.compare("g")==0) ltype=2;
         else {
-	  logger.put(0,"Can not add limit");
-	  logger.put(0, "There are two types of limit (g -for group or  u for singe user)") ;
+	  logger.put(0,_("Can not add limit"));
+	  logger.put(0,_("There are two types of limit (g -for group or  u for singe user))")) ;
 	  return false;
         }
 	break;
@@ -148,11 +151,11 @@ class config_file{
       case 3: 
 	lperiod=token;
 	if (lperiod.length()!=1){
-	  logger.put(0,"Error in limit's period  (h - hour,d - day,m - month), period='" + lperiod + "'");
+	  logger.put(0,_("Error in limit's period  (h - hour,d - day,m - month), period='") + lperiod + "'");
 	  return false;
         }
         if (periods.find(lperiod)==string::npos) {
-	  logger.put(0,"Error in limit's period  (h - hour,d - day,m - month), period='" + lperiod + "'");
+	  logger.put(0,_("Error in limit's period  (h - hour,d - day,m - month), period='") + lperiod + "'");
 	  return false;
 	}
 	break;
@@ -161,7 +164,7 @@ class config_file{
 	if (lcount==0);
 	break;
       default:
-	logger.put(0, "Ignoring all other fields of limit") ;
+	logger.put(0, _("Ignoring all other fields of limit")) ;
 	break;
       }  
     }  
@@ -169,12 +172,12 @@ class config_file{
       transform(lname.begin(),lname.end(),lname.begin(),::tolower);
       ostringstream os;
       os<<lcount;  
-      logger.put(2,"Adding user limit " + lperiod + " "+ os.str() + "\t " +lname);
+      logger.put(2,_("Adding user limit ") + lperiod + " "+ os.str() + "\t " +lname);
       _limits[lname][lperiod]=lcount; 
     }
     else {
       grp=  getgrnam(lname.c_str()); 
-      logger.put(2,"Adding group limit");
+      logger.put(2,_("Adding group limit "));
       int usercount=0;
       if (grp!=NULL) {
 	for (current=grp->gr_mem; (*current!= NULL); current++) {
@@ -182,22 +185,22 @@ class config_file{
           ostringstream os;
           os<<lcount;  
 	  transform(t.begin(),t.end(),t.begin(),::tolower);
-	  logger.put(2,"Adding user limit  " + lperiod  + " " +  os.str() +  "\t" +  t); 
+	  logger.put(2,_("Adding user limit ") + lperiod  + " " +  os.str() +  "\t" +  t); 
 	  _limits[t][lperiod]=lcount;  
 	  ++usercount;
         }
 	if (usercount==0){
 	  _limits["-"][lperiod]=lcount;
-	  logger.put(0, "The group " + lname +" is empty");
+	  logger.put(0, _("The group is empty: ") + lname);
         } 
         else {
 	  ostringstream os;
 	  os<<usercount; 
-	  logger.put(2,"The count of user in group  " + lname +" is " + os.str());
+	  logger.put(2,_("The count of user in group  ") + lname +" : " + os.str());
         }
       }
       else {
-	logger.put(0,"Can not get the group ingormation " + lname); 
+	logger.put(0,_("Can not get the group ingormation ") + lname); 
 	return false;
       }
     } 
@@ -242,21 +245,21 @@ class config_file{
   bool reconfig(){
     reinit(); 
     string* configFileName=_cmdl->getConfigFileName(); 
-    logger.put(2,"Opening " + *configFileName);
+    logger.put(2,_("Opening ") + *configFileName);
     ifstream conf(configFileName->c_str());
     if(!conf) {
-      logger.put(0, "Can not open  '" + *configFileName +"'");
+      logger.put(0, _("Can not open  '") + *configFileName +"'");
       exit(1) ;
     }	
     int lineNom=0;
     string confline;
-    logger.put(1,"Reading configuration file ... " );
+    logger.put(1,_("Reading configuration file ... ") );
     while(getline(conf,confline)){
       ++lineNom;
       ostringstream os;
       os <<lineNom; 
       if(confline[0]=='#') {
-        logger.put(2,"Skip comment line # " + os.str());
+        logger.put(2,_("Skip comment line # ") + os.str());
 	continue;
       }       
       stringstream ss(confline);
@@ -266,7 +269,7 @@ class config_file{
       transform(key.begin(),key.end(),key.begin(),::toupper);
       switch (_keyValues[key]) {
       case 1:
-	logger.put(2,"Skip empty line " +os.str());
+	logger.put(2,_("Skip empty line ") +os.str());
 	break;
       case 2:
 	ss >> _accessLogFile;
@@ -304,18 +307,18 @@ class config_file{
       case 13:
 	ss >> value;
 	if(!addLimit(value)){
-	  logger.put(0, "Error adding limit in config file line  " + os.str()) ; 
+	  logger.put(0, _("Error adding limit in config file line  ") + os.str()) ; 
 	  return false;
 	}
 	break;
       default :
-	logger.put(0,"Error in config file line  " +os.str()); 
-        logger.put(0,"Unknown key ");
+	logger.put(0,_("Error in config file line ") +os.str()); 
+        logger.put(0,_("Unknown key "));
         logger.put(0,confline);
 	return false;
       }
       if (!checkKeyValue(key)) {
-	logger.put(0,"Error in config file line " +os.str()); 
+	logger.put(0,_("Error in config file line ") +os.str()); 
 	logger.put(0,confline);
         return false;
       }   
@@ -325,7 +328,7 @@ class config_file{
 
   bool check() {
     bool result=true;
-    logger.put (2, "Checking configuration... ");
+    logger.put (2, _("Checking configuration... "));
     for( map<string,int>::iterator i=_keyValues.begin();i!=_keyValues.end();++i)
       result=checkKeyValue(i->first) && result;
     return result;

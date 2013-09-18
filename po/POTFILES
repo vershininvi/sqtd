@@ -1,0 +1,7 @@
+     ../src/sqtd/sqtd.cpp \
+     ../src/sqtd/commandline.h  \
+     ../src/sqtd/configfile.h \
+     ../src/sqtd/tcounter.h \
+     ../src/sqtd/tlogger.h \
+     ../src/sqtd/tlogparser.h \
+     ../src/sqtc/sqtc.cpp

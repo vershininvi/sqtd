@@ -7,6 +7,8 @@
 #include <vector>
 #include <sstream>
 
+
+
 using namespace std;
 
 class tlogparser{
@@ -37,10 +39,10 @@ public:
 
   int open(){
     string filename= _conf->getAccessLogFile()->c_str();
-    logger.put(2,"Opening the file " + filename );
+    logger.put(2,_("Opening the file ") + filename );
     _file= new  ifstream(filename.c_str());
     if(!_file){
-      logger.put(0,"Can not open file " +filename);
+      logger.put(0,_("Can not open file ") +filename);
       return 0;
     }
     if (_pos!=0){
@@ -51,15 +53,15 @@ public:
 	 if (newrec.compare(_record)==0){
 	    _pos=_file->tellg();
             os<<_pos;  
-	    logger.put(2,"Start from position pos: " + os.str() );
+	    logger.put(2,_("Start from position pos: ") + os.str() );
 	   return 1;
 	 }  
          else{	  
             os<<_pos;  
-	    logger.put(2,"The record at pos "+ os.str()+ "  is not a last read  record ");
-	    logger.put(2, "The last read record : " + _record);
-	    logger.put(2, "The record at pos   : " + newrec );
-	    logger.put(2, "Starting read from begin of the file ");
+	    logger.put(2,_("The  position is: ")+ os.str());
+	    logger.put(2,_( "The last read record : ") + _record);
+	    logger.put(2,_( "The record at pos   : ") + newrec );
+	    logger.put(2,_( "Starting read from begin of the file "));
 	    _file->seekg(0);
 	    _pos=0;
 	    _record="";

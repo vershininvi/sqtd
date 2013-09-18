@@ -15,14 +15,12 @@
 #include <grp.h>
 #include <sys/stat.h>
 
+
 using namespace std;
 
 bool canwork;
 int  serv_sock;
 tcounter counter;
-
-const char* const OK="OK";
-const char* const ERR="ERR";
 
 uid_t getUid(string* username){
   struct passwd   pwd;
@@ -62,7 +60,7 @@ void my_terminate (int param){
 
 class sock_exception: public exception{
   virtual const char* what() const throw()  {
-    return "Error reading socket";
+    return _("Error reading socket");
   }
 };
 
@@ -121,7 +119,7 @@ void write_Conf(int sock,string* configFile){
     while (getline(conf,confline)) result=write_string(sock,confline); 
   }
   else {
-    confline="Can not open config file " + *configFile;
+    confline=_("Can not open config file ") + *configFile;
     result=write_string(sock,confline);
   } 
   result=write_int(sock,0); 
@@ -198,6 +196,10 @@ void* keep_connection(void* unused){
 }
 
 int main(int argc,char**argv){
+   setlocale( LC_ALL, "" );
+   bindtextdomain( "sqtd", "/usr/share/locale" );
+   textdomain( "sqtd" );
+
   //Разбор параметров командной строки
   command_line cmdl(argc,argv);
   //Конфигурация программы
@@ -205,7 +207,7 @@ int main(int argc,char**argv){
   if (!conf.reconfig())  exit(1);
   logger.setTarget(conf.getLogFile(),cmdl.getNoDaemonMode());
 
-  logger.put(2,"Starting" + *(cmdl.getProgrammName()));  
+  logger.put(2,_("Starting ") + *(cmdl.getProgrammName()));  
   ostringstream os; 
   pid_t pid,sid;
   bool configured;
@@ -218,33 +220,33 @@ int main(int argc,char**argv){
   prev_fn = signal (SIGABRT,my_terminate);
   //Демонизация процессв
   if(!cmdl.getNoDaemonMode()){
-    logger.put(1,"Starting in daemon mode");    
+    logger.put(1,_("Go to daemon mode"));    
     pid=fork();
     if (pid > 0)  {
       exit(0); 
     }
     if(pid<0){
-      logger.put(0, "Can not start as daemon");
+      logger.put(0, _("Can not start as a daemon"));
       exit(1);
     } 
   }
   //Запись pid в файл
-  logger.put(2,"Opening pid file");
+  logger.put(2,_("Opening pid file ") + *(conf.getPidFile()));
   ofstream pidfile(conf.getPidFile()->c_str(),ios_base::out);
   if (!pidfile) {
-    logger.put(0, "Can not open pid file " +*(conf.getPidFile()) ) ; 
+    logger.put(0, _("Can not open pid file ") +*(conf.getPidFile()) ) ; 
     exit(1);
   }
 
   else {
-    logger.put(2,"Priting pid into the pid file");
+    logger.put(2,_("Priting pocess identificator into the pid file"));
     pidfile << getpid()<<endl;
     pidfile.close();
   }
   
-  logger.put(2,"Set session id");
+  logger.put(2,_("Set session id"));
   sid=setsid();
-  logger.put(2,"Changing working dir");
+  logger.put(2,_("Changing working dir"));
   iret=chdir("/");
   //Настройка счетчика
   counter.setConf(&conf);
@@ -256,7 +258,7 @@ int main(int argc,char**argv){
   serv_addr.sun_family=AF_LOCAL;
   strcpy(serv_addr.sun_path,conf.getSockFile()->c_str()) ;
   if (bind(serv_sock,(struct sockaddr *)&serv_addr,SUN_LEN(&serv_addr))){
-    logger.put(2,"Can not create  socket " + *conf.getSockFile() );
+    logger.put(2,_("Can not create  socket ") + *conf.getSockFile() );
     exit(1);
   }
   int ret =chown(conf.getSockFile()->c_str(),getUid(conf.getSockUser()),getGid(conf.getSockGroup()));
@@ -269,18 +271,18 @@ int main(int argc,char**argv){
   while (canwork){
     //Расчет траффика
     if(!counter.calc(&canwork)) {
-      logger.put(0,"Can not calculate user traffic");
+      logger.put(0,_("Can not calculate user traffic"));
       exit(1);
     }
-    logger.put(2, "Reconfiguring ") ; 
+    logger.put(2, _("Reconfiguring sqtd ")) ; 
     configured=conf.reconfig();
     if (!configured){
       if (++confErrCount> 10){
-        logger.put(0,"Can not reconfig sqtd");
+        logger.put(0,_("Can not reconfig sqtd"));
 	exit(1);
       }
     } else  if(confErrCount!=0) confErrCount=0;
-    os<< "Waiting " <<conf.getCheckInterval() <<"s";
+    os<< _("Waiting ") <<conf.getCheckInterval() <<_("s");
     logger.put(1, os.str());
     os.str("");
     sleep(conf.getCheckInterval());
@@ -288,7 +290,7 @@ int main(int argc,char**argv){
   close(serv_sock);
   unlink(conf.getPidFile()->c_str());
   unlink(conf.getSockFile()->c_str());
-  logger.put(0,"Exit..." + string(*cmdl.getProgrammName()));
+  logger.put(0,_("Exit...") + string(*cmdl.getProgrammName()));
   return 0;  
 }
 

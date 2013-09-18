@@ -9,6 +9,7 @@
 #include <syslog.h>
 #include "commandline.h"
 
+
 using namespace std;
 
 
@@ -76,7 +77,7 @@ class tlogger{
           cout.rdbuf(_logfile.rdbuf());
         }
 	else{
-	  cout << "Can not open log file " << *logFile << endl;
+	  cout << _("Can not open log file ") << *logFile << endl;
 	  exit(1);
 	}
       }

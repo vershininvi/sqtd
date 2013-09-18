@@ -1,0 +1,8 @@
+bin_PROGRAMS = sqtd sqtc
+sqtd_SOURCES = src/sqtd/sqtd.cpp src/sqtd/*.h config.h
+sqtc_SOURCES = src/sqtc/sqtc.cpp config.h
+EXTRA_DIST = config.rpath m4/ChangeLog  doc etc gentoo man
+SUBDIRS po
+
+
+ACLOCAL_AMFLAGS = -I m4

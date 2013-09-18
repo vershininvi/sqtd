@@ -1,0 +1,388 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: sqtd 0.1.2\n"
+"Report-Msgid-Bugs-To: www.i_have_no_adress\n"
+"POT-Creation-Date: 2013-09-18 15:25+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/sqtd/sqtd.cpp:63
+msgid "Error reading socket"
+msgstr ""
+
+#: src/sqtd/sqtd.cpp:122
+msgid "Can not open config file "
+msgstr ""
+
+#: src/sqtd/sqtd.cpp:210
+msgid "Starting "
+msgstr ""
+
+#: src/sqtd/sqtd.cpp:223
+msgid "Go to daemon mode"
+msgstr ""
+
+#: src/sqtd/sqtd.cpp:229
+msgid "Can not start as a daemon"
+msgstr ""
+
+#: src/sqtd/sqtd.cpp:234
+msgid "Opening pid file "
+msgstr ""
+
+#: src/sqtd/sqtd.cpp:237
+msgid "Can not open pid file "
+msgstr ""
+
+#: src/sqtd/sqtd.cpp:242
+msgid "Priting pocess identificator into the pid file"
+msgstr ""
+
+#: src/sqtd/sqtd.cpp:247
+msgid "Set session id"
+msgstr ""
+
+#: src/sqtd/sqtd.cpp:249
+msgid "Changing working dir"
+msgstr ""
+
+#: src/sqtd/sqtd.cpp:261
+msgid "Can not create  socket "
+msgstr ""
+
+#: src/sqtd/sqtd.cpp:274
+msgid "Can not calculate user traffic"
+msgstr ""
+
+#: src/sqtd/sqtd.cpp:277
+msgid "Reconfiguring sqtd "
+msgstr ""
+
+#: src/sqtd/sqtd.cpp:281
+msgid "Can not reconfig sqtd"
+msgstr ""
+
+#: src/sqtd/sqtd.cpp:285
+msgid "Waiting "
+msgstr ""
+
+#: src/sqtd/sqtd.cpp:285
+msgid "s"
+msgstr ""
+
+#: src/sqtd/sqtd.cpp:293
+msgid "Exit..."
+msgstr ""
+
+#: src/sqtd/commandline.h:33 src/sqtc/sqtc.cpp:52
+msgid "Usage: "
+msgstr ""
+
+#: src/sqtd/commandline.h:33
+msgid "[OPTIONS]"
+msgstr ""
+
+#: src/sqtd/commandline.h:34
+msgid " -c --config filename      full path to configuration file"
+msgstr ""
+
+#: src/sqtd/commandline.h:35
+msgid " -h --help                 Display this usage information."
+msgstr ""
+
+#: src/sqtd/commandline.h:36
+msgid ""
+" -n --no-daemon            do not start as daemon, output log to console"
+msgstr ""
+
+#: src/sqtd/commandline.h:37
+msgid " -v --version              Print version messages."
+msgstr ""
+
+#: src/sqtd/commandline.h:38
+msgid ""
+"The more information about programm:\n"
+"\t man sqtd"
+msgstr ""
+
+#: src/sqtd/commandline.h:44 src/sqtc/sqtc.cpp:28
+msgid "Version : "
+msgstr ""
+
+#: src/sqtd/configfile.h:40
+msgid "Reading "
+msgstr ""
+
+#: src/sqtd/configfile.h:40 src/sqtd/configfile.h:54
+msgid "... OK"
+msgstr ""
+
+#: src/sqtd/configfile.h:45 src/sqtd/configfile.h:58
+msgid "Error reading "
+msgstr ""
+
+#: src/sqtd/configfile.h:54
+msgid "Writing filename "
+msgstr ""
+
+#: src/sqtd/configfile.h:73
+msgid "Checking configuration key "
+msgstr ""
+
+#: src/sqtd/configfile.h:77
+msgid "The squid access log file not specified"
+msgstr ""
+
+#: src/sqtd/configfile.h:83
+msgid "Check interval is not specified"
+msgstr ""
+
+#: src/sqtd/configfile.h:92
+msgid "Log file is not specified"
+msgstr ""
+
+#: src/sqtd/configfile.h:97
+msgid "No pid file specified "
+msgstr ""
+
+#: src/sqtd/configfile.h:103
+msgid "No sock file specified "
+msgstr ""
+
+#: src/sqtd/configfile.h:108
+msgid "The SockOwner not specified"
+msgstr ""
+
+#: src/sqtd/configfile.h:111
+msgid "The SockGroup not specified "
+msgstr ""
+
+#: src/sqtd/configfile.h:114
+msgid "The SockMod not specified"
+msgstr ""
+
+#: src/sqtd/configfile.h:117
+msgid "The SystemDomainDelimiter not specified"
+msgstr ""
+
+#: src/sqtd/configfile.h:120
+msgid "The SquidDomainDelimiter  not specified"
+msgstr ""
+
+#: src/sqtd/configfile.h:128
+msgid "Adding limit"
+msgstr ""
+
+#: src/sqtd/configfile.h:143
+msgid "Can not add limit"
+msgstr ""
+
+#: src/sqtd/configfile.h:144
+msgid "There are two types of limit (g -for group or  u for singe user))"
+msgstr ""
+
+#: src/sqtd/configfile.h:154 src/sqtd/configfile.h:158
+msgid "Error in limit's period  (h - hour,d - day,m - month), period='"
+msgstr ""
+
+#: src/sqtd/configfile.h:167
+msgid "Ignoring all other fields of limit"
+msgstr ""
+
+#: src/sqtd/configfile.h:175 src/sqtd/configfile.h:188
+msgid "Adding user limit "
+msgstr ""
+
+#: src/sqtd/configfile.h:180
+msgid "Adding group limit "
+msgstr ""
+
+#: src/sqtd/configfile.h:194
+msgid "The group is empty: "
+msgstr ""
+
+#: src/sqtd/configfile.h:199
+msgid "The count of user in group  "
+msgstr ""
+
+#: src/sqtd/configfile.h:203
+msgid "Can not get the group ingormation "
+msgstr ""
+
+#: src/sqtd/configfile.h:248
+msgid "Opening "
+msgstr ""
+
+#: src/sqtd/configfile.h:251
+msgid "Can not open  '"
+msgstr ""
+
+#: src/sqtd/configfile.h:256
+msgid "Reading configuration file ... "
+msgstr ""
+
+#: src/sqtd/configfile.h:262
+msgid "Skip comment line # "
+msgstr ""
+
+#: src/sqtd/configfile.h:272
+msgid "Skip empty line "
+msgstr ""
+
+#: src/sqtd/configfile.h:310
+msgid "Error adding limit in config file line  "
+msgstr ""
+
+#: src/sqtd/configfile.h:315 src/sqtd/configfile.h:321
+msgid "Error in config file line "
+msgstr ""
+
+#: src/sqtd/configfile.h:316
+msgid "Unknown key "
+msgstr ""
+
+#: src/sqtd/configfile.h:331
+msgid "Checking configuration... "
+msgstr ""
+
+#: src/sqtd/tcounter.h:64
+msgid "Calculating user traffic"
+msgstr ""
+
+#: src/sqtd/tcounter.h:76
+msgid "Error reading record from access.log"
+msgstr ""
+
+#: src/sqtd/tcounter.h:78
+msgid "Wrong record "
+msgstr ""
+
+#: src/sqtd/tcounter.h:105
+msgid "Can not open  squid acces log file"
+msgstr ""
+
+#: src/sqtd/tlogger.h:80
+msgid "Can not open log file "
+msgstr ""
+
+#: src/sqtd/tlogparser.h:42
+msgid "Opening the file "
+msgstr ""
+
+#: src/sqtd/tlogparser.h:45
+msgid "Can not open file "
+msgstr ""
+
+#: src/sqtd/tlogparser.h:56
+msgid "Start from position pos: "
+msgstr ""
+
+#: src/sqtd/tlogparser.h:61
+msgid "The  position is: "
+msgstr ""
+
+#: src/sqtd/tlogparser.h:62
+msgid "The last read record : "
+msgstr ""
+
+#: src/sqtd/tlogparser.h:63
+msgid "The record at pos   : "
+msgstr ""
+
+#: src/sqtd/tlogparser.h:64
+msgid "Starting read from begin of the file "
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:52
+msgid " options "
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:53
+msgid " -i --interactive             Ineractive mode."
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:54
+msgid " -h --help                    Display this usage information."
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:55
+msgid " -l --light-mode              Return OK on error."
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:56
+msgid ""
+" -s --socket   filename       The sqtd socket file to connect (default /var/"
+"lib/sqtd/sqtd.sock)."
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:57
+msgid " -d --debug    filename       The output debug info to specified file. "
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:63
+msgid "Enter command"
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:64
+msgid "The avaiable commands is"
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:65
+msgid "help               - show this help"
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:66
+msgid "config             - show current sqtd config"
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:67
+msgid "limits [USERNAME]  - show limits  for all or for one user"
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:68
+msgid "traf   [USERNAME]  - show traffic for all or for one user"
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:69
+msgid ""
+"user    USERNAME   - check user status (OK -can access , ERR -can not acess)"
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:70
+msgid "quit               - exit programm"
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:71
+msgid "Format of USERNAME : domain\\login, where \\ is domain delimiter"
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:99
+msgid "Can not connect to the socket "
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:100
+msgid "Check the sqtd is started and socket file exists"
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:163 src/sqtc/sqtc.cpp:168 src/sqtc/sqtc.cpp:180
+msgid "Return default value (can be changed with --lightmode option)"
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:175
+msgid "\t\t\t\tResponce :"
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:299
+msgid "Query :"
+msgstr ""

@@ -1,0 +1,7 @@
+# List of source files which contain translatable strings.
+src/sqtd/sqtd.cpp
+src/sqtd/commandline.h 
+src/sqtd/configfile.h
+src/sqtd/tcounter.h
+src/sqtd/tlogger.h
+src/sqtd/tlogparser.h

@@ -1,0 +1,402 @@
+# Russian translations for sqtd package
+# Русский переводы пакета sqtd.
+# Copyright (C) 2013 THE sqtd'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the sqtd package.
+# FIRST AUTHOR vershininvi@rambler.ru, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sqtd 1.1.2\n"
+"Report-Msgid-Bugs-To: www.i_have_no_adress\n"
+"POT-Creation-Date: 2013-09-18 14:27+0400\n"
+"PO-Revision-Date: 2013-09-18 10:29+0400\n"
+"Last-Translator:  <vershininvi@rambler.ru>\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: src/sqtd/sqtd.cpp:63
+msgid "Error reading socket"
+msgstr "Ошибка чтерия сокета "
+
+#: src/sqtd/sqtd.cpp:122
+msgid "Can not open config file "
+msgstr "Невозможно открыть файл конфигурации"
+
+#: src/sqtd/sqtd.cpp:210
+msgid "Starting "
+msgstr "Запуск "
+
+#: src/sqtd/sqtd.cpp:223
+msgid "Go to daemon mode"
+msgstr "Переход в режим демона "
+
+#: src/sqtd/sqtd.cpp:229
+msgid "Can not start as a daemon"
+msgstr "Запуск демона невозможен "
+
+#: src/sqtd/sqtd.cpp:234
+msgid "Opening pid file "
+msgstr "Открытие файла идентификатора процесса "
+
+#: src/sqtd/sqtd.cpp:237
+msgid "Can not open pid file "
+msgstr "Невозможно открыть файл идентификатора процесса "
+
+#: src/sqtd/sqtd.cpp:242
+msgid "Priting pocess identificator into the pid file"
+msgstr "Запись идентификатора процесса в файл "
+
+#: src/sqtd/sqtd.cpp:247
+msgid "Set session id"
+msgstr "Установка идентификатора сессии "
+
+#: src/sqtd/sqtd.cpp:249
+msgid "Changing working dir"
+msgstr "Смена рабочего каталога "
+
+#: src/sqtd/sqtd.cpp:261
+msgid "Can not create  socket "
+msgstr "Невозможно создание сокета "
+
+#: src/sqtd/sqtd.cpp:274
+msgid "Can not calculate user traffic"
+msgstr "Невозможно рассчитать трафик "
+
+#: src/sqtd/sqtd.cpp:277
+msgid "Reconfiguring sqtd "
+msgstr "Реконфигурация sqtd "
+
+#: src/sqtd/sqtd.cpp:281
+msgid "Can not reconfig sqtd"
+msgstr "Реконфигурация sqtd невозможна "
+
+#: src/sqtd/sqtd.cpp:285
+msgid "Waiting "
+msgstr "Ожидание "
+
+#: src/sqtd/sqtd.cpp:285
+msgid "s"
+msgstr "с"
+
+#: src/sqtd/sqtd.cpp:293
+msgid "Exit..."
+msgstr "Выход..."
+
+#: src/sqtd/commandline.h:33 src/sqtc/sqtc.cpp:45
+msgid "Usage: "
+msgstr "Использование "
+
+#: src/sqtd/commandline.h:33
+msgid "[OPTIONS]"
+msgstr " [ПАРАМЕТРЫ] "
+
+#: src/sqtd/commandline.h:34
+msgid " -c --config filename      full path to configuration file"
+msgstr " -c --config filename      Путь к файлу конфигурации "
+
+#: src/sqtd/commandline.h:35
+msgid " -h --help                 Display this usage information."
+msgstr " -h --help                 Отображение справки. "
+
+#: src/sqtd/commandline.h:36
+msgid ""
+" -n --no-daemon            do not start as daemon, output log to console"
+msgstr ""
+" -n --no-daemon            Не запускать как сервис, выводить журнал в "
+"консоль."
+
+#: src/sqtd/commandline.h:37
+msgid " -v --version              Print version messages."
+msgstr " -v --version              Показать версию."
+
+#: src/sqtd/commandline.h:38
+msgid ""
+"The more information about programm:\n"
+"\t man sqtd"
+msgstr ""
+"Дополнительная справка:\n"
+"\t man sqtd"
+
+#: src/sqtd/commandline.h:44
+msgid "Version : "
+msgstr "Версия : "
+
+#: src/sqtd/configfile.h:40
+msgid "Reading "
+msgstr "Чтение "
+
+#: src/sqtd/configfile.h:40 src/sqtd/configfile.h:54
+msgid "... OK"
+msgstr "...ОК "
+
+#: src/sqtd/configfile.h:45 src/sqtd/configfile.h:58
+msgid "Error reading "
+msgstr "Ошибка чтения "
+
+#: src/sqtd/configfile.h:54
+msgid "Writing filename "
+msgstr "Запись файла "
+
+#: src/sqtd/configfile.h:73
+msgid "Checking configuration key "
+msgstr "Проверка ключа конфигурации "
+
+#: src/sqtd/configfile.h:77
+msgid "The squid access log file not specified"
+msgstr "Не указан путь к журналу доступа squid "
+
+#: src/sqtd/configfile.h:83
+msgid "Check interval is not specified"
+msgstr "Период проверки не указан "
+
+#: src/sqtd/configfile.h:92
+msgid "Log file is not specified"
+msgstr "Не указан файл журнала "
+
+#: src/sqtd/configfile.h:97
+msgid "No pid file specified "
+msgstr "Не указан файл идентификатора процесса "
+
+#: src/sqtd/configfile.h:103
+msgid "No sock file specified "
+msgstr "Не указан файл сокета "
+
+#: src/sqtd/configfile.h:108
+msgid "The SockOwner not specified"
+msgstr "Не указан владелец сокета (SockOwner) "
+
+#: src/sqtd/configfile.h:111
+msgid "The SockGroup not specified "
+msgstr "Не указана группа сокета (SockGroup) "
+
+#: src/sqtd/configfile.h:114
+msgid "The SockMod not specified"
+msgstr "Не указан режим доступа к файлу сокета (SockMod) "
+
+#: src/sqtd/configfile.h:117
+msgid "The SystemDomainDelimiter not specified"
+msgstr "Не указан системный разделитель домена и имени пользователя"
+
+#: src/sqtd/configfile.h:120
+msgid "The SquidDomainDelimiter  not specified"
+msgstr "Не указан разделитель домена и имени пользователя squid "
+
+#: src/sqtd/configfile.h:128
+msgid "Adding limit"
+msgstr "Добавление ограничения "
+
+#: src/sqtd/configfile.h:143
+msgid "Can not add limit"
+msgstr "Невозможно добавление ограничения "
+
+#: src/sqtd/configfile.h:144
+msgid "There are two types of limit (g -for group or  u for singe user))"
+msgstr "Типы ограничения (g для группы или u для пользователя) "
+
+#: src/sqtd/configfile.h:154 src/sqtd/configfile.h:158
+msgid "Error in limit's period  (h - hour,d - day,m - month), period='"
+msgstr ""
+"Неверно указан период ограничения  (h - час,d - день,m - месяц), указан "
+"период '"
+
+#: src/sqtd/configfile.h:167
+msgid "Ignoring all other fields of limit"
+msgstr "Игнорирование дополнителных полей "
+
+#: src/sqtd/configfile.h:175 src/sqtd/configfile.h:188
+msgid "Adding user limit "
+msgstr "Добавление ограничения пользователя "
+
+#: src/sqtd/configfile.h:180
+msgid "Adding group limit "
+msgstr "Добавление группового ограничения "
+
+#: src/sqtd/configfile.h:194
+msgid "The group is empty: "
+msgstr "Группа не содержит пользователей: "
+
+#: src/sqtd/configfile.h:199
+msgid "The count of user in group  "
+msgstr "Количество пользователей в группе "
+
+#: src/sqtd/configfile.h:203
+msgid "Can not get the group ingormation "
+msgstr "Невозможно получить информацию о группе "
+
+#: src/sqtd/configfile.h:248
+msgid "Opening "
+msgstr "Открытие "
+
+#: src/sqtd/configfile.h:251
+msgid "Can not open  '"
+msgstr "Невозможно открыть '"
+
+#: src/sqtd/configfile.h:256
+msgid "Reading configuration file ... "
+msgstr "Чтение конфигурационного файла "
+
+#: src/sqtd/configfile.h:262
+msgid "Skip comment line # "
+msgstr "Пропуск комментария "
+
+#: src/sqtd/configfile.h:272
+msgid "Skip empty line "
+msgstr "Пропуск пустой строки "
+
+#: src/sqtd/configfile.h:310
+msgid "Error adding limit in config file line  "
+msgstr "Ошибка добавления лимита, строка конфигурационного файла "
+
+#: src/sqtd/configfile.h:315 src/sqtd/configfile.h:321
+msgid "Error in config file line "
+msgstr "Ошибка в строке конфигурационного файла "
+
+#: src/sqtd/configfile.h:316
+msgid "Unknown key "
+msgstr "Неизвестный ключ файла конфигурации "
+
+#: src/sqtd/configfile.h:331
+msgid "Checking configuration... "
+msgstr "Проверка конфигурации "
+
+#: src/sqtd/tcounter.h:64
+msgid "Calculating user traffic"
+msgstr "Вычисление трафика пользователей "
+
+#: src/sqtd/tcounter.h:76
+msgid "Error reading record from access.log"
+msgstr "Ошибка чтения записи из файла журнала доступа squid "
+
+#: src/sqtd/tcounter.h:78
+msgid "Wrong record "
+msgstr "Ошибочная запись "
+
+#: src/sqtd/tcounter.h:105
+msgid "Can not open  squid acces log file"
+msgstr "Невозможно открыть файл журнала доступа squid "
+
+#: src/sqtd/tlogger.h:80
+msgid "Can not open log file "
+msgstr "Невозможно открыть журнал "
+
+#: src/sqtd/tlogparser.h:42
+msgid "Opening the file "
+msgstr "Открытие файла "
+
+#: src/sqtd/tlogparser.h:45
+msgid "Can not open file "
+msgstr "Невозможно открыть файл "
+
+#: src/sqtd/tlogparser.h:56
+msgid "Start from position pos: "
+msgstr "Обработка с позиции "
+
+#: src/sqtd/tlogparser.h:61
+msgid "The  position is: "
+msgstr "Позиция : "
+
+#: src/sqtd/tlogparser.h:62
+msgid "The last read record : "
+msgstr "Последняя обработанная запись"
+
+#: src/sqtd/tlogparser.h:63
+msgid "The record at pos   : "
+msgstr "Запись на позиции : "
+
+#: src/sqtd/tlogparser.h:64
+msgid "Starting read from begin of the file "
+msgstr "Обработка с начала файла "
+
+#: src/sqtc/sqtc.cpp:45
+msgid " options "
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:46
+msgid " -i --interactive             Ineractive mode."
+msgstr " -v --version              Показать версию."
+
+#: src/sqtc/sqtc.cpp:47
+msgid " -h --help                    Display this usage information."
+msgstr " -h --help                 Отображение справки. "
+
+#: src/sqtc/sqtc.cpp:48
+msgid " -l --light-mode              Return OK on error."
+msgstr " -l --light-mode             Возвращать OK при ошибках."
+
+#: src/sqtc/sqtc.cpp:49
+msgid ""
+" -s --socket   filename       The sqtd socket file to connect (default /var/"
+"lib/sqtd/sqtd.sock)."
+msgstr ""
+" -s --socket   имя файла      Имя файла сокета (по умолчанию /var/lib/sqtd/"
+"sqtd.sock)."
+
+#: src/sqtc/sqtc.cpp:50
+msgid " -d --debug    filename       The output debug info to specified file. "
+msgstr " -d --debug    имяфайла       Вывести журнал отладки в файл. "
+
+#: src/sqtc/sqtc.cpp:56
+msgid "Enter command"
+msgstr "Введите команду"
+
+#: src/sqtc/sqtc.cpp:57
+msgid "The avaiable commands is"
+msgstr "Возможны следующие команды"
+
+#: src/sqtc/sqtc.cpp:58
+msgid "help               - show this help"
+msgstr " -h --help                 Отображение справки. "
+
+#: src/sqtc/sqtc.cpp:59
+msgid "config             - show current sqtd config"
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:60
+msgid "limits [USERNAME]  - show limits  for all or for one user"
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:61
+msgid "traf   [USERNAME]  - show traffic for all or for one user"
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:62
+msgid ""
+"user    USERNAME   - check user status (OK -can access , ERR -can not acess)"
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:63
+msgid "quit               - exit programm"
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:64
+msgid "Format of USERNAME : domain\\login, where \\ is domain delimiter"
+msgstr ""
+"Формат USERNAME : домен\\логин, где \\ - разделитель домена и имени "
+"пользователя"
+
+#: src/sqtc/sqtc.cpp:92
+msgid "Can not connect to the socket "
+msgstr "Невозможно создание сокета "
+
+#: src/sqtc/sqtc.cpp:93
+msgid "Check the sqtd is started and socket file exists"
+msgstr "Проверте, запущен ли sqtd и наличие и права  сокет файла "
+
+#: src/sqtc/sqtc.cpp:156 src/sqtc/sqtc.cpp:161 src/sqtc/sqtc.cpp:173
+msgid "Return default value (can be changed with --lightmode option)"
+msgstr ""
+"Возврат значения по умолчанию (может быть изменено параметром командной "
+"строки --lightmode )"
+
+#: src/sqtc/sqtc.cpp:168
+msgid "\t\t\t\tResponce :"
+msgstr ""
+
+#: src/sqtc/sqtc.cpp:287
+msgid "Query :"
+msgstr "Запрос :"
