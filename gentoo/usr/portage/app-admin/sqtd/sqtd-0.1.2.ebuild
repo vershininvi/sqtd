@@ -1,16 +1,22 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v3
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/zabbix/zabbix-2.0.5.ebuild,v 1.3 2013/02/22 02:45:53 mattm Exp $
+# $Header: $
 
 EAPI="2"
 
-inherit flag-o-matic depend.php autotools  user
+inherit autotools git-2 
 
-DESCRIPTION="sqtd  is s SQUID traffic quotation daemon"
-HOMEPAGE="http://www.i_have_not_home.com/"
-MY_P=${P/_/}
-SRC_URI="http://prdownloads.sourceforge.net/sqtd/${MY_P}.tar.bz2"
+DESCRIPTION="Squd quotas traffic daemon"
+
+HOMEPAGE="http://code.google.com/p/sqtd/"
+
+SRC_URI=""
+
+EGIT_REPO_URI="https://code.google.com/p/sqtd/"
+EGIT_COMMIT=${P}
+
 LICENSE="GPL-3"
+
 SLOT="0"
 
 KEYWORDS="~amd64 ~x86"
@@ -23,13 +29,15 @@ RDEPEND=""
 
 DEPEND=""
 
-S=${WORKDIR}/${MY_P}
+S=${WORKDIR}/${P}
 
 src_prepare() {
+   echo ${S}
    eautoreconf
 }
 
 src_configure() {
+    
     econf || die "econf failed"
 }
 
@@ -38,8 +46,6 @@ src_install() {
                /etc/sqtd \
 	       /var/lib  \
                /var/lib/sqtd
-
-
 	insinto /etc/sqtd
 	doins \
 	       ${S}/doc/sqtd.conf.example 
@@ -52,10 +58,8 @@ src_install() {
 		${S}/src/sqtc/sqtc
 	domo \
 		${S}/po/ru.gmo 
-
 	dodoc README INSTALL NEWS ChangeLog \
 		${S}/doc/sqtd.conf.example 
 	doman  	${S}/man/sqtd.ru.1 \
 	        ${S}/man/sqtc.ru.1
-	
 }
