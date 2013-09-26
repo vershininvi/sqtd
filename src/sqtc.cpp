@@ -9,7 +9,7 @@
 #include <sstream>
 #include <fstream>
 #include <algorithm>
-#include "../../config.h"
+#include "config.h"
 #include <libintl.h>
 #include <locale.h>
 #define _(STRING)    gettext(STRING)

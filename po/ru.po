@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sqtd 1.1.2\n"
-"Report-Msgid-Bugs-To: www.i_have_no_adress\n"
-"POT-Creation-Date: 2013-09-18 15:25+0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-09-24 17:02+0400\n"
 "PO-Revision-Date: 2013-09-18 15:06+0400\n"
 "Last-Translator:  <vershininvi@rambler.ru>\n"
 "Language-Team: Russian\n"
@@ -19,102 +19,294 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/sqtd/sqtd.cpp:63
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:40
+msgid "Reading "
+msgstr "Чтение "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:40
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:54
+msgid "... OK"
+msgstr "...ОК "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:45
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:58
+msgid "Error reading "
+msgstr "Ошибка чтения "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:54
+msgid "Writing filename "
+msgstr "Запись файла "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:73
+msgid "Checking configuration key "
+msgstr "Проверка ключа конфигурации "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:77
+msgid "The squid access log file not specified"
+msgstr "Не указан путь к журналу доступа squid "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:83
+msgid "Check interval is not specified"
+msgstr "Период проверки не указан "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:92
+msgid "Log file is not specified"
+msgstr "Не указан файл журнала "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:97
+msgid "No pid file specified "
+msgstr "Не указан файл идентификатора процесса "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:103
+msgid "No sock file specified "
+msgstr "Не указан файл сокета "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:108
+msgid "The SockOwner not specified"
+msgstr "Не указан владелец сокета (SockOwner) "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:111
+msgid "The SockGroup not specified "
+msgstr "Не указана группа сокета (SockGroup) "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:114
+msgid "The SockMod not specified"
+msgstr "Не указан режим доступа к файлу сокета (SockMod) "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:117
+msgid "The SystemDomainDelimiter not specified"
+msgstr "Не указан системный разделитель домена и имени пользователя"
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:120
+msgid "The SquidDomainDelimiter  not specified"
+msgstr "Не указан разделитель домена и имени пользователя squid "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:128
+msgid "Adding limit"
+msgstr "Добавление ограничения "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:143
+msgid "Can not add limit"
+msgstr "Невозможно добавление ограничения "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:144
+msgid "There are two types of limit (g -for group or  u for singe user))"
+msgstr "Типы ограничения (g для группы или u для пользователя) "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:154
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:158
+msgid "Error in limit's period  (h - hour,d - day,m - month), period='"
+msgstr ""
+"Неверно указан период ограничения  (h - час,d - день,m - месяц), указан "
+"период '"
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:167
+msgid "Ignoring all other fields of limit"
+msgstr "Игнорирование дополнителных полей "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:175
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:188
+msgid "Adding user limit "
+msgstr "Добавление ограничения пользователя "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:180
+msgid "Adding group limit "
+msgstr "Добавление группового ограничения "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:194
+msgid "The group is empty: "
+msgstr "Группа не содержит пользователей: "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:199
+msgid "The count of user in group  "
+msgstr "Количество пользователей в группе "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:203
+msgid "Can not get the group ingormation "
+msgstr "Невозможно получить информацию о группе "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:248
+msgid "Opening "
+msgstr "Открытие "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:251
+msgid "Can not open  '"
+msgstr "Невозможно открыть '"
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:256
+msgid "Reading configuration file ... "
+msgstr "Чтение конфигурационного файла "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:262
+msgid "Skip comment line # "
+msgstr "Пропуск комментария "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:272
+msgid "Skip empty line "
+msgstr "Пропуск пустой строки "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:310
+msgid "Error adding limit in config file line  "
+msgstr "Ошибка добавления лимита, строка конфигурационного файла "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:315
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:321
+msgid "Error in config file line "
+msgstr "Ошибка в строке конфигурационного файла "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:316
+msgid "Unknown key "
+msgstr "Неизвестный ключ файла конфигурации "
+
+#: /home/vvi/projects/sqtdcmake/src/configfile.h:331
+msgid "Checking configuration... "
+msgstr "Проверка конфигурации "
+
+#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:63
 msgid "Error reading socket"
 msgstr "Ошибка чтерия сокета "
 
-#: src/sqtd/sqtd.cpp:122
+#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:122
 msgid "Can not open config file "
 msgstr "Невозможно открыть файл конфигурации"
 
-#: src/sqtd/sqtd.cpp:210
+#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:210
 msgid "Starting "
 msgstr "Запуск "
 
-#: src/sqtd/sqtd.cpp:223
+#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:223
 msgid "Go to daemon mode"
 msgstr "Переход в режим демона "
 
-#: src/sqtd/sqtd.cpp:229
+#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:229
 msgid "Can not start as a daemon"
 msgstr "Запуск демона невозможен "
 
-#: src/sqtd/sqtd.cpp:234
+#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:234
 msgid "Opening pid file "
 msgstr "Открытие файла идентификатора процесса "
 
-#: src/sqtd/sqtd.cpp:237
+#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:237
 msgid "Can not open pid file "
 msgstr "Невозможно открыть файл идентификатора процесса "
 
-#: src/sqtd/sqtd.cpp:242
+#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:242
 msgid "Priting pocess identificator into the pid file"
 msgstr "Запись идентификатора процесса в файл "
 
-#: src/sqtd/sqtd.cpp:247
+#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:247
 msgid "Set session id"
 msgstr "Установка идентификатора сессии "
 
-#: src/sqtd/sqtd.cpp:249
+#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:249
 msgid "Changing working dir"
 msgstr "Смена рабочего каталога "
 
-#: src/sqtd/sqtd.cpp:261
+#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:261
 msgid "Can not create  socket "
 msgstr "Невозможно создание сокета "
 
-#: src/sqtd/sqtd.cpp:274
+#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:274
 msgid "Can not calculate user traffic"
 msgstr "Невозможно рассчитать трафик "
 
-#: src/sqtd/sqtd.cpp:277
+#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:277
 msgid "Reconfiguring sqtd "
 msgstr "Реконфигурация sqtd "
 
-#: src/sqtd/sqtd.cpp:281
+#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:281
 msgid "Can not reconfig sqtd"
 msgstr "Реконфигурация sqtd невозможна "
 
-#: src/sqtd/sqtd.cpp:285
+#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:285
 msgid "Waiting "
 msgstr "Ожидание "
 
-#: src/sqtd/sqtd.cpp:285
+#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:285
 msgid "s"
 msgstr "с"
 
-#: src/sqtd/sqtd.cpp:293
+#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:293
 msgid "Exit..."
 msgstr "Выход..."
 
-#: src/sqtd/commandline.h:33 src/sqtc/sqtc.cpp:52
+#: /home/vvi/projects/sqtdcmake/src/tcounter.h:64
+msgid "Calculating user traffic"
+msgstr "Вычисление трафика пользователей "
+
+#: /home/vvi/projects/sqtdcmake/src/tcounter.h:76
+msgid "Error reading record from access.log"
+msgstr "Ошибка чтения записи из файла журнала доступа squid "
+
+#: /home/vvi/projects/sqtdcmake/src/tcounter.h:78
+msgid "Wrong record "
+msgstr "Ошибочная запись "
+
+#: /home/vvi/projects/sqtdcmake/src/tcounter.h:105
+msgid "Can not open  squid acces log file"
+msgstr "Невозможно открыть файл журнала доступа squid "
+
+#: /home/vvi/projects/sqtdcmake/src/tlogger.h:80
+msgid "Can not open log file "
+msgstr "Невозможно открыть журнал "
+
+#: /home/vvi/projects/sqtdcmake/src/tlogparser.h:42
+msgid "Opening the file "
+msgstr "Открытие файла "
+
+#: /home/vvi/projects/sqtdcmake/src/tlogparser.h:45
+msgid "Can not open file "
+msgstr "Невозможно открыть файл "
+
+#: /home/vvi/projects/sqtdcmake/src/tlogparser.h:56
+msgid "Start from position pos: "
+msgstr "Обработка с позиции "
+
+#: /home/vvi/projects/sqtdcmake/src/tlogparser.h:61
+msgid "The  position is: "
+msgstr "Позиция : "
+
+#: /home/vvi/projects/sqtdcmake/src/tlogparser.h:62
+msgid "The last read record : "
+msgstr "Последняя обработанная запись"
+
+#: /home/vvi/projects/sqtdcmake/src/tlogparser.h:63
+msgid "The record at pos   : "
+msgstr "Запись на позиции : "
+
+#: /home/vvi/projects/sqtdcmake/src/tlogparser.h:64
+msgid "Starting read from begin of the file "
+msgstr "Обработка с начала файла "
+
+#: /home/vvi/projects/sqtdcmake/src/commandline.h:32
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:52
 msgid "Usage: "
 msgstr "Использование "
 
-#: src/sqtd/commandline.h:33
+#: /home/vvi/projects/sqtdcmake/src/commandline.h:32
 msgid "[OPTIONS]"
 msgstr " [ПАРАМЕТРЫ] "
 
-#: src/sqtd/commandline.h:34
+#: /home/vvi/projects/sqtdcmake/src/commandline.h:33
 msgid " -c --config filename      full path to configuration file"
 msgstr " -c --config filename      Путь к файлу конфигурации "
 
-#: src/sqtd/commandline.h:35
+#: /home/vvi/projects/sqtdcmake/src/commandline.h:34
 msgid " -h --help                 Display this usage information."
 msgstr " -h --help                 Отображение справки. "
 
-#: src/sqtd/commandline.h:36
+#: /home/vvi/projects/sqtdcmake/src/commandline.h:35
 msgid ""
 " -n --no-daemon            do not start as daemon, output log to console"
 msgstr ""
 " -n --no-daemon            Не запускать как сервис, выводить журнал в "
 "консоль."
 
-#: src/sqtd/commandline.h:37
+#: /home/vvi/projects/sqtdcmake/src/commandline.h:36
 msgid " -v --version              Print version messages."
 msgstr " -v --version              Показать версию."
 
-#: src/sqtd/commandline.h:38
+#: /home/vvi/projects/sqtdcmake/src/commandline.h:37
 msgid ""
 "The more information about programm:\n"
 "\t man sqtd"
@@ -122,213 +314,28 @@ msgstr ""
 "Дополнительная справка:\n"
 "\t man sqtd"
 
-#: src/sqtd/commandline.h:44 src/sqtc/sqtc.cpp:28
+#: /home/vvi/projects/sqtdcmake/src/commandline.h:43
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:28
 msgid "Version : "
 msgstr "Версия : "
 
-#: src/sqtd/configfile.h:40
-msgid "Reading "
-msgstr "Чтение "
-
-#: src/sqtd/configfile.h:40 src/sqtd/configfile.h:54
-msgid "... OK"
-msgstr "...ОК "
-
-#: src/sqtd/configfile.h:45 src/sqtd/configfile.h:58
-msgid "Error reading "
-msgstr "Ошибка чтения "
-
-#: src/sqtd/configfile.h:54
-msgid "Writing filename "
-msgstr "Запись файла "
-
-#: src/sqtd/configfile.h:73
-msgid "Checking configuration key "
-msgstr "Проверка ключа конфигурации "
-
-#: src/sqtd/configfile.h:77
-msgid "The squid access log file not specified"
-msgstr "Не указан путь к журналу доступа squid "
-
-#: src/sqtd/configfile.h:83
-msgid "Check interval is not specified"
-msgstr "Период проверки не указан "
-
-#: src/sqtd/configfile.h:92
-msgid "Log file is not specified"
-msgstr "Не указан файл журнала "
-
-#: src/sqtd/configfile.h:97
-msgid "No pid file specified "
-msgstr "Не указан файл идентификатора процесса "
-
-#: src/sqtd/configfile.h:103
-msgid "No sock file specified "
-msgstr "Не указан файл сокета "
-
-#: src/sqtd/configfile.h:108
-msgid "The SockOwner not specified"
-msgstr "Не указан владелец сокета (SockOwner) "
-
-#: src/sqtd/configfile.h:111
-msgid "The SockGroup not specified "
-msgstr "Не указана группа сокета (SockGroup) "
-
-#: src/sqtd/configfile.h:114
-msgid "The SockMod not specified"
-msgstr "Не указан режим доступа к файлу сокета (SockMod) "
-
-#: src/sqtd/configfile.h:117
-msgid "The SystemDomainDelimiter not specified"
-msgstr "Не указан системный разделитель домена и имени пользователя"
-
-#: src/sqtd/configfile.h:120
-msgid "The SquidDomainDelimiter  not specified"
-msgstr "Не указан разделитель домена и имени пользователя squid "
-
-#: src/sqtd/configfile.h:128
-msgid "Adding limit"
-msgstr "Добавление ограничения "
-
-#: src/sqtd/configfile.h:143
-msgid "Can not add limit"
-msgstr "Невозможно добавление ограничения "
-
-#: src/sqtd/configfile.h:144
-msgid "There are two types of limit (g -for group or  u for singe user))"
-msgstr "Типы ограничения (g для группы или u для пользователя) "
-
-#: src/sqtd/configfile.h:154 src/sqtd/configfile.h:158
-msgid "Error in limit's period  (h - hour,d - day,m - month), period='"
-msgstr ""
-"Неверно указан период ограничения  (h - час,d - день,m - месяц), указан "
-"период '"
-
-#: src/sqtd/configfile.h:167
-msgid "Ignoring all other fields of limit"
-msgstr "Игнорирование дополнителных полей "
-
-#: src/sqtd/configfile.h:175 src/sqtd/configfile.h:188
-msgid "Adding user limit "
-msgstr "Добавление ограничения пользователя "
-
-#: src/sqtd/configfile.h:180
-msgid "Adding group limit "
-msgstr "Добавление группового ограничения "
-
-#: src/sqtd/configfile.h:194
-msgid "The group is empty: "
-msgstr "Группа не содержит пользователей: "
-
-#: src/sqtd/configfile.h:199
-msgid "The count of user in group  "
-msgstr "Количество пользователей в группе "
-
-#: src/sqtd/configfile.h:203
-msgid "Can not get the group ingormation "
-msgstr "Невозможно получить информацию о группе "
-
-#: src/sqtd/configfile.h:248
-msgid "Opening "
-msgstr "Открытие "
-
-#: src/sqtd/configfile.h:251
-msgid "Can not open  '"
-msgstr "Невозможно открыть '"
-
-#: src/sqtd/configfile.h:256
-msgid "Reading configuration file ... "
-msgstr "Чтение конфигурационного файла "
-
-#: src/sqtd/configfile.h:262
-msgid "Skip comment line # "
-msgstr "Пропуск комментария "
-
-#: src/sqtd/configfile.h:272
-msgid "Skip empty line "
-msgstr "Пропуск пустой строки "
-
-#: src/sqtd/configfile.h:310
-msgid "Error adding limit in config file line  "
-msgstr "Ошибка добавления лимита, строка конфигурационного файла "
-
-#: src/sqtd/configfile.h:315 src/sqtd/configfile.h:321
-msgid "Error in config file line "
-msgstr "Ошибка в строке конфигурационного файла "
-
-#: src/sqtd/configfile.h:316
-msgid "Unknown key "
-msgstr "Неизвестный ключ файла конфигурации "
-
-#: src/sqtd/configfile.h:331
-msgid "Checking configuration... "
-msgstr "Проверка конфигурации "
-
-#: src/sqtd/tcounter.h:64
-msgid "Calculating user traffic"
-msgstr "Вычисление трафика пользователей "
-
-#: src/sqtd/tcounter.h:76
-msgid "Error reading record from access.log"
-msgstr "Ошибка чтения записи из файла журнала доступа squid "
-
-#: src/sqtd/tcounter.h:78
-msgid "Wrong record "
-msgstr "Ошибочная запись "
-
-#: src/sqtd/tcounter.h:105
-msgid "Can not open  squid acces log file"
-msgstr "Невозможно открыть файл журнала доступа squid "
-
-#: src/sqtd/tlogger.h:80
-msgid "Can not open log file "
-msgstr "Невозможно открыть журнал "
-
-#: src/sqtd/tlogparser.h:42
-msgid "Opening the file "
-msgstr "Открытие файла "
-
-#: src/sqtd/tlogparser.h:45
-msgid "Can not open file "
-msgstr "Невозможно открыть файл "
-
-#: src/sqtd/tlogparser.h:56
-msgid "Start from position pos: "
-msgstr "Обработка с позиции "
-
-#: src/sqtd/tlogparser.h:61
-msgid "The  position is: "
-msgstr "Позиция : "
-
-#: src/sqtd/tlogparser.h:62
-msgid "The last read record : "
-msgstr "Последняя обработанная запись"
-
-#: src/sqtd/tlogparser.h:63
-msgid "The record at pos   : "
-msgstr "Запись на позиции : "
-
-#: src/sqtd/tlogparser.h:64
-msgid "Starting read from begin of the file "
-msgstr "Обработка с начала файла "
-
-#: src/sqtc/sqtc.cpp:52
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:52
 msgid " options "
 msgstr " параметры "
 
-#: src/sqtc/sqtc.cpp:53
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:53
 msgid " -i --interactive             Ineractive mode."
 msgstr " -v --version              Показать версию."
 
-#: src/sqtc/sqtc.cpp:54
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:54
 msgid " -h --help                    Display this usage information."
 msgstr " -h --help                 Отображение справки. "
 
-#: src/sqtc/sqtc.cpp:55
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:55
 msgid " -l --light-mode              Return OK on error."
 msgstr " -l --light-mode             Возвращать OK при ошибках."
 
-#: src/sqtc/sqtc.cpp:56
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:56
 msgid ""
 " -s --socket   filename       The sqtd socket file to connect (default /var/"
 "lib/sqtd/sqtd.sock)."
@@ -336,73 +343,75 @@ msgstr ""
 " -s --socket   имя файла      Имя файла сокета (по умолчанию /var/lib/sqtd/"
 "sqtd.sock)."
 
-#: src/sqtc/sqtc.cpp:57
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:57
 msgid " -d --debug    filename       The output debug info to specified file. "
 msgstr " -d --debug    имяфайла       Вывести журнал отладки в файл. "
 
-#: src/sqtc/sqtc.cpp:63
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:63
 msgid "Enter command"
 msgstr "Введите команду"
 
-#: src/sqtc/sqtc.cpp:64
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:64
 msgid "The avaiable commands is"
 msgstr "Возможны следующие команды"
 
-#: src/sqtc/sqtc.cpp:65
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:65
 msgid "help               - show this help"
 msgstr " -h --help                 Отображение справки. "
 
-#: src/sqtc/sqtc.cpp:66
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:66
 msgid "config             - show current sqtd config"
 msgstr "config             - показать текущую конфигурацию"
 
-#: src/sqtc/sqtc.cpp:67
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:67
 msgid "limits [USERNAME]  - show limits  for all or for one user"
 msgstr ""
 "limits [USERNAME]  - показать ограничения для всех или для однгого "
 "пользователя"
 
-#: src/sqtc/sqtc.cpp:68
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:68
 msgid "traf   [USERNAME]  - show traffic for all or for one user"
 msgstr ""
 "traf   [USERNAME]  - показать ограничения для всех или для однгого "
 "пользователя"
 
-#: src/sqtc/sqtc.cpp:69
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:69
 msgid ""
 "user    USERNAME   - check user status (OK -can access , ERR -can not acess)"
 msgstr ""
 "user    USERNAME   - проверка статуса (OK - доступ открыт , ERR -доступ "
 "закрыт)"
 
-#: src/sqtc/sqtc.cpp:70
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:70
 msgid "quit               - exit programm"
 msgstr "quit               - выход из программы"
 
-#: src/sqtc/sqtc.cpp:71
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:71
 msgid "Format of USERNAME : domain\\login, where \\ is domain delimiter"
 msgstr ""
 "Формат USERNAME : домен\\логин, где \\ - разделитель домена и имени "
 "пользователя"
 
-#: src/sqtc/sqtc.cpp:99
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:99
 msgid "Can not connect to the socket "
 msgstr "Невозможно создание сокета "
 
-#: src/sqtc/sqtc.cpp:100
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:100
 msgid "Check the sqtd is started and socket file exists"
 msgstr "Проверте, запущен ли sqtd и наличие и права  сокет файла "
 
-#: src/sqtc/sqtc.cpp:163 src/sqtc/sqtc.cpp:168 src/sqtc/sqtc.cpp:180
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:163
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:168
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:180
 msgid "Return default value (can be changed with --lightmode option)"
 msgstr ""
 "Возврат значения по умолчанию (может быть изменено параметром командной "
 "строки --lightmode )"
 
-#: src/sqtc/sqtc.cpp:175
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:175
 msgid "\t\t\t\tResponce :"
 msgstr "\t\t\t\tОтвет :"
 
-#: src/sqtc/sqtc.cpp:299
+#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:299
 msgid "Query :"
 msgstr "Запрос :"

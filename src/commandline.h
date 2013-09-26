@@ -1,7 +1,6 @@
 #ifndef COMMAND_LINE
 #define COMMAND_LINE
-
-#include "../../config.h" 
+#include "config.h" 
 #include <map>
 #include <cstdlib>
 #include <sstream>

@@ -1,0 +1,74 @@
+.TH sqtc "1" "09.09.2013" "sqtc" "User commands"
+.SH NAME
+sqtc \- Squid quotas traffic client 
+.SH СИНТАКСИС
+sqtc [-i] [-h] [-l] [-s файл] [-d файл]
+.SH ОПИСАНИЕ
+.B sqtc
+can be used within sqtd for configureing squid external access lists. Need the sqtd socket file (option -s , default /var/lib/sqtd/sqtd.sock. Can be used in interaction mode for checking sqtd configuration. 
+
+.SH Interaction mode
+.TP
+\fB help\fR 
+Print help message. 
+.TP
+\fB config\fR
+print sqtd config from  sqtd. 
+.TP
+\fB limits [USERNAME]\fR
+print quotas for all user,or for single user
+.TP
+\fB traf\fR
+print internet traffic count for all users or for sumgle user. 
+
+.TP
+\fB user\fR
+print OK if user can acces to internet or  ERR if restricted.
+
+
+.SH NonInteractive mode
+In non intaractive mode sqtc takes user logins from stdin (in url encoded form) and print  OK or ERR to stdout. To create external acl in squid configuration you can write something like: 
+
+
+external_acl_type  SQTD_ACL_TYPE ttl=30 negative_ttl=30 %LOGIN /usr/sbin/sqtc -l -d /tmp/sqtc.log
+
+
+acl SQTD_ACL external SQTD_ACL_TYPE
+
+
+http_access allow SQTD_ACL   
+
+
+If sqtc can not connect to sqtd, gives  ERR, or OK (-l options ).
+
+.SH КЛЮЧИ
+.TP
+\fB\-s  filepath\fR  
+the socket file path
+.TP
+\fB\-d  filepath\fR  
+the debug file path for testing squid request and sqtd answers
+.TP
+\fB\-h\fR
+print help and exit
+.TP
+\fB\-i\fR
+start in iteractive mode
+
+.SH Exit status
+.TP
+0 \- if OK 
+.TP
+1 \- if Error 
+
+.SH Files
+.I /var/lib/sqtd/sqtd.sock  
+.RS
+the socket file, created by sqtd. 
+.RE
+
+.SH Author
+Written by Vladimir Vershinin 
+<vershininvi@rambler.ru> Russia . Volgograd.
+.SH "СМОТРИТЕ ТАКЖЕ"
+man getent, man smb.conf, man squid, man sqtd.

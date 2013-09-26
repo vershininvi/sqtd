@@ -1,7 +1,50 @@
-To install programm
-./configure
-make 
-make install
 
-To uninstall programm
-make uninstall
+
+TO GET SOURCES
+
+Get a local copy of the sqtd repository with this command:
+   git clone https://code.google.com/p/sqtd/ sqtd
+
+
+TO INSTALL PROGRAMM FROM SOURCE
+
+You need cmake (http://www.cmake.org/)  to configure and install sqtd. 
+ 1.  Go to source directory (cd sqtd)
+ 2.  Create build directory (mkdir  biuld)
+ 3.  Go to build directory  (cd build) 
+ 4.  Create build cache from source directory (cmake ../)        
+ 5.  Compile program (make)
+ 6.  Instal programm   (make install)
+
+You can change some buold options  option from source directory (cmake -i build or cmake-gui)
+
+See build/install_manifest.txt for installed files. 
+
+You can run  make DESTDIR=/path/to/destination"   to install sqtd in destination directory 
+(for maintainer purposes ).   
+
+See cmake manuals for other options. 
+
+
+TO UNINSTALL PROGRAMM FROM SOURCE
+
+1.   Go to build directory 
+2    Unistall programm (make uninstall)
+3.   Check /usr/sharedoc/sqtd-* directory and remove it if unnessesary  (for default config)
+4.   Remove /var/lib/sqtd directory if unnessesary.
+4.   Remove /var/lib/sqtd directory if unnessesary.
+
+
+TO INSTALL/UNINSTALL PROGRAM IN GENTOO (www.gentoo.org)
+
+   You can use  sqtd-*.ebuild file from source directory 
+
+TO INSTALL/UNINSTALL PROGRAM FOR OTHER *NIX 
+
+   Sorry, I can not create and support binary package for other  *nix. 
+   I belive you can create it from source if you need it.
+
+
+
+ 
+ 

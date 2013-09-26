@@ -1,0 +1,101 @@
+.TH sqtd "1" "09.09.2013" "sqtd" "User commands"
+.SH NAME
+sqtd \- Squid traffic quotation daemon 
+.SH SYNOPSIS
+sqtd [-c файл] [-n] [-v] [-h]
+.SH DESCRIPTION
+.B sqtd
+
+
+restrict user`s internet traffic according quotas in the configuration file. The default location of configuration ffile is /etc/sqtd/sqtd.conf (can be changed with option -c). Analysis of squid access.log  is performed regularly at intervals specified by the key in configuration file CheckInterval (seconds). Te log of sqtd is recorded in a file, specified with the key in configuration file LogFile, or in the system log (default), or to standard output if you run sqtd with command line option -n. The process id is recorded un a file specified by the key  PidFileи. Sqtd is waiting for client connection on socket file (key  SocksFile). The client programm sqtc (man sqtc) can work in interactive mode, or can be used for configuring external access list in squid configuration. 
+.SH OPTIONS
+.TP
+\fB\-c filepath\fR  
+use file path as configuration file
+.TP
+\fB\-h\fR
+display help or exit
+.TP
+\fB\-v\fR
+display version of sqtd and exit
+.TP
+\fB\-n\fR
+start in debug (no-daemon) mode, output log to console
+.SH Exit status
+.TP
+0 \- if OK
+.TP
+1 \- if error
+.SH FILES
+.I /etc/sqtd/sqtd.conf 
+.RS
+the configuration file 
+.RE
+.I /var/lib/sqtd/sqtd.pid
+.RS
+temporary file for proccess identification  
+.RE
+.I /var/lib/sqtd/sqtd.sock
+.RS
+temporary file for socket
+.RE
+
+.SH CONFIGURATION FILE
+sqtd processes the config file sequentially from start to finish.  Lines starting with # are comments. Blank lines are ignored. Each non-empty line configuration file is a KEY VALUE pair. if VALUE is the file path,there are recommended use full path. Если параметр -с не указан -  используется конфигурационный файл умолчанию /etc/sqtd/sqtd.conf.  
+
+.RE
+\fBThe configuration files keys:\fR
+.TP
+\fBCheckInterval num\fR  
+The CheckInterval. The default value is 300 ( 5 minutes). Then sqtd shall reconfiguring and check a new records in squid acces.log file. 
+
+.RE
+.TP
+\fBAccessLogFile файл\fR 
+the  squid access.log file. Default /var/log/squid/access.log
+.RE
+.TP
+\fBLogFile файл\fR       
+the sqtd log file, (default  - syslog, or console in  debug mode  (the command line option -n))
+.RE
+.TP
+\fBPidFile файл\fR 
+the process identificator file. Default /var/lib/sqtd/sqtd.pid
+.RE
+.TP
+\fBSosckFile файл\fR 
+The socket file. Default /var/lib/sqtd/sqtd.sock. The access to socket file is contolled with keys SockUser, SockDomain,SockMod. You can check this by  ls -lh /path/to/socketfile after sqtd starting. You can check the sqtc owner if it run under squid  like this  "ps -aF | grep sqtc" .   
+.RE
+.TP
+\fBSosckUser username\fR 
+The socket owner 
+.RE
+.TP
+\fBSosckUser groupname\fR 
+The socket group 
+.RE
+.TP
+\fBSoskMod mode\fR 
+The socket mode.  For example 770 - full owner and group access.  See man chmod. 
+.RE
+
+.TP
+\fBSystemDomainDelimiter\fR 
+System delimiter of domain and user name . May be obtained by getent passwd.  
+.RE
+
+.TP
+\fBSquidDomainDelimiter\fR 
+Squid domain delimiter. May be obtained from acces.log file.
+.RE
+
+.TP
+\fBLimit resriction\fR
+You can restrict user`s internet  traffic by key Limit. The restriction is a string as  TYPE:OBJECTNAME:PERIOD:COUNT. The TYPE is one of  u - gor user,or  g - for group. The OBJECTNAME - is a user or group name. The PERIOD  is one of h - hour, d - day or m -month. The COUNT can be specified in bytes (100), kilobytes (300K), megabytes (900M)у or gigabytes (10G). If COUNT is  0, then unlimited. The next Limit key  can ovveride previos one. The format of OJECTNAME can be obtained by getent group or getent user.
+.RE
+.SH AUTHOR
+Written by Vladimir Versinin
+
+<vershininvi@rambler.ru>  Russia. Volgograd.
+.SH "SEE ALSO"
+man getent, man smb.conf, man squid, man sqtc, man ps, man chmod, man ls.

@@ -1,4 +1,12 @@
-
+In sqtd-0.1.3
+   Add the English man pages for sqtd and sqtc -done
+   Patch russian man pages -done
+   Add the English and Russian info documentation 
+   Patch the sqtd and sqtc output messages 
+   sqtc code deduplication (socket functions,version, etc)
+   sqtc double-prompt interactive mode  bug 
+   improvig sqtc interactive output
+  
 
       	
 	
