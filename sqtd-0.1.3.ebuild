@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v3
 # $Header: $
 
-EAPI="2"
+EAPI="5"
 
-inherit autotools git-2 
+inherit cmake-utils  git-2 
 
 DESCRIPTION="Squd quotas traffic daemon"
 
@@ -13,7 +13,7 @@ HOMEPAGE="http://code.google.com/p/sqtd/"
 SRC_URI=""
 
 EGIT_REPO_URI="https://code.google.com/p/sqtd/"
-EGIT_COMMIT=${P}
+#EGIT_COMMIT=${P}
 
 LICENSE="GPL-3"
 
@@ -31,35 +31,13 @@ DEPEND=""
 
 S=${WORKDIR}/${P}
 
-src_prepare() {
-   echo ${S}
-   eautoreconf
-}
-
 src_configure() {
-    
-    econf || die "econf failed"
+    einfo "Configuring sqtd"
+    cmake-utils_src_configure  || die  "Cmake: sqtd configuration failed"
 }
 
 src_install() {
-	dodir \
-               /etc/sqtd \
-	       /var/lib  \
-               /var/lib/sqtd
-	insinto /etc/sqtd
-	doins \
-	       ${S}/doc/sqtd.conf.example 
-	doinitd \
-		${S}/etc/init.d/sqtd
-        doconfd \
-		${S}/etc/conf.d/sqtd
-	dosbin \
-		${S}/src/sqtd/sqtd \
-		${S}/src/sqtc/sqtc
-	domo \
-		${S}/po/ru.gmo 
-	dodoc README INSTALL NEWS ChangeLog \
-		${S}/doc/sqtd.conf.example 
-	doman  	${S}/man/sqtd.ru.1 \
-	        ${S}/man/sqtc.ru.1
+   einfo "Installing sqtd"
+   cmake-utils_src_install || die "Cmake: sqtd installation failed
 }
+
