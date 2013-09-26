@@ -31,6 +31,10 @@ DEPEND=""
 
 S=${WORKDIR}/${P}
 
+
+
+
+
 src_configure() {
     einfo "Configuring sqtd"
     cmake-utils_src_configure  || die  "Cmake: sqtd configuration failed"
@@ -38,6 +42,6 @@ src_configure() {
 
 src_install() {
    einfo "Installing sqtd"
-   cmake-utils_src_install || die "Cmake: sqtd installation failed
+   cmake-utils_src_install || die "Cmake: sqtd installation failed"
 }
 
