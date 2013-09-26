@@ -13,7 +13,7 @@ HOMEPAGE="http://code.google.com/p/sqtd/"
 SRC_URI=""
 
 EGIT_REPO_URI="https://code.google.com/p/sqtd/"
-#EGIT_COMMIT=${P}
+EGIT_COMMIT=${P}
 
 LICENSE="GPL-3"
 
