@@ -133,6 +133,7 @@ ELSE(NOT BZIP2_EXECUTABLE)
       string(FIND ${CURRENT_MAN} "." POS)
       string(SUBSTRING ${CURRENT_MAN} 0 ${POS} MAN_SECTION)
       set (INSTALL_PATH ${MAN_DIR}/${MAN_LANG}/man${MAN_SECTION})  
+      
       get_filename_component (CURRENT_MAN  ${MAN_FILE} NAME)
       add_custom_command(
 	TARGET man_pages
@@ -141,8 +142,11 @@ ELSE(NOT BZIP2_EXECUTABLE)
 	COMMAND  ${BZIP2_EXECUTABLE}   ${PROJECT_BINARY_DIR}/man/${CURRENT_MAN}
 	DEPENDS ${MAN_FILE}
       )
+     
      install( FILES ${PROJECT_BINARY_DIR}/man/${CURRENT_MAN}.bz2  
-              DESTINATION ${INSTALL_PATH}/${MAN_NAME}.bz2)
+              DESTINATION ${INSTALL_PATH}
+	      RENAME ${MAN_NAME}.bz2
+     )
    endforeach( MAN_FILE ${MAN_FILES} )
 ENDIF(NOT BZIP2_EXECUTABLE)
 
