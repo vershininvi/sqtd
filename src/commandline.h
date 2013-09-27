@@ -5,12 +5,9 @@
 #include <cstdlib>
 #include <sstream>
 #include <getopt.h>
-
-
 #include <libintl.h>
 #include <locale.h>
 #define _(STRING)    gettext(STRING)
-
 
 using namespace std;
 const char*  const  short_options="c:hnv"; 
@@ -24,29 +21,21 @@ const struct option long_options[]={
 
 class command_line{
  private:
-  string _programm_name;      
   string _config_file;
   int     _no_daemon;
 
   void print_usage (ostream *dest,int exit_code){
-    *dest <<  _("Usage: ") << _programm_name << _("[OPTIONS]") << endl
+    *dest <<  _("Usage: ") << program_name << _("[OPTIONS]") << endl
 	  <<  _(" -c --config filename      full path to configuration file") << endl
 	  <<  _(" -h --help                 Display this usage information.") << endl
 	  <<  _(" -n --no-daemon            do not start as daemon, output log to console") << endl
 	  <<  _(" -v --version              Print version messages.")<<endl<<endl 
-	  <<  _("The more information about programm:\n\t man sqtd") << endl;
+	  <<  _("The more information about program:\n\t man sqtd") << endl;
     exit (exit_code);
   }
-  
-  void print_version(){
-    cout <<_programm_name <<  endl 
-         << _("Version : ")  <<   VERSION << endl;
-    exit(0);
-  }
-
  public:
   command_line(int argc, char** argv){
-    _programm_name=argv[0];      
+    program_name=argv[0];      
     _config_file="";
     _no_daemon=0;
     int next_option;
@@ -72,12 +61,10 @@ class command_line{
       }
     }
     while (next_option != -1);
-    if (_config_file.compare("")==0) _config_file="/etc/sqtd/sqtd.conf";
+    if (_config_file.compare("")==0) _config_file=DEFAULT_CONFIG;
   }
 
-  string*  getProgrammName()  {return &_programm_name;}
   string*  getConfigFileName(){return &_config_file; }
   int    getNoDaemonMode()    {return _no_daemon;}
-  
 };
 #endif  /*COMMAND_LINE */

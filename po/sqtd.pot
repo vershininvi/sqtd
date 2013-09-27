@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-24 17:02+0400\n"
+"POT-Creation-Date: 2013-09-27 15:31+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,381 +17,372 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:40
-msgid "Reading "
+#: /home/vvi/projects/sqtd/src/configfile.h:37
+msgid "Success check reading file "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:40
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:54
-msgid "... OK"
+#: /home/vvi/projects/sqtd/src/configfile.h:42
+msgid "Error check reading file "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:45
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:58
-msgid "Error reading "
+#: /home/vvi/projects/sqtd/src/configfile.h:51
+msgid "Success check writing file "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:54
-msgid "Writing filename "
+#: /home/vvi/projects/sqtd/src/configfile.h:55
+msgid "Error check writing file"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:73
+#: /home/vvi/projects/sqtd/src/configfile.h:70
 msgid "Checking configuration key "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:77
+#: /home/vvi/projects/sqtd/src/configfile.h:74
 msgid "The squid access log file not specified"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:83
+#: /home/vvi/projects/sqtd/src/configfile.h:80
 msgid "Check interval is not specified"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:92
+#: /home/vvi/projects/sqtd/src/configfile.h:89
 msgid "Log file is not specified"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:97
+#: /home/vvi/projects/sqtd/src/configfile.h:94
 msgid "No pid file specified "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:103
+#: /home/vvi/projects/sqtd/src/configfile.h:100
 msgid "No sock file specified "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:108
+#: /home/vvi/projects/sqtd/src/configfile.h:105
 msgid "The SockOwner not specified"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:111
+#: /home/vvi/projects/sqtd/src/configfile.h:108
 msgid "The SockGroup not specified "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:114
+#: /home/vvi/projects/sqtd/src/configfile.h:111
 msgid "The SockMod not specified"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:117
+#: /home/vvi/projects/sqtd/src/configfile.h:114
 msgid "The SystemDomainDelimiter not specified"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:120
+#: /home/vvi/projects/sqtd/src/configfile.h:117
 msgid "The SquidDomainDelimiter  not specified"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:128
+#: /home/vvi/projects/sqtd/src/configfile.h:125
 msgid "Adding limit"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:143
+#: /home/vvi/projects/sqtd/src/configfile.h:140
 msgid "Can not add limit"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:144
+#: /home/vvi/projects/sqtd/src/configfile.h:141
 msgid "There are two types of limit (g -for group or  u for singe user))"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:154
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:158
+#: /home/vvi/projects/sqtd/src/configfile.h:151
+#: /home/vvi/projects/sqtd/src/configfile.h:155
 msgid "Error in limit's period  (h - hour,d - day,m - month), period='"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:167
+#: /home/vvi/projects/sqtd/src/configfile.h:164
 msgid "Ignoring all other fields of limit"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:175
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:188
+#: /home/vvi/projects/sqtd/src/configfile.h:172
+#: /home/vvi/projects/sqtd/src/configfile.h:185
 msgid "Adding user limit "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:180
+#: /home/vvi/projects/sqtd/src/configfile.h:177
 msgid "Adding group limit "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:194
+#: /home/vvi/projects/sqtd/src/configfile.h:191
 msgid "The group is empty: "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:199
+#: /home/vvi/projects/sqtd/src/configfile.h:196
 msgid "The count of user in group  "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:203
-msgid "Can not get the group ingormation "
+#: /home/vvi/projects/sqtd/src/configfile.h:200
+msgid "Can not get the group information "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:248
+#: /home/vvi/projects/sqtd/src/configfile.h:245
 msgid "Opening "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:251
+#: /home/vvi/projects/sqtd/src/configfile.h:248
 msgid "Can not open  '"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:256
+#: /home/vvi/projects/sqtd/src/configfile.h:253
 msgid "Reading configuration file ... "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:262
+#: /home/vvi/projects/sqtd/src/configfile.h:259
 msgid "Skip comment line # "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:272
+#: /home/vvi/projects/sqtd/src/configfile.h:269
 msgid "Skip empty line "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:310
-msgid "Error adding limit in config file line  "
+#: /home/vvi/projects/sqtd/src/configfile.h:307
+msgid "Error adding limit in configuration file line  "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:315
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:321
-msgid "Error in config file line "
+#: /home/vvi/projects/sqtd/src/configfile.h:312
+#: /home/vvi/projects/sqtd/src/configfile.h:318
+msgid "Error in configuration file line "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:316
+#: /home/vvi/projects/sqtd/src/configfile.h:313
 msgid "Unknown key "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/configfile.h:331
-msgid "Checking configuration... "
+#: /home/vvi/projects/sqtd/src/configfile.h:328
+msgid "Checking configuration "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:63
+#: /home/vvi/projects/sqtd/src/sqtd.cpp:62
 msgid "Error reading socket"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:122
-msgid "Can not open config file "
+#: /home/vvi/projects/sqtd/src/sqtd.cpp:121
+msgid "Can not open configuration file "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:210
+#: /home/vvi/projects/sqtd/src/sqtd.cpp:209
 msgid "Starting "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:223
+#: /home/vvi/projects/sqtd/src/sqtd.cpp:222
 msgid "Go to daemon mode"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:229
+#: /home/vvi/projects/sqtd/src/sqtd.cpp:228
 msgid "Can not start as a daemon"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:234
+#: /home/vvi/projects/sqtd/src/sqtd.cpp:233
 msgid "Opening pid file "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:237
+#: /home/vvi/projects/sqtd/src/sqtd.cpp:236
 msgid "Can not open pid file "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:242
-msgid "Priting pocess identificator into the pid file"
+#: /home/vvi/projects/sqtd/src/sqtd.cpp:240
+msgid "Write pocess identificator into the pid file"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:247
+#: /home/vvi/projects/sqtd/src/sqtd.cpp:245
 msgid "Set session id"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:249
-msgid "Changing working dir"
+#: /home/vvi/projects/sqtd/src/sqtd.cpp:247
+msgid "Changing working directory"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:261
+#: /home/vvi/projects/sqtd/src/sqtd.cpp:259
 msgid "Can not create  socket "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:274
+#: /home/vvi/projects/sqtd/src/sqtd.cpp:271
 msgid "Can not calculate user traffic"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:277
+#: /home/vvi/projects/sqtd/src/sqtd.cpp:274
 msgid "Reconfiguring sqtd "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:281
-msgid "Can not reconfig sqtd"
+#: /home/vvi/projects/sqtd/src/sqtd.cpp:278
+msgid "Can not reconfigure sqtd"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:285
+#: /home/vvi/projects/sqtd/src/sqtd.cpp:282
 msgid "Waiting "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:285
+#: /home/vvi/projects/sqtd/src/sqtd.cpp:282
 msgid "s"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtd.cpp:293
-msgid "Exit..."
+#: /home/vvi/projects/sqtd/src/sqtd.cpp:290
+msgid "Exit "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/tcounter.h:64
+#: /home/vvi/projects/sqtd/src/tcounter.h:60
 msgid "Calculating user traffic"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/tcounter.h:76
-msgid "Error reading record from access.log"
+#: /home/vvi/projects/sqtd/src/tcounter.h:72
+msgid "Error reading record from access log file"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/tcounter.h:78
+#: /home/vvi/projects/sqtd/src/tcounter.h:74
 msgid "Wrong record "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/tcounter.h:105
-msgid "Can not open  squid acces log file"
+#: /home/vvi/projects/sqtd/src/tcounter.h:101
+msgid "Can not open  squid access log file"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/tlogger.h:80
+#: /home/vvi/projects/sqtd/src/tlogger.h:78
 msgid "Can not open log file "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/tlogparser.h:42
+#: /home/vvi/projects/sqtd/src/tlogparser.h:39
 msgid "Opening the file "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/tlogparser.h:45
+#: /home/vvi/projects/sqtd/src/tlogparser.h:42
 msgid "Can not open file "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/tlogparser.h:56
-msgid "Start from position pos: "
+#: /home/vvi/projects/sqtd/src/tlogparser.h:53
+msgid "Start from position: "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/tlogparser.h:61
+#: /home/vvi/projects/sqtd/src/tlogparser.h:58
 msgid "The  position is: "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/tlogparser.h:62
+#: /home/vvi/projects/sqtd/src/tlogparser.h:59
 msgid "The last read record : "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/tlogparser.h:63
-msgid "The record at pos   : "
+#: /home/vvi/projects/sqtd/src/tlogparser.h:60
+msgid "The record at position: "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/tlogparser.h:64
+#: /home/vvi/projects/sqtd/src/tlogparser.h:61
 msgid "Starting read from begin of the file "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/commandline.h:32
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:52
+#: /home/vvi/projects/sqtd/src/commandline.h:28
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:46
 msgid "Usage: "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/commandline.h:32
+#: /home/vvi/projects/sqtd/src/commandline.h:28
 msgid "[OPTIONS]"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/commandline.h:33
+#: /home/vvi/projects/sqtd/src/commandline.h:29
 msgid " -c --config filename      full path to configuration file"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/commandline.h:34
+#: /home/vvi/projects/sqtd/src/commandline.h:30
 msgid " -h --help                 Display this usage information."
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/commandline.h:35
+#: /home/vvi/projects/sqtd/src/commandline.h:31
 msgid ""
 " -n --no-daemon            do not start as daemon, output log to console"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/commandline.h:36
+#: /home/vvi/projects/sqtd/src/commandline.h:32
 msgid " -v --version              Print version messages."
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/commandline.h:37
+#: /home/vvi/projects/sqtd/src/commandline.h:33
 msgid ""
-"The more information about programm:\n"
+"The more information about program:\n"
 "\t man sqtd"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/commandline.h:43
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:28
-msgid "Version : "
-msgstr ""
-
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:52
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:46
 msgid " options "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:53
-msgid " -i --interactive             Ineractive mode."
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:47
+msgid " -i --interactive             Interactive mode."
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:54
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:48
 msgid " -h --help                    Display this usage information."
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:55
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:49
 msgid " -l --light-mode              Return OK on error."
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:56
-msgid ""
-" -s --socket   filename       The sqtd socket file to connect (default /var/"
-"lib/sqtd/sqtd.sock)."
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:50
+msgid " -s --socket   filename       The sqtd socket file to connect (default "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:57
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:51
 msgid " -d --debug    filename       The output debug info to specified file. "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:63
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:57
 msgid "Enter command"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:64
-msgid "The avaiable commands is"
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:58
+msgid "The available commands is:"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:65
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:59
 msgid "help               - show this help"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:66
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:60
 msgid "config             - show current sqtd config"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:67
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:61
 msgid "limits [USERNAME]  - show limits  for all or for one user"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:68
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:62
 msgid "traf   [USERNAME]  - show traffic for all or for one user"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:69
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:63
 msgid ""
-"user    USERNAME   - check user status (OK -can access , ERR -can not acess)"
+"user    USERNAME   - check user status (OK -can access , ERR -can not access)"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:70
-msgid "quit               - exit programm"
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:64
+msgid "quit               - exit program"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:71
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:65
 msgid "Format of USERNAME : domain\\login, where \\ is domain delimiter"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:99
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:90
 msgid "Can not connect to the socket "
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:100
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:91
 msgid "Check the sqtd is started and socket file exists"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:163
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:168
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:180
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:154
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:159
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:171
 msgid "Return default value (can be changed with --lightmode option)"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:175
-msgid "\t\t\t\tResponce :"
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:166
+msgid "\t\t\t\tResponse :"
 msgstr ""
 
-#: /home/vvi/projects/sqtdcmake/src/sqtc.cpp:299
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:291
 msgid "Query :"
 msgstr ""

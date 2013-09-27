@@ -9,15 +9,13 @@
 #include <syslog.h>
 #include "commandline.h"
 
-
 using namespace std;
-
 
 class tlogger{
  private:
-  int _level;                //Уровень отображаемых сообщений, по умолчанию 0 
-  int _target;               //Приемник сообщений 0 - cout, 1 - syslog,2 - файл
-  ofstream _logfile;         //Файловый поток  
+  int _level;                //display log level, default  0 
+  int _target;               //log target 0 - cout, 1 - syslog,2 - file
+  ofstream _logfile;         //Filestream   
   int _logLevels[3];
   streambuf  *_backup;
  public:
@@ -87,6 +85,6 @@ class tlogger{
   int getTarget(){return _target;}
 };
 
+//Global logger
 tlogger logger;
-
 #endif  /*TLOGGER*/

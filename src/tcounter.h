@@ -6,13 +6,9 @@
 #include <map>
 #include <vector>
 #include <algorithm>
-
-
 #include <libintl.h>
 #include <locale.h>
 #define _(STRING)    gettext(STRING)
-
-
 
 class tcounter {
  private:
@@ -73,7 +69,7 @@ class tcounter {
 	vector<string>* rec= _parser.getFields();
 	if (rec->at(3).compare("TCP_MISS/200")!=0) continue;
 	if (rec->size()!= 10) {
-	  logger.put(0,_("Error reading record from access.log")); 
+	  logger.put(0,_("Error reading record from access log file")); 
           os.str("");
           os << _("Wrong record ") << _parser.getPos() << endl << _parser.getRecord();
           logger.put(0,os.str());
@@ -102,7 +98,7 @@ class tcounter {
     _parser.close();
   }
   else {
-    logger.put(0,_("Can not open  squid acces log file" ));
+    logger.put(0,_("Can not open  squid access log file" ));
     return false;
   }
   return true;
@@ -113,18 +109,17 @@ map < string, map <string, long long> > *getLimits(){return _conf->getLimits();}
   
 bool checkUser(string* username){
   bool pass=false;
-  if(_conf->getLimits()->count(*username)==0) return false; //Нет в лимитах  - не пускать 
-  map <string, long long> limit= _conf->getLimits()->at(*username); //Лимиты пользователя
+  if(_conf->getLimits()->count(*username)==0) return false;                   //User can not access internet  
+  map <string, long long> limit= _conf->getLimits()->at(*username);           //User`s limits
   for ( map<string,long long>::iterator i=limit.begin();i!=limit.end();++i){
-    if(i->second==0) continue; //Не ограничен
+    if(i->second==0) continue; //Unlimited
     if (i->second<=_traf[*username][i->first]) return false; 
   } 
-  return true;//Пользователь в списке, траффик либо не ограничен либо не указан 
+  return true;//User can access internet 
 }
 
 void setConf(config_file* conf){_conf=conf;_parser.setConf(_conf); }
 config_file* getConf(){return _conf;}
 
 };
-
 #endif /*SQTD_COUNTER*/

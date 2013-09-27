@@ -31,10 +31,6 @@ DEPEND=""
 
 S=${WORKDIR}/${P}
 
-
-
-
-
 src_configure() {
     einfo "Configuring sqtd"
     cmake-utils_src_configure  || die  "Cmake: sqtd configuration failed"

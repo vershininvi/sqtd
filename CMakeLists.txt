@@ -1,12 +1,8 @@
 cmake_minimum_required (VERSION 2.6)
 project (sqtd)
-set (sqtd_VERSION_MAJOR   0)
-set (sqtd_VERSION_MINOR   1)
-set (sqtd_VERSION_RELEASE 3)
-
-
-
-
+set (sqtd_VERSION_MAJOR   1)
+set (sqtd_VERSION_MINOR   0)
+set (sqtd_VERSION_RELEASE 0)
 
 #Set path to package components
 set(
@@ -34,11 +30,9 @@ ETC_DIR        "/etc"
 )
 
 set(
-VAR_LIB_DIR    "/var/lib"
+VAR_DIR    "/var"
   CACHE  PATH  "The directory to put temporary  socket and pid files"
 )
-
-
 
 set(sqtd_VERSION "${sqtd_VERSION_MAJOR}.${sqtd_VERSION_MINOR}.${sqtd_VERSION_RELEASE}")
 
@@ -53,8 +47,6 @@ configure_file (
 )
 include_directories("${PROJECT_BINARY_DIR}")
 
-
-
 #Make target for executable files, install it into BIN_DIR (/usr/sbin)  
 add_executable(sqtd src/sqtd.cpp)
 add_executable(sqtc src/sqtc.cpp)
@@ -62,19 +54,17 @@ install( TARGETS sqtd sqtc
        RUNTIME DESTINATION ${BIN_DIR}
 )
 
-
 #Generate localization  files for gettext from source files
 
 file(GLOB SOURCE_FILES ${PROJECT_SOURCE_DIR}/src/*)
-file(GLOB PO_FILES ${PROJECT_SOURCE_DIR}/po/*)
+file(GLOB PO_FILES ${PROJECT_SOURCE_DIR}/po/*.po)
 find_program(XGETTEXT xgettext)
 if(NOT XGETTEXT)
     message( " Note: xgettext coud not be found. Can not generate sqtd.pot file  "  )
 else(NOT XGETTEXT)
 #generate pot template from source code
-  add_custom_command(
-     OUTPUT  ${PROJECT_SOURCE_DIR}/po/sqtd.pot
-      COMMAND ${XGETTEXT} -k_ --from-code=utf-8 -d sqtd -o ${PROJECT_SOURCE_DIR}/po/sqtd.pot ${SOURCE_FILES}
+  add_custom_target(potfile ALL
+      COMMAND ${XGETTEXT} -k_ -d sqtd -o ${PROJECT_SOURCE_DIR}/po/sqtd.pot ${SOURCE_FILES}
      DEPENDS ${SOURCE_FILES}
   )
 endif(NOT XGETTEXT)
@@ -82,12 +72,12 @@ endif(NOT XGETTEXT)
 #update existing po files for gettext
 find_program(MSGMERGE msgmerge) 
 if(NOT MSGMERGE)
-    message( " Note: msgmerge coud not be found. Can not generate sqtyd.pot file  "  )
+    message( " Note: msgmerge coud not be found. Can not generate sqtd.pot file  "  )
 else(NOT MSGMERGE)
-  file(GLOB PO_FILES ${PROJECT_SOURCE_DIR}/po/*.po)
+  add_custom_target(pofiles ALL)
   foreach( PO_FILE ${PO_FILES})
     add_custom_command(
-       OUTPUT  ${PO_FILE}
+       TARGET  pofiles 
        COMMAND ${MSGMERGE} -U  ${PO_FILE}   ${PROJECT_SOURCE_DIR}/po/sqtd.pot
        DEPENDS ${PROJECT_SOURCE_DIR}/po/sqtd.pot
     )
@@ -104,7 +94,7 @@ else(NOT MSGFMT)
     add_custom_command(
       TARGET  localization
       COMMAND ${MSGFMT} -c -v -o ${PROJECT_BINARY_DIR}/${LANG}.mo  ${PO_FILE}
-      DEPENDS ${PROJECT_SOURCE_DIR}/po/ru.po
+      DEPENDS ${PROJECT_SOURCE_DIR}/po/ru.po ${PROJECT_SOURCE_DIR}/po/sqtd.pot
     )
     install( FILES ${PROJECT_BINARY_DIR}/${LANG}.mo  
               DESTINATION ${LOCALE_DIR}/${LANG}/LC_MESSAGES/sqtd.mo)
@@ -177,7 +167,7 @@ install( FILES ${PROJECT_SOURCE_DIR}/doc/sqtd.conf.example
 file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/var/sqtd)
 
 install ( DIRECTORY ${PROJECT_BINARY_DIR}/var/sqtd
-          DESTINATION ${VAR_LIB_DIR} 
+          DESTINATION ${VAR_DIR}/lib 
 )
 
 #Adding unininstall target

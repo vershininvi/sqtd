@@ -1,3 +1,4 @@
+#include "config.h"
 #include <iostream>
 #include <unistd.h>
 #include <getopt.h>
@@ -13,21 +14,14 @@
 #include <libintl.h>
 #include <locale.h>
 #define _(STRING)    gettext(STRING)
-
+#define prompt()     cout<<"sqtc" 
 
 using namespace std;
 
-const char* program_name;
 int interactive;
 string lightmode;
 ofstream debug_stream;
 
-
-void print_version(){
-    cout <<program_name <<  endl 
-         << _("Version : ")  <<   VERSION << endl;
-    exit(0);
-  }
 
 string url_decode(string input){
   ostringstream os;
@@ -50,10 +44,10 @@ string url_decode(string input){
 
 void print_usage (ostream *dest , int exit_code){
   *dest <<  _("Usage: ") << program_name <<_(" options ") << endl;
-  *dest <<  _(" -i --interactive             Ineractive mode.")<<endl 
+  *dest <<  _(" -i --interactive             Interactive mode.")<<endl 
         <<  _(" -h --help                    Display this usage information.") << endl
         <<  _(" -l --light-mode              Return OK on error.")              << endl
-        <<  _(" -s --socket   filename       The sqtd socket file to connect (default /var/lib/sqtd/sqtd.sock).") << endl
+        <<  _(" -s --socket   filename       The sqtd socket file to connect (default ") << DEFAULT_SOCK_FILE <<" ." << endl
         <<  _(" -d --debug    filename       The output debug info to specified file. ") << endl;
         
   exit (exit_code);
@@ -61,19 +55,16 @@ void print_usage (ostream *dest , int exit_code){
 
 void help(){
   cout << _("Enter command") << endl
-       << _("The avaiable commands is") << endl
+       << _("The available commands is:") << endl
        << _("help               - show this help")  << endl
        << _("config             - show current sqtd config") << endl
        << _("limits [USERNAME]  - show limits  for all or for one user")   << endl       
        << _("traf   [USERNAME]  - show traffic for all or for one user")   << endl       
-       << _("user    USERNAME   - check user status (OK -can access , ERR -can not acess)")<< endl       
-       << _("quit               - exit programm")   << endl
+       << _("user    USERNAME   - check user status (OK -can access , ERR -can not access)")<< endl       
+       << _("quit               - exit program")   << endl
        << _("Format of USERNAME : domain\\login, where \\ is domain delimiter") << endl;  
 }
 
-void prompt(){
-  cout << "cmd>";
-}
 
 
 class filesock_client{
@@ -84,13 +75,13 @@ private:
   int _verbose;
   string _default;
 public: 
-  filesock_client(string socket_file,int verbose,string default_responce){
+  filesock_client(string socket_file,int verbose,string default_response){
     _isConnected=false;
     _sock_fd = socket (PF_LOCAL, SOCK_STREAM, 0);
     _serv_addr.sun_family = AF_LOCAL;
     strcpy (_serv_addr.sun_path, socket_file.c_str()); 
     _verbose=verbose;
-    _default=default_responce;
+    _default=default_response;
   }
   
   bool Connect(){  
@@ -118,14 +109,14 @@ public:
     return true;
   }
 
-  char* get(char **responce){
+  char* get(char **response){
     int length=0;
     ssize_t getted;
     if (read (_sock_fd, &length, sizeof (length)) == 0) return NULL;
     if (!length>0)return NULL;
-    *responce = (char*) malloc (length);
-    getted=read (_sock_fd, *responce, length);
-    if (getted!=-1) return *responce;
+    *response = (char*) malloc (length);
+    getted=read (_sock_fd, *response, length);
+    if (getted!=-1) return *response;
     else {
       Disconnect();
       return NULL;
@@ -133,27 +124,27 @@ public:
   }
 
   void showConfig(){ 
-    char* responce;
-    if(put(-1)) while(get(&responce)){
-      cout <<responce << endl;
-      free(responce);
+    char* response;
+    if(put(-1)) while(get(&response)){
+      cout <<response << endl;
+      free(response);
     }	  
   }
     
   
   void showLimit(string username){ 
-    char* responce;
-    if(put(-2)&& put(username.c_str())) while(get(&responce)){
-      cout <<responce << endl;
-      free(responce);
+    char* response;
+    if(put(-2)&& put(username.c_str())) while(get(&response)){
+      cout <<response << endl;
+      free(response);
     }	  
   }
 
   void showTraf(string username){ 
-  char* responce;
-  if(put(-3)&& put(username.c_str()))  while(get(&responce)){
-      cout <<responce << endl;
-      free(responce);
+  char* response;
+  if(put(-3)&& put(username.c_str()))  while(get(&response)){
+      cout <<response << endl;
+      free(response);
     }	
   }
   
@@ -169,12 +160,12 @@ public:
       cout <<_default<<endl;
       return;
     }
-    char* responce=NULL;
-    responce=get(&responce);
-    if(responce){
-      if(debug_stream.is_open()) debug_stream << _("\t\t\t\tResponce :")<< responce << endl;
-	  cout << responce <<endl;
-	  free (responce); 
+    char* response=NULL;
+    response=get(&response);
+    if(response){
+      if(debug_stream.is_open()) debug_stream << _("\t\t\t\tResponse :")<< response << endl;
+	  cout << response <<endl;
+	  free (response); 
     }
     else {
       cout <<_("Return default value (can be changed with --lightmode option)") << endl; 
@@ -188,8 +179,8 @@ public:
 int main(int argc,char** argv){
    program_name=argv[0];
    setlocale( LC_ALL, "" );
-   bindtextdomain( "sqtd", "/usr/share/locale" );
-   textdomain( "sqtd" );
+   bindtextdomain( TEXTDOMAIN, LOCALE_DIR );
+   textdomain( TEXTDOMAIN );
 
 
   /*Анализ параметров командной строки*/
@@ -208,7 +199,7 @@ int main(int argc,char** argv){
   char* debug_file=NULL;
   interactive=0;
   lightmode="ERR";
-  program_name=argv[0];
+
   int next_option; 
   do{
     next_option = getopt_long (argc, argv, short_options, long_options, NULL);
@@ -239,7 +230,7 @@ int main(int argc,char** argv){
       }
   }
   while (next_option != -1);
-  if (socket_file.compare("")==0)  socket_file="/var/lib/sqtd/sqtd.sock";
+  if (socket_file.compare("")==0)  socket_file=DEFAULT_SOCK_FILE;
 
   if(debug_file){
     debug_stream.open(debug_file,ios::app);
@@ -288,13 +279,14 @@ int main(int argc,char** argv){
 	  break;
 	case 7:
 	  exit(0);
-	  break;
+        default:
+          cout << "Invalid command: " << key << endl;
+	  help();
 	}
       }
-      prompt(); 
     }  
   }
-  //Not Interactive mode
+  //Non interactive
   else while (getline(cin , input)){
       if (debug_file) debug_stream <<_("Query :")<< input; 
       con.showUser(url_decode(input));

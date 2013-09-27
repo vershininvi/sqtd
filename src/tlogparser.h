@@ -7,8 +7,6 @@
 #include <vector>
 #include <sstream>
 
-
-
 using namespace std;
 
 class tlogparser{
@@ -29,7 +27,6 @@ public:
   ~tlogparser(){
     close();
   };
-
 
   void setConf(config_file * conf){_conf=conf;}
   void setPos(ifstream::pos_type position){ _pos=position;}
@@ -53,14 +50,14 @@ public:
 	 if (newrec.compare(_record)==0){
 	    _pos=_file->tellg();
             os<<_pos;  
-	    logger.put(2,_("Start from position pos: ") + os.str() );
+	    logger.put(2,_("Start from position: ") + os.str() );
 	   return 1;
 	 }  
          else{	  
             os<<_pos;  
 	    logger.put(2,_("The  position is: ")+ os.str());
 	    logger.put(2,_( "The last read record : ") + _record);
-	    logger.put(2,_( "The record at pos   : ") + newrec );
+	    logger.put(2,_( "The record at position: ") + newrec );
 	    logger.put(2,_( "Starting read from begin of the file "));
 	    _file->seekg(0);
 	    _pos=0;

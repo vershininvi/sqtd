@@ -1,6 +1,18 @@
+#ifndef CONFIG_H
+#define CONFIG_H
 #define VERSION      "@sqtd_VERSION@"
-#define VAR_LIB_DIR  "@VAR_LIB_DIR@"
+#define VAR_DIR      "@VAR_DIR@"
 #define LOCALE_DIR   "@LOCALE_DIR@"
 #define ETC_DIR      "@ETC_DIR@"
 
 
+#define VAR_LIB_DIR   "@VAR_DIR@/lib"
+#define DEFAULT_CONFIG "@ETC_DIR@/sqtd/sqtd.conf"
+#define DEFAULT_CHECK_INTERVAL 300
+#define DEFAULT_ACCESS_LOG  "@VAR_DIR@/log/squid/access.log"
+#define DEFAULT_PID_FILE    "@VAR_DIR@/lib/sqtd/sqtd.pid"
+#define DEFAULT_SOCK_FILE   "@VAR_DIR@/lib/sqtd/sqtd.sock"
+#define TEXTDOMAIN "sqtd"
+#define print_version() cout<<program_name<<endl<< _("Version : ")<< VERSION<< endl;exit(0)
+const char* program_name;  
+#endif /*CONFIG_H*/

@@ -5,7 +5,7 @@ sqtc \- Squid quotas traffic client
 sqtc [-i] [-h] [-l] [-s файл] [-d файл]
 .SH ОПИСАНИЕ
 .B sqtc
-can be used within sqtd for configureing squid external access lists. Need the sqtd socket file (option -s , default /var/lib/sqtd/sqtd.sock. Can be used in interaction mode for checking sqtd configuration. 
+can be used within sqtd for configuring squid external access lists. Need the sqtd socket file (option -s , default /var/lib/sqtd/sqtd.sock. Can be used in interaction mode for checking sqtd configuration. 
 
 .SH Interaction mode
 .TP
@@ -13,21 +13,21 @@ can be used within sqtd for configureing squid external access lists. Need the s
 Print help message. 
 .TP
 \fB config\fR
-print sqtd config from  sqtd. 
+Print sqtd configuration. 
 .TP
 \fB limits [USERNAME]\fR
-print quotas for all user,or for single user
+Print quotas for all user,or for single user
 .TP
 \fB traf\fR
-print internet traffic count for all users or for sumgle user. 
+Print internet traffic count for all users or for single user. 
 
 .TP
 \fB user\fR
-print OK if user can acces to internet or  ERR if restricted.
+Print OK if user can access to internet or  ERR if restricted.
 
 
-.SH NonInteractive mode
-In non intaractive mode sqtc takes user logins from stdin (in url encoded form) and print  OK or ERR to stdout. To create external acl in squid configuration you can write something like: 
+.SH Non interactive mode
+In non interactive mode sqtc takes users login from stdin (in url encoded form) and print  OK or ERR to stdout. To create external acl in squid configuration you can write something like: 
 
 
 external_acl_type  SQTD_ACL_TYPE ttl=30 negative_ttl=30 %LOGIN /usr/sbin/sqtc -l -d /tmp/sqtc.log
@@ -39,7 +39,7 @@ acl SQTD_ACL external SQTD_ACL_TYPE
 http_access allow SQTD_ACL   
 
 
-If sqtc can not connect to sqtd, gives  ERR, or OK (-l options ).
+If sqtc can not connect to sqtd, gives  ERR, or OK (if started with  -l option).
 
 .SH КЛЮЧИ
 .TP
@@ -53,7 +53,7 @@ the debug file path for testing squid request and sqtd answers
 print help and exit
 .TP
 \fB\-i\fR
-start in iteractive mode
+start in interactive mode
 
 .SH Exit status
 .TP
@@ -68,7 +68,6 @@ the socket file, created by sqtd.
 .RE
 
 .SH Author
-Written by Vladimir Vershinin 
-<vershininvi@rambler.ru> Russia . Volgograd.
-.SH "СМОТРИТЕ ТАКЖЕ"
+Written by Vladimir Vershinin <vershininvi@rambler.ru> Russia, Volgograd.
+.SH "SEE ALSO"
 man getent, man smb.conf, man squid, man sqtd.

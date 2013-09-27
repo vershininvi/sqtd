@@ -15,7 +15,6 @@
 #include <grp.h>
 #include <sys/stat.h>
 
-
 using namespace std;
 
 bool canwork;
@@ -105,10 +104,10 @@ size_t read_string(int sock,int length,string* output ){
 void write_User(int sock,int length){
   string username;
   size_t result=read_string(sock,length,&username); 
-  string  responce;
-  if (counter.checkUser(&username))responce="OK";  
-  else responce="ERR";
-  write_string(sock,responce);
+  string  response;
+  if (counter.checkUser(&username))response="OK";  
+  else response="ERR";
+  write_string(sock,response);
 }
 
 void write_Conf(int sock,string* configFile){
@@ -119,7 +118,7 @@ void write_Conf(int sock,string* configFile){
     while (getline(conf,confline)) result=write_string(sock,confline); 
   }
   else {
-    confline=_("Can not open config file ") + *configFile;
+    confline=_("Can not open configuration file ") + *configFile;
     result=write_string(sock,confline);
   } 
   result=write_int(sock,0); 
@@ -150,7 +149,7 @@ void write_Map(int sock, map < string, map<string, long long > >* limits){
   write_int(sock,0);
 }
 
-void* responce (void*  client_sock){
+void* response (void*  client_sock){
   int sock=*((int*)client_sock);
   free(client_sock);
   int length=0;
@@ -188,37 +187,37 @@ void* keep_connection(void* unused){
     socklen_t client_len;
     struct  sockaddr_un client_addr;
     *client_sock = accept (serv_sock,(struct sockaddr *)&client_addr, &client_len);
-    /*Создание треда обработки соединения*/
-    pthread_t responce_thread;
-    pthread_create(&responce_thread,NULL,&responce,client_sock);
+    //Starting socket connection keeper thread
+    pthread_t response_thread;
+    pthread_create(&response_thread,NULL,&response,client_sock);
   } 
   return NULL;
 }
 
 int main(int argc,char**argv){
    setlocale( LC_ALL, "" );
-   bindtextdomain( "sqtd", "/usr/share/locale" );
-   textdomain( "sqtd" );
+   bindtextdomain( TEXTDOMAIN, LOCALE_DIR);
+   textdomain( TEXTDOMAIN );
 
-  //Разбор параметров командной строки
+  //Parse command line parameters 
   command_line cmdl(argc,argv);
-  //Конфигурация программы
+  //Configuring sqtd
   config_file conf(&cmdl);
   if (!conf.reconfig())  exit(1);
   logger.setTarget(conf.getLogFile(),cmdl.getNoDaemonMode());
 
-  logger.put(2,_("Starting ") + *(cmdl.getProgrammName()));  
+  logger.put(2,_("Starting ") + string(program_name));  
   ostringstream os; 
   pid_t pid,sid;
   bool configured;
   int confErrCount;
   int iret;  
-  //Регистрация обработчиков сигналов;
+  //Registering signal handlers;
   void (*prev_fn)(int);
   canwork= true; 
   prev_fn = signal (SIGTERM,my_terminate);
   prev_fn = signal (SIGABRT,my_terminate);
-  //Демонизация процессв
+  //Starting as daemon
   if(!cmdl.getNoDaemonMode()){
     logger.put(1,_("Go to daemon mode"));    
     pid=fork();
@@ -230,28 +229,27 @@ int main(int argc,char**argv){
       exit(1);
     } 
   }
-  //Запись pid в файл
+  //Write  pidfile 
   logger.put(2,_("Opening pid file ") + *(conf.getPidFile()));
   ofstream pidfile(conf.getPidFile()->c_str(),ios_base::out);
   if (!pidfile) {
     logger.put(0, _("Can not open pid file ") +*(conf.getPidFile()) ) ; 
     exit(1);
   }
-
   else {
-    logger.put(2,_("Priting pocess identificator into the pid file"));
+    logger.put(2,_("Write pocess identificator into the pid file"));
     pidfile << getpid()<<endl;
     pidfile.close();
   }
   
   logger.put(2,_("Set session id"));
   sid=setsid();
-  logger.put(2,_("Changing working dir"));
+  logger.put(2,_("Changing working directory"));
   iret=chdir("/");
-  //Настройка счетчика
+  //Configuring counter 
   counter.setConf(&conf);
   
-  /*Открытие сокета*/
+  //Open socket
   unlink(conf.getSockFile()->c_str());
   serv_sock=socket(PF_LOCAL,SOCK_STREAM,0);
   struct sockaddr_un  serv_addr;  
@@ -264,12 +262,11 @@ int main(int argc,char**argv){
   int ret =chown(conf.getSockFile()->c_str(),getUid(conf.getSockUser()),getGid(conf.getSockGroup()));
   chMod(conf.getSockFile(),conf.getSockMod());
   listen(serv_sock,10);
-  /*Запуск треда  процесса прослушивания сокета*/ 
+  //Starting thread for socket listening 
   pthread_t connection_thread;
   pthread_create(&connection_thread,NULL,&keep_connection,NULL);
-  /* Рассчет траффика */ 
+  // Calculate traffic  
   while (canwork){
-    //Расчет траффика
     if(!counter.calc(&canwork)) {
       logger.put(0,_("Can not calculate user traffic"));
       exit(1);
@@ -278,7 +275,7 @@ int main(int argc,char**argv){
     configured=conf.reconfig();
     if (!configured){
       if (++confErrCount> 10){
-        logger.put(0,_("Can not reconfig sqtd"));
+        logger.put(0,_("Can not reconfigure sqtd"));
 	exit(1);
       }
     } else  if(confErrCount!=0) confErrCount=0;
@@ -290,7 +287,7 @@ int main(int argc,char**argv){
   close(serv_sock);
   unlink(conf.getPidFile()->c_str());
   unlink(conf.getSockFile()->c_str());
-  logger.put(0,_("Exit...") + string(*cmdl.getProgrammName()));
+  logger.put(0,_("Exit ")+  string(program_name));
   return 0;  
 }
 
