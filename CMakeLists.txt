@@ -132,7 +132,15 @@ ELSE(NOT BZIP2_EXECUTABLE)
       string(REPLACE "${MAN_LANG}." "" CURRENT_MAN ${CURRENT_MAN})
       string(FIND ${CURRENT_MAN} "." POS)
       string(SUBSTRING ${CURRENT_MAN} 0 ${POS} MAN_SECTION)
-      set (INSTALL_PATH ${MAN_DIR}/${MAN_LANG}/man${MAN_SECTION})  
+        
+      string(COMPARE EQUAL ${MAN_LANG} "en" IS_EN)
+      
+      if(IS_EN)
+      	set (INSTALL_PATH ${MAN_DIR}/man${MAN_SECTION}) 
+      else(IS_EN)
+        set (INSTALL_PATH ${MAN_DIR}/${MAN_LANG}/man${MAN_SECTION})  
+      endif(IS_EN)
+
       
       get_filename_component (CURRENT_MAN  ${MAN_FILE} NAME)
       add_custom_command(
