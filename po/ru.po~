@@ -1,388 +1,406 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Russian translations for sqtd package
+# Русский переводы пакета sqtd.
+# Copyright (C) 2013 THE sqtd'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the sqtd package.
+# Vladimir Vershinin vershininvi@rambler.ru, 2013.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: sqtd 1.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-30 09:55+0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2013-09-27 15:30+0400\n"
+"PO-Revision-Date: 2013-09-18 15:06+0400\n"
+"Last-Translator:  <vershininvi@rambler.ru>\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: /home/vvi/projects/sqtd/src/configfile.h:37
 msgid "Success check reading file "
-msgstr ""
+msgstr "Успешная проверка чтения файла "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:42
 msgid "Error check reading file "
-msgstr ""
+msgstr "Ошибка проверки чтения "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:51
 msgid "Success check writing file "
-msgstr ""
+msgstr "Успешная проверка записи файла "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:55
 msgid "Error check writing file"
-msgstr ""
+msgstr "Ошибка открытия файла "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:70
 msgid "Checking configuration key "
-msgstr ""
+msgstr "Проверка ключа конфигурации "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:74
 msgid "The squid access log file not specified"
-msgstr ""
+msgstr "Не указан путь к журналу доступа squid "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:80
 msgid "Check interval is not specified"
-msgstr ""
+msgstr "Период проверки не указан "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:89
 msgid "Log file is not specified"
-msgstr ""
+msgstr "Не указан файл журнала "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:94
 msgid "No pid file specified "
-msgstr ""
+msgstr "Не указан файл идентификатора процесса "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:100
 msgid "No sock file specified "
-msgstr ""
+msgstr "Не указан файл сокета "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:105
 msgid "The SockOwner not specified"
-msgstr ""
+msgstr "Не указан владелец сокета (SockOwner) "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:108
 msgid "The SockGroup not specified "
-msgstr ""
+msgstr "Не указана группа сокета (SockGroup) "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:111
 msgid "The SockMod not specified"
-msgstr ""
+msgstr "Не указан режим доступа к файлу сокета (SockMod) "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:114
 msgid "The SystemDomainDelimiter not specified"
-msgstr ""
+msgstr "Не указан системный разделитель домена и имени пользователя"
 
 #: /home/vvi/projects/sqtd/src/configfile.h:117
 msgid "The SquidDomainDelimiter  not specified"
-msgstr ""
+msgstr "Не указан разделитель домена и имени пользователя squid "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:125
 msgid "Adding limit"
-msgstr ""
+msgstr "Добавление ограничения "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:140
 msgid "Can not add limit"
-msgstr ""
+msgstr "Невозможно добавление ограничения "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:141
 msgid "There are two types of limit (g -for group or  u for singe user))"
-msgstr ""
+msgstr "Типы ограничения (g для группы или u для пользователя) "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:151
 #: /home/vvi/projects/sqtd/src/configfile.h:155
 msgid "Error in limit's period  (h - hour,d - day,m - month), period='"
 msgstr ""
+"Неверно указан период ограничения  (h - час,d - день,m - месяц), указан "
+"период '"
 
 #: /home/vvi/projects/sqtd/src/configfile.h:164
 msgid "Ignoring all other fields of limit"
-msgstr ""
+msgstr "Игнорирование дополнительных полей "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:172
 #: /home/vvi/projects/sqtd/src/configfile.h:185
 msgid "Adding user limit "
-msgstr ""
+msgstr "Добавление ограничения пользователя "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:177
 msgid "Adding group limit "
-msgstr ""
+msgstr "Добавление группового ограничения "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:191
 msgid "The group is empty: "
-msgstr ""
+msgstr "Группа не содержит пользователей: "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:196
 msgid "The count of user in group  "
-msgstr ""
+msgstr "Количество пользователей в группе "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:200
 msgid "Can not get the group information "
-msgstr ""
+msgstr "Невозможно получить информацию о группе "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:245
 msgid "Opening "
-msgstr ""
+msgstr "Открытие "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:248
 msgid "Can not open  '"
-msgstr ""
+msgstr "Невозможно открыть '"
 
 #: /home/vvi/projects/sqtd/src/configfile.h:253
 msgid "Reading configuration file ... "
-msgstr ""
+msgstr "Чтение конфигурационного файла "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:259
 msgid "Skip comment line # "
-msgstr ""
+msgstr "Пропуск комментария "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:269
 msgid "Skip empty line "
-msgstr ""
+msgstr "Пропуск пустой строки "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:307
 msgid "Error adding limit in configuration file line  "
-msgstr ""
+msgstr "Ошибка добавления лимита, строка конфигурационного файла "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:312
 #: /home/vvi/projects/sqtd/src/configfile.h:318
 msgid "Error in configuration file line "
-msgstr ""
+msgstr "Ошибка в строке конфигурационного файла "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:313
 msgid "Unknown key "
-msgstr ""
+msgstr "Неизвестный ключ файла конфигурации "
 
 #: /home/vvi/projects/sqtd/src/configfile.h:328
 msgid "Checking configuration "
-msgstr ""
+msgstr "Проверка конфигурации "
 
 #: /home/vvi/projects/sqtd/src/sqtd.cpp:62
 msgid "Error reading socket"
-msgstr ""
+msgstr "Ошибка чтения сокета "
 
 #: /home/vvi/projects/sqtd/src/sqtd.cpp:121
 msgid "Can not open configuration file "
-msgstr ""
+msgstr "Невозможно открыть файл конфигурации "
 
 #: /home/vvi/projects/sqtd/src/sqtd.cpp:209
 msgid "Starting "
-msgstr ""
+msgstr "Запуск "
 
 #: /home/vvi/projects/sqtd/src/sqtd.cpp:222
 msgid "Go to daemon mode"
-msgstr ""
+msgstr "Переход в режим демона "
 
 #: /home/vvi/projects/sqtd/src/sqtd.cpp:228
 msgid "Can not start as a daemon"
-msgstr ""
+msgstr "Запуск демона невозможен "
 
 #: /home/vvi/projects/sqtd/src/sqtd.cpp:233
 msgid "Opening pid file "
-msgstr ""
+msgstr "Открытие файла идентификатора процесса "
 
 #: /home/vvi/projects/sqtd/src/sqtd.cpp:236
 msgid "Can not open pid file "
-msgstr ""
+msgstr "Невозможно открыть файл идентификатора процесса "
 
 #: /home/vvi/projects/sqtd/src/sqtd.cpp:240
 msgid "Write pocess identificator into the pid file"
-msgstr ""
+msgstr "Запись идентификатора процесса в файл "
 
 #: /home/vvi/projects/sqtd/src/sqtd.cpp:245
 msgid "Set session id"
-msgstr ""
+msgstr "Установка идентификатора сессии "
 
 #: /home/vvi/projects/sqtd/src/sqtd.cpp:247
 msgid "Changing working directory"
-msgstr ""
+msgstr "Смена рабочего каталога "
 
 #: /home/vvi/projects/sqtd/src/sqtd.cpp:259
 msgid "Can not create  socket "
-msgstr ""
+msgstr "Невозможно создание сокета "
 
 #: /home/vvi/projects/sqtd/src/sqtd.cpp:271
 msgid "Can not calculate user traffic"
-msgstr ""
+msgstr "Невозможно рассчитать трафик "
 
 #: /home/vvi/projects/sqtd/src/sqtd.cpp:274
 msgid "Reconfiguring sqtd "
-msgstr ""
+msgstr "Реконфигурация sqtd "
 
 #: /home/vvi/projects/sqtd/src/sqtd.cpp:278
 msgid "Can not reconfigure sqtd"
-msgstr ""
+msgstr "Реконфигурация sqtd невозможна "
 
 #: /home/vvi/projects/sqtd/src/sqtd.cpp:282
 msgid "Waiting "
-msgstr ""
+msgstr "Ожидание "
 
 #: /home/vvi/projects/sqtd/src/sqtd.cpp:282
 msgid "s"
-msgstr ""
+msgstr "с"
 
 #: /home/vvi/projects/sqtd/src/sqtd.cpp:290
 msgid "Exit "
-msgstr ""
+msgstr "Выход "
 
 #: /home/vvi/projects/sqtd/src/tcounter.h:60
 msgid "Calculating user traffic"
-msgstr ""
+msgstr "Вычисление трафика пользователей "
 
 #: /home/vvi/projects/sqtd/src/tcounter.h:72
 msgid "Error reading record from access log file"
-msgstr ""
+msgstr "Ошибка чтения записи из файла журнала доступа squid "
 
 #: /home/vvi/projects/sqtd/src/tcounter.h:74
 msgid "Wrong record "
-msgstr ""
+msgstr "Ошибочная запись "
 
 #: /home/vvi/projects/sqtd/src/tcounter.h:101
 msgid "Can not open  squid access log file"
-msgstr ""
+msgstr "Невозможно открыть файл журнала доступа squid "
 
 #: /home/vvi/projects/sqtd/src/tlogger.h:78
 msgid "Can not open log file "
-msgstr ""
+msgstr "Невозможно открыть журнал "
 
 #: /home/vvi/projects/sqtd/src/tlogparser.h:39
 msgid "Opening the file "
-msgstr ""
+msgstr "Открытие файла "
 
 #: /home/vvi/projects/sqtd/src/tlogparser.h:42
 msgid "Can not open file "
-msgstr ""
+msgstr "Невозможно открыть файл "
 
 #: /home/vvi/projects/sqtd/src/tlogparser.h:53
 msgid "Start from position: "
-msgstr ""
+msgstr "Обработка с позиции: "
 
 #: /home/vvi/projects/sqtd/src/tlogparser.h:58
 msgid "The  position is: "
-msgstr ""
+msgstr "Позиция : "
 
 #: /home/vvi/projects/sqtd/src/tlogparser.h:59
 msgid "The last read record : "
-msgstr ""
+msgstr "Последняя обработанная запись"
 
 #: /home/vvi/projects/sqtd/src/tlogparser.h:60
 msgid "The record at position: "
-msgstr ""
+msgstr "Запись на позиции: "
 
 #: /home/vvi/projects/sqtd/src/tlogparser.h:61
 msgid "Starting read from begin of the file "
-msgstr ""
+msgstr "Обработка с начала файла "
 
 #: /home/vvi/projects/sqtd/src/commandline.h:28
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:46
 msgid "Usage: "
-msgstr ""
+msgstr "Использование "
 
 #: /home/vvi/projects/sqtd/src/commandline.h:28
 msgid "[OPTIONS]"
-msgstr ""
+msgstr " [ПАРАМЕТРЫ] "
 
 #: /home/vvi/projects/sqtd/src/commandline.h:29
 msgid " -c --config filename      full path to configuration file"
-msgstr ""
+msgstr " -c --config filename      Путь к файлу конфигурации "
 
 #: /home/vvi/projects/sqtd/src/commandline.h:30
 msgid " -h --help                 Display this usage information."
-msgstr ""
+msgstr " -h --help                 Отображение справки. "
 
 #: /home/vvi/projects/sqtd/src/commandline.h:31
 msgid ""
 " -n --no-daemon            do not start as daemon, output log to console"
 msgstr ""
+" -n --no-daemon            Не запускать как сервис, выводить журнал в "
+"консоль."
 
 #: /home/vvi/projects/sqtd/src/commandline.h:32
 msgid " -v --version              Print version messages."
-msgstr ""
+msgstr " -v --version              Показать версию."
 
 #: /home/vvi/projects/sqtd/src/commandline.h:33
 msgid ""
 "The more information about program:\n"
 "\t man sqtd"
 msgstr ""
+"Дополнительная справка:\n"
+"\t man sqtd"
 
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:46
 msgid " options "
-msgstr ""
+msgstr " параметры "
 
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:47
 msgid " -i --interactive             Interactive mode."
-msgstr ""
+msgstr " -i --interactive             Интерактивный режим."
 
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:48
 msgid " -h --help                    Display this usage information."
-msgstr ""
+msgstr " -h --help                    Отображение справки. "
 
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:49
 msgid " -l --light-mode              Return OK on error."
-msgstr ""
+msgstr " -l --light-mode              Возвращать OK при ошибках."
 
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:50
 msgid " -s --socket   filename       The sqtd socket file to connect (default "
 msgstr ""
+" -s --socket   имяфайла       Имя файла сокета (по умолчанию sqtd.sock)."
 
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:51
 msgid " -d --debug    filename       The output debug info to specified file. "
-msgstr ""
+msgstr " -d --debug    имяфайла       Вывести журнал отладки в файл. "
 
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:57
 msgid "Enter command"
-msgstr ""
+msgstr "Введите команду"
 
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:58
 msgid "The available commands is:"
-msgstr ""
+msgstr "Возможны следующие команды:"
 
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:59
 msgid "help               - show this help"
-msgstr ""
+msgstr "help               - Отображение справки. "
 
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:60
 msgid "config             - show current sqtd config"
-msgstr ""
+msgstr "config             - показать текущую конфигурацию"
 
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:61
 msgid "limits [USERNAME]  - show limits  for all or for one user"
 msgstr ""
+"limits [USERNAME]  - показать ограничения для всех или для одного "
+"пользователя"
 
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:62
 msgid "traf   [USERNAME]  - show traffic for all or for one user"
 msgstr ""
+"traf   [USERNAME]  - показать трафик для всех или для одного пользователя"
 
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:63
 msgid ""
 "user    USERNAME   - check user status (OK -can access , ERR -can not access)"
 msgstr ""
+"user    USERNAME   - проверка статуса (OK - доступ открыт , ERR -доступ "
+"закрыт)"
 
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:64
 msgid "quit               - exit program"
-msgstr ""
+msgstr "quit               - выход из программы"
 
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:65
 msgid "Format of USERNAME : domain\\login, where \\ is domain delimiter"
 msgstr ""
+"Формат USERNAME : домен\\логин, где \\ - разделитель домена и имени "
+"пользователя"
 
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:90
 msgid "Can not connect to the socket "
-msgstr ""
+msgstr "Невозможно создание сокета "
 
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:91
 msgid "Check the sqtd is started and socket file exists"
-msgstr ""
+msgstr "Проверьте, запущен ли sqtd и наличие и права  сокет файла "
 
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:154
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:159
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:171
 msgid "Return default value (can be changed with --lightmode option)"
 msgstr ""
+"Возврат значения по умолчанию (может быть изменено параметром командной "
+"строки --lightmode )"
 
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:166
 msgid "\t\t\t\tResponse :"
-msgstr ""
+msgstr "\t\t\t\tОтвет :"
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:295
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:291
 msgid "Query :"
-msgstr ""
+msgstr "Запрос :"

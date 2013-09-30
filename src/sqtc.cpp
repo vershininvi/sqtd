@@ -286,8 +286,9 @@ int main(int argc,char** argv){
         cout << "Invalid command: " << key << endl;
 	help();
       }
+      prompt();
     }  
-    prompt();
+    
   }
   //Non interactive
   else while (getline(cin , input)){

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sqtd 1.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-27 15:30+0400\n"
+"POT-Creation-Date: 2013-09-30 09:54+0400\n"
 "PO-Revision-Date: 2013-09-18 15:06+0400\n"
 "Last-Translator:  <vershininvi@rambler.ru>\n"
 "Language-Team: Russian\n"
@@ -342,7 +342,6 @@ msgid "Enter command"
 msgstr "Введите команду"
 
 #: /home/vvi/projects/sqtd/src/sqtc.cpp:58
-#, fuzzy
 msgid "The available commands is:"
 msgstr "Возможны следующие команды:"
 
@@ -402,6 +401,6 @@ msgstr ""
 msgid "\t\t\t\tResponse :"
 msgstr "\t\t\t\tОтвет :"
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:291
+#: /home/vvi/projects/sqtd/src/sqtc.cpp:295
 msgid "Query :"
 msgstr "Запрос :"
