@@ -14,7 +14,7 @@
 #include <libintl.h>
 #include <locale.h>
 #define _(STRING)    gettext(STRING)
-#define prompt()     cout<<"sqtc" 
+#define prompt()     cout<<"sqtc>" 
 
 using namespace std;
 
@@ -279,10 +279,13 @@ int main(int argc,char** argv){
 	  break;
 	case 7:
 	  exit(0);
-        default:
-          cout << "Invalid command: " << key << endl;
-	  help();
 	}
+	
+      }
+      else{
+        cout << "Invalid command: " << key << endl;
+	help();
+	prompt();
       }
     }  
   }
