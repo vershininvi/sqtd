@@ -11,8 +11,9 @@ sqtd 1.0.0
    Spell checking source and documentation
 
 sqtd 1.0.1
-   Bad destination of mo files 
-   sqtc double-prompt interactive mode bug
+   Fixed bad destination of mo files 
+   Fixed sqtc double-prompt interactive mode bug
+   Init  script wrong mod bug
          
 
 Next sqtc 1.1.0
