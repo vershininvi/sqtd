@@ -276,7 +276,7 @@ int main(int argc,char** argv){
 	  break;
 	case 6:
 	  con.showUser(value);
-	  break;
+ 	  break;
 	case 7:
 	  exit(0);
 	}
@@ -285,9 +285,9 @@ int main(int argc,char** argv){
       else{
         cout << "Invalid command: " << key << endl;
 	help();
-	prompt();
       }
     }  
+    prompt();
   }
   //Non interactive
   else while (getline(cin , input)){
