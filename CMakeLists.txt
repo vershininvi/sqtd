@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 2.6)
 project (sqtd)
 set (sqtd_VERSION_MAJOR   1)
 set (sqtd_VERSION_MINOR   0)
-set (sqtd_VERSION_RELEASE 0)
+set (sqtd_VERSION_RELEASE 1)
 
 #Set path to package components
 set(
@@ -97,7 +97,10 @@ else(NOT MSGFMT)
       DEPENDS ${PROJECT_SOURCE_DIR}/po/ru.po ${PROJECT_SOURCE_DIR}/po/sqtd.pot
     )
     install( FILES ${PROJECT_BINARY_DIR}/${LANG}.mo  
-              DESTINATION ${LOCALE_DIR}/${LANG}/LC_MESSAGES/sqtd.mo)
+              DESTINATION ${LOCALE_DIR}/${LANG}/LC_MESSAGES
+	      RENAME sqtd.mo
+    )
+              
   endforeach( PO_FILE ${PO_FILES})
 endif(NOT MSGFMT)
 

@@ -10,6 +10,11 @@ sqtd 1.0.0
    add sqtd signals to sqtd  man 
    Spell checking source and documentation
 
+sqtd 1.0.1
+   Bad destination of mo files 
+   sqtc double-prompt interactive mode bug
+         
+
 Next sqtc 1.1.0
     improvig sqtc interactive output 
     code deduplication (socket functions, etc)
