@@ -260,7 +260,6 @@ int main(int argc,char** argv){
       if (keyValue.count(key)){
 	switch(keyValue[key]){
   	 case 1:
-	   prompt();
 	   break;
 	 case 2:
 	  help();
