@@ -161,7 +161,11 @@ install( FILES ${PROJECT_SOURCE_DIR}/doc/sqtd.conf.example
 
 
 
-install( DIRECTORY ${PROJECT_SOURCE_DIR}/etc/conf.d ${PROJECT_SOURCE_DIR}/etc/init.d    
+install( DIRECTORY ${PROJECT_SOURCE_DIR}/etc/conf.d     
+         DESTINATION ${ETC_DIR} )
+
+install( DIRECTORY ${PROJECT_SOURCE_DIR}/etc/init.d    
+         FILE_PERMISSIONS  OWNER_EXECUTE GROUP_EXECUTE WORLD_EXECUTE
          DESTINATION ${ETC_DIR} )
 
 install( FILES ${PROJECT_SOURCE_DIR}/doc/sqtd.conf.example  
