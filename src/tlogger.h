@@ -75,7 +75,7 @@ class tlogger{
           cout.rdbuf(_logfile.rdbuf());
         }
 	else{
-	  cout << _("Can not open log file ") << *logFile << endl;
+	  cout << _("Can not open log file")<< " " << *logFile << endl;
 	  exit(1);
 	}
       }

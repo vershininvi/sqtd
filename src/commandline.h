@@ -27,9 +27,9 @@ class command_line{
   void print_usage (ostream *dest,int exit_code){
     *dest <<  _("Usage: ") << program_name << _("[OPTIONS]") << endl
 	  <<  _(" -c --config filename      full path to configuration file") << endl
-	  <<  _(" -h --help                 Display this usage information.") << endl
+	  <<  _(" -h --help                 Display this usage information") << endl
 	  <<  _(" -n --no-daemon            do not start as daemon, output log to console") << endl
-	  <<  _(" -v --version              Print version messages.")<<endl<<endl 
+	  <<  _(" -v --version              Print version messages")<<endl<<endl 
 	  <<  _("The more information about program:\n\t man sqtd") << endl;
     exit (exit_code);
   }

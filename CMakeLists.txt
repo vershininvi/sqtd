@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 2.6)
 project (sqtd)
 set (sqtd_VERSION_MAJOR   1)
 set (sqtd_VERSION_MINOR   0)
-set (sqtd_VERSION_RELEASE 1)
+set (sqtd_VERSION_RELEASE 2)
 
 #Set path to package components
 set(

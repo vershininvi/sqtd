@@ -87,7 +87,7 @@ public:
   bool Connect(){  
     if(_isConnected) return _isConnected;
     if ( connect (_sock_fd, (struct sockaddr *)&_serv_addr, SUN_LEN (&_serv_addr))==0) _isConnected=true;
-    else if(_verbose) cerr << _("Can not connect to the socket ") << _serv_addr.sun_path  << endl
+    else if(_verbose) cerr << _("Can not connect to the socket") << " "<< _serv_addr.sun_path  << endl
                            << _("Check the sqtd is started and socket file exists")<< endl;
     return _isConnected;
   }
@@ -163,7 +163,7 @@ public:
     char* response=NULL;
     response=get(&response);
     if(response){
-      if(debug_stream.is_open()) debug_stream << _("\t\t\t\tResponse :")<< response << endl;
+      if(debug_stream.is_open()) debug_stream << "\t\t\t\t"<< _("Response")<<": " <<response << endl;
 	  cout << response <<endl;
 	  free (response); 
     }
@@ -282,7 +282,7 @@ int main(int argc,char** argv){
 	
       }
       else{
-        cout << "Invalid command: " << key << endl;
+        cout << _("Invalid command")<<" " << key << endl;
 	help();
       }
       prompt();
@@ -291,7 +291,7 @@ int main(int argc,char** argv){
   }
   //Non interactive
   else while (getline(cin , input)){
-      if (debug_file) debug_stream <<_("Query :")<< input; 
+      if (debug_file) debug_stream <<_("Query")<< ": "<< input; 
       con.showUser(url_decode(input));
   }
   

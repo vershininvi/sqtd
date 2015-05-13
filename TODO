@@ -15,10 +15,15 @@ sqtd 1.0.1
    Fixed sqtc double-prompt interactive mode bug
    Init  script wrong mod bug
          
+sqtd 1.0.2 
+    sqtd startup bug
+    	 Change config_file.reconfig() (do not break on config error to parse all config file)
+	 Change sqtd main function (do not exit on config errors)
+    sqtd translation improvement    	 
 
-Next sqtc 1.1.0
+sqtc 1.1.0
     improvig sqtc interactive output 
-    code deduplication (socket functions, etc)
+    add error messenger (mail, etc). Add admin spam defence     
 
 
          

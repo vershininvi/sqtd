@@ -21,6 +21,9 @@ bool canwork;
 int  serv_sock;
 tcounter counter;
 
+//Common used functions
+
+//Convert username to user id 
 uid_t getUid(string* username){
   struct passwd   pwd;
   struct passwd*  result;
@@ -40,23 +43,27 @@ uid_t getUid(string* username){
   return pwd.pw_uid;
 }
 
+//Convert group name to group id
 gid_t getGid(string* groupname){
   struct group  *group=getgrnam(groupname->c_str());
   if(!group) return -1;
   else return group->gr_gid;
 }
 
+//Change file mode bits 
 void chMod(string* filename,string* mode ){
   if (mode->compare("")==0) return;
   int i= strtol(mode->c_str(),0,8);
   chmod(filename->c_str(),i);
 }
 
+//Set global terminate flag 
 void my_terminate (int param){
   canwork=false;
 }
 
 
+//Socket error handling class
 class sock_exception: public exception{
   virtual const char* what() const throw()  {
     return _("Error reading socket");
@@ -64,13 +71,16 @@ class sock_exception: public exception{
 };
 
 
+//Socket functions
+
+//Write an integer to socket
 size_t write_int(int sock,int message){
   size_t result=write(sock,&message,sizeof(int));
   if(result<=0) throw  sock_exception(); 
   return result;
 }
 
-
+//Write  a string to socket
 size_t write_string(int sock,string message){
   size_t length=message.size()+1;
   write_int(sock,length);
@@ -78,13 +88,14 @@ size_t write_string(int sock,string message){
   if(result<=0) throw  sock_exception(); 
 }
 
-
+//Read an integer from  socket
 size_t read_int(int sock,int* output){
   size_t result= recv(sock,output, sizeof(int),0);
   if (result<=0) throw  sock_exception();
   return result;   
 }
 
+//Read string from  socket
 size_t read_string(int sock,int length,string* output ){
   if (length>0){
     char* text=(char*)malloc(length);
@@ -100,7 +111,8 @@ size_t read_string(int sock,int length,string* output ){
   else return true;
 }
 
-
+// Socket reaction functions
+//return  user status to the socket  
 void write_User(int sock,int length){
   string username;
   size_t result=read_string(sock,length,&username); 
@@ -110,6 +122,7 @@ void write_User(int sock,int length){
   write_string(sock,response);
 }
 
+//Write sqtd config file to the socket
 void write_Conf(int sock,string* configFile){
   size_t result;
   ifstream conf(configFile->c_str());
@@ -118,12 +131,13 @@ void write_Conf(int sock,string* configFile){
     while (getline(conf,confline)) result=write_string(sock,confline); 
   }
   else {
-    confline=_("Can not open configuration file ") + *configFile;
+    confline=_("Can not open configuration file")+ ' ' + *configFile;
     result=write_string(sock,confline);
   } 
   result=write_int(sock,0); 
 }
 
+//Write user(s) limits  to the socket
 void write_Map(int sock, map < string, map<string, long long > >* limits){
   int length;
   string username;
@@ -149,6 +163,7 @@ void write_Map(int sock, map < string, map<string, long long > >* limits){
   write_int(sock,0);
 }
 
+//Listen socket input 
 void* response (void*  client_sock){
   int sock=*((int*)client_sock);
   free(client_sock);
@@ -180,6 +195,7 @@ void* response (void*  client_sock){
   return NULL;
 }
 
+//Create socket and start responce function  
 void* keep_connection(void* unused){
   while(canwork) {
     int* client_sock;
@@ -194,23 +210,22 @@ void* keep_connection(void* unused){
   return NULL;
 }
 
+
+//main finction
 int main(int argc,char**argv){
    setlocale( LC_ALL, "" );
    bindtextdomain( TEXTDOMAIN, LOCALE_DIR);
    textdomain( TEXTDOMAIN );
-
   //Parse command line parameters 
   command_line cmdl(argc,argv);
   //Configuring sqtd
   config_file conf(&cmdl);
-  if (!conf.reconfig())  exit(1);
+  conf.reconfig();
   logger.setTarget(conf.getLogFile(),cmdl.getNoDaemonMode());
-
-  logger.put(2,_("Starting ") + string(program_name));  
+  logger.put(0,_("Starting") +' '+ string(program_name));  
   ostringstream os; 
   pid_t pid,sid;
   bool configured;
-  int confErrCount;
   int iret;  
   //Registering signal handlers;
   void (*prev_fn)(int);
@@ -228,27 +243,24 @@ int main(int argc,char**argv){
       logger.put(0, _("Can not start as a daemon"));
       exit(1);
     } 
+    //Write  pidfile 
+    logger.put(2,_("Opening pid file")+ string(" '")+ *conf.getPidFile()+string("'"));
+    ofstream pidfile(conf.getPidFile()->c_str(),ios_base::out);
+    if (!pidfile) {
+      logger.put(0, _("Can not open pid file")+string(" '")+*conf.getPidFile()+string("'") ) ; 
+    }
+    else {
+      logger.put(2,_("Write pid to the pid file") +string(" '")+*conf.getPidFile()+ string("'") );
+      pidfile << getpid()<<endl;
+      pidfile.close();
+    }
   }
-  //Write  pidfile 
-  logger.put(2,_("Opening pid file ") + *(conf.getPidFile()));
-  ofstream pidfile(conf.getPidFile()->c_str(),ios_base::out);
-  if (!pidfile) {
-    logger.put(0, _("Can not open pid file ") +*(conf.getPidFile()) ) ; 
-    exit(1);
-  }
-  else {
-    logger.put(2,_("Write pocess identificator into the pid file"));
-    pidfile << getpid()<<endl;
-    pidfile.close();
-  }
-  
   logger.put(2,_("Set session id"));
   sid=setsid();
   logger.put(2,_("Changing working directory"));
   iret=chdir("/");
   //Configuring counter 
   counter.setConf(&conf);
-  
   //Open socket
   unlink(conf.getSockFile()->c_str());
   serv_sock=socket(PF_LOCAL,SOCK_STREAM,0);
@@ -256,7 +268,9 @@ int main(int argc,char**argv){
   serv_addr.sun_family=AF_LOCAL;
   strcpy(serv_addr.sun_path,conf.getSockFile()->c_str()) ;
   if (bind(serv_sock,(struct sockaddr *)&serv_addr,SUN_LEN(&serv_addr))){
-    logger.put(2,_("Can not create  socket ") + *conf.getSockFile() );
+    logger.put(0,_("Can not create  socket") +string(" '")+ *conf.getSockFile()+string("'") );
+    logger.put(0,_("Error starting") + ' '+ string(program_name));
+    logger.put(0,_("Exit"));  
     exit(1);
   }
   int ret =chown(conf.getSockFile()->c_str(),getUid(conf.getSockUser()),getGid(conf.getSockGroup()));
@@ -269,17 +283,13 @@ int main(int argc,char**argv){
   while (canwork){
     if(!counter.calc(&canwork)) {
       logger.put(0,_("Can not calculate user traffic"));
-      exit(1);
     }
-    logger.put(2, _("Reconfiguring sqtd ")) ; 
+    logger.put(2, _("Reconfiguring sqtd")) ; 
     configured=conf.reconfig();
     if (!configured){
-      if (++confErrCount> 10){
         logger.put(0,_("Can not reconfigure sqtd"));
-	exit(1);
-      }
-    } else  if(confErrCount!=0) confErrCount=0;
-    os<< _("Waiting ") <<conf.getCheckInterval() <<_("s");
+    }
+    os<< _("Waiting") <<" "<<conf.getCheckInterval() <<_("s");
     logger.put(1, os.str());
     os.str("");
     sleep(conf.getCheckInterval());
@@ -287,7 +297,7 @@ int main(int argc,char**argv){
   close(serv_sock);
   unlink(conf.getPidFile()->c_str());
   unlink(conf.getSockFile()->c_str());
-  logger.put(0,_("Exit ")+  string(program_name));
+  logger.put(0,_("Exit")+string(" ")+  string(program_name));
   return 0;  
 }
 
