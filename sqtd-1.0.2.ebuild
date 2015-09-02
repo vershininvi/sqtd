@@ -8,11 +8,11 @@ inherit cmake-utils  git-2
 
 DESCRIPTION="Squd quotas traffic daemon"
 
-HOMEPAGE="http://code.google.com/p/sqtd/"
+HOMEPAGE="https://github.com/vershininvi/sqtd/wiki"
 
 SRC_URI=""
 
-EGIT_REPO_URI="https://code.google.com/p/sqtd/"
+EGIT_REPO_URI="https://github.com/vershininvi/sqtd"
 EGIT_COMMIT=${P}
 
 LICENSE="GPL-3"

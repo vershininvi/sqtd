@@ -1,7 +1,7 @@
 I. Getting sources
 
 You can get a local copy of the sqtd repository with this command:
-   git clone https://code.google.com/p/sqtd/ sqtd
+   git clone https://github.com/vershininvi/sqtd  sqtd
 
 II. Installation the sqtd from source
 
