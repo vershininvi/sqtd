@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-13 10:32+0300\n"
+"POT-Creation-Date: 2018-04-06 12:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,378 +17,378 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: /home/vvi/projects/sqtd/src/configfile.h:37
-msgid "Success check reading file"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:42
-msgid "Error check reading file"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:51
-msgid "Success check writing file"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:55
-msgid "Error check writing file"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:70
-msgid "Checking configuration key"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:74
-msgid "The squid access log file not specified"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:80
-msgid "Check interval is not specified"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:89
-msgid "Log file is not specified"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:94
-msgid "No pid file specified"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:100
-msgid "No sock file specified"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:105
-msgid "The SockOwner not specified"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:108
-msgid "The SockGroup not specified"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:111
-msgid "The SockMod not specified"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:114
-msgid "The SystemDomainDelimiter not specified"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:117
-msgid "The SquidDomainDelimiter  not specified"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:125
-msgid "Adding limit"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:140
-msgid "Can not add limit"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:141
-msgid "There are two types of limit (g -for group or  u for singe user))"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:151
-#: /home/vvi/projects/sqtd/src/configfile.h:155
-msgid "Error in limit's period  (h - hour,d - day,m - month), period"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:164
-msgid "Ignoring all other fields of limit"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:172
-#: /home/vvi/projects/sqtd/src/configfile.h:185
-msgid "Adding user limit"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:177
-msgid "Adding group limit"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:191
-msgid "The group is empty"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:196
-msgid "The count of user in group"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:200
-msgid "Can not get the group information"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:249
-msgid "Opening"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:252
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:134
-msgid "Can not open configuration file"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:258
-msgid "Reading configuration file"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:264
-msgid "Skip comment line"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:274
-msgid "Skip empty line"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:312
-msgid "Error adding limit in configuration file line"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:317
-#: /home/vvi/projects/sqtd/src/configfile.h:323
-msgid "Error in configuration file line"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:318
-msgid "Unknown key"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/configfile.h:333
-msgid "Checking configuration"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:69
-msgid "Error reading socket"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:225
-msgid "Starting"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:237
-msgid "Go to daemon mode"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:243
-msgid "Can not start as a daemon"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:247
-msgid "Opening pid file"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:250
-msgid "Can not open pid file"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:253
-msgid "Write pid to the pid file"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:258
-msgid "Set session id"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:260
-msgid "Changing working directory"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:271
-msgid "Can not create  socket"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:272
-msgid "Error starting"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:273
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:300
-msgid "Exit"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:285
-msgid "Can not calculate user traffic"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:287
-msgid "Reconfiguring sqtd"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:290
-msgid "Can not reconfigure sqtd"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:292
-msgid "Waiting"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:292
-msgid "s"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/tcounter.h:60
-msgid "Calculating user traffic"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/tcounter.h:72
-msgid "Error reading record from access log file"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/tcounter.h:74
-msgid "Wrong record "
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/tcounter.h:101
-msgid "Can not open  squid access log file"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/tlogger.h:78
-msgid "Can not open log file"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/tlogparser.h:39
-msgid "Opening the file"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/tlogparser.h:42
-msgid "Can not open file"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/tlogparser.h:53
-msgid "Start from position"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/tlogparser.h:58
-msgid "The  position is"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/tlogparser.h:59
-msgid "The last read record"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/tlogparser.h:60
-msgid "The record at position"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/tlogparser.h:61
-msgid "Starting read from begin of the file"
-msgstr ""
-
-#: /home/vvi/projects/sqtd/src/commandline.h:28
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:46
+#: /vagrant/projects/sqtd/src/commandline.h:28
+#: /vagrant/projects/sqtd/src/sqtc.cpp:46
 msgid "Usage: "
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/commandline.h:28
+#: /vagrant/projects/sqtd/src/commandline.h:28
 msgid "[OPTIONS]"
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/commandline.h:29
+#: /vagrant/projects/sqtd/src/commandline.h:29
 msgid " -c --config filename      full path to configuration file"
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/commandline.h:30
+#: /vagrant/projects/sqtd/src/commandline.h:30
 msgid " -h --help                 Display this usage information"
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/commandline.h:31
+#: /vagrant/projects/sqtd/src/commandline.h:31
 msgid ""
 " -n --no-daemon            do not start as daemon, output log to console"
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/commandline.h:32
+#: /vagrant/projects/sqtd/src/commandline.h:32
 msgid " -v --version              Print version messages"
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/commandline.h:33
+#: /vagrant/projects/sqtd/src/commandline.h:33
 msgid ""
 "The more information about program:\n"
 "\t man sqtd"
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:46
+#: /vagrant/projects/sqtd/src/configfile.h:37
+msgid "Success check reading file"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:42
+msgid "Error check reading file"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:51
+msgid "Success check writing file"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:55
+msgid "Error check writing file"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:70
+msgid "Checking configuration key"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:74
+msgid "The squid access log file not specified"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:80
+msgid "Check interval is not specified"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:89
+msgid "Log file is not specified"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:94
+msgid "No pid file specified"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:100
+msgid "No sock file specified"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:105
+msgid "The SockOwner not specified"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:108
+msgid "The SockGroup not specified"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:111
+msgid "The SockMod not specified"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:114
+msgid "The SystemDomainDelimiter not specified"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:117
+msgid "The SquidDomainDelimiter  not specified"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:125
+msgid "Adding limit"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:140
+msgid "Can not add limit"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:141
+msgid "There are two types of limit (g -for group or  u for singe user))"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:151
+#: /vagrant/projects/sqtd/src/configfile.h:155
+msgid "Error in limit's period  (h - hour,d - day,m - month), period"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:164
+msgid "Ignoring all other fields of limit"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:172
+#: /vagrant/projects/sqtd/src/configfile.h:185
+msgid "Adding user limit"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:177
+msgid "Adding group limit"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:191
+msgid "The group is empty"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:196
+msgid "The count of user in group"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:200
+msgid "Can not get the group information"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:249
+msgid "Opening"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:252
+#: /vagrant/projects/sqtd/src/sqtd.cpp:134
+msgid "Can not open configuration file"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:258
+msgid "Reading configuration file"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:264
+msgid "Skip comment line"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:274
+msgid "Skip empty line"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:312
+msgid "Error adding limit in configuration file line"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:317
+#: /vagrant/projects/sqtd/src/configfile.h:323
+msgid "Error in configuration file line"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:318
+msgid "Unknown key"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/configfile.h:333
+msgid "Checking configuration"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/sqtc.cpp:46
 msgid " options "
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:47
+#: /vagrant/projects/sqtd/src/sqtc.cpp:47
 msgid " -i --interactive             Interactive mode."
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:48
+#: /vagrant/projects/sqtd/src/sqtc.cpp:48
 msgid " -h --help                    Display this usage information."
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:49
+#: /vagrant/projects/sqtd/src/sqtc.cpp:49
 msgid " -l --light-mode              Return OK on error."
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:50
+#: /vagrant/projects/sqtd/src/sqtc.cpp:50
 msgid " -s --socket   filename       The sqtd socket file to connect (default "
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:51
+#: /vagrant/projects/sqtd/src/sqtc.cpp:51
 msgid " -d --debug    filename       The output debug info to specified file. "
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:57
+#: /vagrant/projects/sqtd/src/sqtc.cpp:57
 msgid "Enter command"
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:58
+#: /vagrant/projects/sqtd/src/sqtc.cpp:58
 msgid "The available commands is:"
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:59
+#: /vagrant/projects/sqtd/src/sqtc.cpp:59
 msgid "help               - show this help"
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:60
+#: /vagrant/projects/sqtd/src/sqtc.cpp:60
 msgid "config             - show current sqtd config"
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:61
+#: /vagrant/projects/sqtd/src/sqtc.cpp:61
 msgid "limits [USERNAME]  - show limits  for all or for one user"
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:62
+#: /vagrant/projects/sqtd/src/sqtc.cpp:62
 msgid "traf   [USERNAME]  - show traffic for all or for one user"
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:63
+#: /vagrant/projects/sqtd/src/sqtc.cpp:63
 msgid ""
 "user    USERNAME   - check user status (OK -can access , ERR -can not access)"
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:64
+#: /vagrant/projects/sqtd/src/sqtc.cpp:64
 msgid "quit               - exit program"
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:65
+#: /vagrant/projects/sqtd/src/sqtc.cpp:65
 msgid "Format of USERNAME : domain\\login, where \\ is domain delimiter"
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:90
+#: /vagrant/projects/sqtd/src/sqtc.cpp:90
 msgid "Can not connect to the socket"
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:91
+#: /vagrant/projects/sqtd/src/sqtc.cpp:91
 msgid "Check the sqtd is started and socket file exists"
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:154
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:159
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:171
+#: /vagrant/projects/sqtd/src/sqtc.cpp:154
+#: /vagrant/projects/sqtd/src/sqtc.cpp:159
+#: /vagrant/projects/sqtd/src/sqtc.cpp:171
 msgid "Return default value (can be changed with --lightmode option)"
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:166
+#: /vagrant/projects/sqtd/src/sqtc.cpp:166
 msgid "Response"
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:285
+#: /vagrant/projects/sqtd/src/sqtc.cpp:285
 msgid "Invalid command"
 msgstr ""
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:294
+#: /vagrant/projects/sqtd/src/sqtc.cpp:294
 msgid "Query"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:69
+msgid "Error reading socket"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:225
+msgid "Starting"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:237
+msgid "Go to daemon mode"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:243
+msgid "Can not start as a daemon"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:247
+msgid "Opening pid file"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:250
+msgid "Can not open pid file"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:253
+msgid "Write pid to the pid file"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:258
+msgid "Set session id"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:260
+msgid "Changing working directory"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:271
+msgid "Can not create  socket"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:272
+msgid "Error starting"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:273
+#: /vagrant/projects/sqtd/src/sqtd.cpp:300
+msgid "Exit"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:285
+msgid "Can not calculate user traffic"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:287
+msgid "Reconfiguring sqtd"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:290
+msgid "Can not reconfigure sqtd"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:292
+msgid "Waiting"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:292
+msgid "s"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/tcounter.h:60
+msgid "Calculating user traffic"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/tcounter.h:72
+msgid "Error reading record from access log file"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/tcounter.h:74
+msgid "Wrong record "
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/tcounter.h:101
+msgid "Can not open  squid access log file"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/tlogger.h:78
+msgid "Can not open log file"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/tlogparser.h:39
+msgid "Opening the file"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/tlogparser.h:42
+msgid "Can not open file"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/tlogparser.h:53
+msgid "Start from position"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/tlogparser.h:58
+msgid "The  position is"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/tlogparser.h:59
+msgid "The last read record"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/tlogparser.h:60
+msgid "The record at position"
+msgstr ""
+
+#: /vagrant/projects/sqtd/src/tlogparser.h:61
+msgid "Starting read from begin of the file"
 msgstr ""

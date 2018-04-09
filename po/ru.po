@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sqtd 1.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-13 10:10+0300\n"
+"POT-Creation-Date: 2018-04-06 11:50+0000\n"
 "PO-Revision-Date: 2015-05-13 10:32+0300\n"
 "Last-Translator:  <vershininvi@rambler.ru>\n"
 "Language-Team: Russian\n"
@@ -19,290 +19,34 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: /home/vvi/projects/sqtd/src/configfile.h:37
-msgid "Success check reading file"
-msgstr "Успешная проверка чтения файла"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:42
-msgid "Error check reading file"
-msgstr "Ошибка проверки чтения"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:51
-msgid "Success check writing file"
-msgstr "Успешная проверка записи файла"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:55
-msgid "Error check writing file"
-msgstr "Ошибка открытия файла на чтение"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:70
-msgid "Checking configuration key"
-msgstr "Проверка ключа конфигурации"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:74
-msgid "The squid access log file not specified"
-msgstr "Не указан путь к журналу доступа squid"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:80
-msgid "Check interval is not specified"
-msgstr "Период проверки не указан"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:89
-msgid "Log file is not specified"
-msgstr "Не указан файл журнала"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:94
-msgid "No pid file specified"
-msgstr "Не указан файл идентификатора процесса"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:100
-msgid "No sock file specified"
-msgstr "Не указан файл сокета"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:105
-msgid "The SockOwner not specified"
-msgstr "Не указан владелец сокета (SockOwner)"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:108
-msgid "The SockGroup not specified"
-msgstr "Не указана группа сокета (SockGroup)"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:111
-msgid "The SockMod not specified"
-msgstr "Не указан режим доступа к файлу сокета (SockMod)"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:114
-msgid "The SystemDomainDelimiter not specified"
-msgstr "Не указан системный разделитель домена и имени пользователя"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:117
-msgid "The SquidDomainDelimiter  not specified"
-msgstr "Не указан разделитель домена и имени пользователя squid"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:125
-msgid "Adding limit"
-msgstr "Добавление ограничения"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:140
-msgid "Can not add limit"
-msgstr "Невозможно добавление ограничения"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:141
-msgid "There are two types of limit (g -for group or  u for singe user))"
-msgstr "Типы ограничения (g для группы или u для пользователя)"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:151
-#: /home/vvi/projects/sqtd/src/configfile.h:155
-msgid "Error in limit's period  (h - hour,d - day,m - month), period"
-msgstr "Неверно указан период ограничения  (h - час,d - день,m - месяц), период"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:164
-msgid "Ignoring all other fields of limit"
-msgstr "Игнорирование дополнительных полей"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:172
-#: /home/vvi/projects/sqtd/src/configfile.h:185
-msgid "Adding user limit"
-msgstr "Добавление ограничения пользователя"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:177
-msgid "Adding group limit"
-msgstr "Добавление группового ограничения"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:191
-msgid "The group is empty"
-msgstr "Группа не содержит пользователей"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:196
-msgid "The count of user in group"
-msgstr "Количество пользователей в группе"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:200
-msgid "Can not get the group information"
-msgstr "Невозможно получить информацию о группе"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:249
-msgid "Opening"
-msgstr "Открытие"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:252
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:134
-msgid "Can not open configuration file"
-msgstr "Невозможно открыть файл конфигурации"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:258
-msgid "Reading configuration file"
-msgstr "Чтение конфигурационного файла"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:264
-msgid "Skip comment line"
-msgstr "Пропуск комментария"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:274
-msgid "Skip empty line"
-msgstr "Пропуск пустой строки"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:312
-msgid "Error adding limit in configuration file line"
-msgstr "Ошибка добавления лимита, строка конфигурационного файла"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:317
-#: /home/vvi/projects/sqtd/src/configfile.h:323
-msgid "Error in configuration file line"
-msgstr "Ошибка в строке конфигурационного файла"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:318
-msgid "Unknown key"
-msgstr "Неизвестный ключ файла конфигурации"
-
-#: /home/vvi/projects/sqtd/src/configfile.h:333
-msgid "Checking configuration"
-msgstr "Проверка конфигурации"
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:69
-msgid "Error reading socket"
-msgstr "Ошибка чтения сокета"
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:225
-msgid "Starting"
-msgstr "Запуск"
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:237
-msgid "Go to daemon mode"
-msgstr "Переход в режим демона"
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:243
-msgid "Can not start as a daemon"
-msgstr "Запуск демона невозможен "
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:247
-msgid "Opening pid file"
-msgstr "Открытие файла идентификатора процесса "
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:250
-msgid "Can not open pid file"
-msgstr "Невозможно открыть файл идентификатора процесса"
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:253
-msgid "Write pid to the pid file"
-msgstr "Запись идентификатора процесса в файл"
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:258
-msgid "Set session id"
-msgstr "Установка идентификатора сессии"
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:260
-msgid "Changing working directory"
-msgstr "Смена рабочего каталога"
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:271
-msgid "Can not create  socket"
-msgstr "Невозможно создание сокета"
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:272
-msgid "Error starting"
-msgstr "Ошибка запуска"
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:273
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:300
-msgid "Exit"
-msgstr "Выход"
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:285
-msgid "Can not calculate user traffic"
-msgstr "Невозможно рассчитать трафик"
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:287
-msgid "Reconfiguring sqtd"
-msgstr "Реконфигурация sqtd"
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:290
-msgid "Can not reconfigure sqtd"
-msgstr "Реконфигурация sqtd невозможна "
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:292
-msgid "Waiting"
-msgstr "Ожидание"
-
-#: /home/vvi/projects/sqtd/src/sqtd.cpp:292
-msgid "s"
-msgstr "сек"
-
-#: /home/vvi/projects/sqtd/src/tcounter.h:60
-msgid "Calculating user traffic"
-msgstr "Вычисление трафика пользователей "
-
-#: /home/vvi/projects/sqtd/src/tcounter.h:72
-msgid "Error reading record from access log file"
-msgstr "Ошибка чтения записи из файла журнала доступа squid"
-
-#: /home/vvi/projects/sqtd/src/tcounter.h:74
-msgid "Wrong record "
-msgstr "Ошибочная запись "
-
-#: /home/vvi/projects/sqtd/src/tcounter.h:101
-msgid "Can not open  squid access log file"
-msgstr "Невозможно открыть файл журнала доступа squid"
-
-#: /home/vvi/projects/sqtd/src/tlogger.h:78
-msgid "Can not open log file"
-msgstr "Невозможно открыть журнал"
-
-#: /home/vvi/projects/sqtd/src/tlogparser.h:39
-msgid "Opening the file"
-msgstr "Открытие файла"
-
-#: /home/vvi/projects/sqtd/src/tlogparser.h:42
-msgid "Can not open file"
-msgstr "Невозможно открыть файл"
-
-#: /home/vvi/projects/sqtd/src/tlogparser.h:53
-msgid "Start from position"
-msgstr "Обработка с позиции"
-
-#: /home/vvi/projects/sqtd/src/tlogparser.h:58
-msgid "The  position is"
-msgstr "Позиция"
-
-#: /home/vvi/projects/sqtd/src/tlogparser.h:59
-msgid "The last read record"
-msgstr "Последняя обработанная запись"
-
-#: /home/vvi/projects/sqtd/src/tlogparser.h:60
-msgid "The record at position"
-msgstr "Запись на позиции"
-
-#: /home/vvi/projects/sqtd/src/tlogparser.h:61
-msgid "Starting read from begin of the file"
-msgstr "Обработка с начала файла"
-
-#: /home/vvi/projects/sqtd/src/commandline.h:28
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:46
+#: /vagrant/projects/sqtd/src/commandline.h:28
+#: /vagrant/projects/sqtd/src/sqtc.cpp:46
 msgid "Usage: "
 msgstr "Использование"
 
-#: /home/vvi/projects/sqtd/src/commandline.h:28
+#: /vagrant/projects/sqtd/src/commandline.h:28
 msgid "[OPTIONS]"
 msgstr "[ПАРАМЕТРЫ]"
 
-#: /home/vvi/projects/sqtd/src/commandline.h:29
+#: /vagrant/projects/sqtd/src/commandline.h:29
 msgid " -c --config filename      full path to configuration file"
 msgstr " -c --config filename      Путь к файлу конфигурации "
 
-#: /home/vvi/projects/sqtd/src/commandline.h:30
+#: /vagrant/projects/sqtd/src/commandline.h:30
 msgid " -h --help                 Display this usage information"
 msgstr " -h --help                 Отображение справки"
 
-#: /home/vvi/projects/sqtd/src/commandline.h:31
+#: /vagrant/projects/sqtd/src/commandline.h:31
 msgid ""
 " -n --no-daemon            do not start as daemon, output log to console"
-msgstr " -n --no-daemon            Не запускать как сервис, выводить журнал в консоль"
+msgstr ""
+" -n --no-daemon            Не запускать как сервис, выводить журнал в консоль"
 
-#: /home/vvi/projects/sqtd/src/commandline.h:32
+#: /vagrant/projects/sqtd/src/commandline.h:32
 msgid " -v --version              Print version messages"
 msgstr " -v --version              Показать версию"
 
-#: /home/vvi/projects/sqtd/src/commandline.h:33
+#: /vagrant/projects/sqtd/src/commandline.h:33
 msgid ""
 "The more information about program:\n"
 "\t man sqtd"
@@ -310,97 +54,357 @@ msgstr ""
 "Дополнительная справка:\n"
 "\t man sqtd"
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:46
+#: /vagrant/projects/sqtd/src/configfile.h:37
+msgid "Success check reading file"
+msgstr "Успешная проверка чтения файла"
+
+#: /vagrant/projects/sqtd/src/configfile.h:42
+msgid "Error check reading file"
+msgstr "Ошибка проверки чтения"
+
+#: /vagrant/projects/sqtd/src/configfile.h:51
+msgid "Success check writing file"
+msgstr "Успешная проверка записи файла"
+
+#: /vagrant/projects/sqtd/src/configfile.h:55
+msgid "Error check writing file"
+msgstr "Ошибка открытия файла на чтение"
+
+#: /vagrant/projects/sqtd/src/configfile.h:70
+msgid "Checking configuration key"
+msgstr "Проверка ключа конфигурации"
+
+#: /vagrant/projects/sqtd/src/configfile.h:74
+msgid "The squid access log file not specified"
+msgstr "Не указан путь к журналу доступа squid"
+
+#: /vagrant/projects/sqtd/src/configfile.h:80
+msgid "Check interval is not specified"
+msgstr "Период проверки не указан"
+
+#: /vagrant/projects/sqtd/src/configfile.h:89
+msgid "Log file is not specified"
+msgstr "Не указан файл журнала"
+
+#: /vagrant/projects/sqtd/src/configfile.h:94
+msgid "No pid file specified"
+msgstr "Не указан файл идентификатора процесса"
+
+#: /vagrant/projects/sqtd/src/configfile.h:100
+msgid "No sock file specified"
+msgstr "Не указан файл сокета"
+
+#: /vagrant/projects/sqtd/src/configfile.h:105
+msgid "The SockOwner not specified"
+msgstr "Не указан владелец сокета (SockOwner)"
+
+#: /vagrant/projects/sqtd/src/configfile.h:108
+msgid "The SockGroup not specified"
+msgstr "Не указана группа сокета (SockGroup)"
+
+#: /vagrant/projects/sqtd/src/configfile.h:111
+msgid "The SockMod not specified"
+msgstr "Не указан режим доступа к файлу сокета (SockMod)"
+
+#: /vagrant/projects/sqtd/src/configfile.h:114
+msgid "The SystemDomainDelimiter not specified"
+msgstr "Не указан системный разделитель домена и имени пользователя"
+
+#: /vagrant/projects/sqtd/src/configfile.h:117
+msgid "The SquidDomainDelimiter  not specified"
+msgstr "Не указан разделитель домена и имени пользователя squid"
+
+#: /vagrant/projects/sqtd/src/configfile.h:125
+msgid "Adding limit"
+msgstr "Добавление ограничения"
+
+#: /vagrant/projects/sqtd/src/configfile.h:140
+msgid "Can not add limit"
+msgstr "Невозможно добавление ограничения"
+
+#: /vagrant/projects/sqtd/src/configfile.h:141
+msgid "There are two types of limit (g -for group or  u for singe user))"
+msgstr "Типы ограничения (g для группы или u для пользователя)"
+
+#: /vagrant/projects/sqtd/src/configfile.h:151
+#: /vagrant/projects/sqtd/src/configfile.h:155
+msgid "Error in limit's period  (h - hour,d - day,m - month), period"
+msgstr ""
+"Неверно указан период ограничения  (h - час,d - день,m - месяц), период"
+
+#: /vagrant/projects/sqtd/src/configfile.h:164
+msgid "Ignoring all other fields of limit"
+msgstr "Игнорирование дополнительных полей"
+
+#: /vagrant/projects/sqtd/src/configfile.h:172
+#: /vagrant/projects/sqtd/src/configfile.h:185
+msgid "Adding user limit"
+msgstr "Добавление ограничения пользователя"
+
+#: /vagrant/projects/sqtd/src/configfile.h:177
+msgid "Adding group limit"
+msgstr "Добавление группового ограничения"
+
+#: /vagrant/projects/sqtd/src/configfile.h:191
+msgid "The group is empty"
+msgstr "Группа не содержит пользователей"
+
+#: /vagrant/projects/sqtd/src/configfile.h:196
+msgid "The count of user in group"
+msgstr "Количество пользователей в группе"
+
+#: /vagrant/projects/sqtd/src/configfile.h:200
+msgid "Can not get the group information"
+msgstr "Невозможно получить информацию о группе"
+
+#: /vagrant/projects/sqtd/src/configfile.h:249
+msgid "Opening"
+msgstr "Открытие"
+
+#: /vagrant/projects/sqtd/src/configfile.h:252
+#: /vagrant/projects/sqtd/src/sqtd.cpp:134
+msgid "Can not open configuration file"
+msgstr "Невозможно открыть файл конфигурации"
+
+#: /vagrant/projects/sqtd/src/configfile.h:258
+msgid "Reading configuration file"
+msgstr "Чтение конфигурационного файла"
+
+#: /vagrant/projects/sqtd/src/configfile.h:264
+msgid "Skip comment line"
+msgstr "Пропуск комментария"
+
+#: /vagrant/projects/sqtd/src/configfile.h:274
+msgid "Skip empty line"
+msgstr "Пропуск пустой строки"
+
+#: /vagrant/projects/sqtd/src/configfile.h:312
+msgid "Error adding limit in configuration file line"
+msgstr "Ошибка добавления лимита, строка конфигурационного файла"
+
+#: /vagrant/projects/sqtd/src/configfile.h:317
+#: /vagrant/projects/sqtd/src/configfile.h:323
+msgid "Error in configuration file line"
+msgstr "Ошибка в строке конфигурационного файла"
+
+#: /vagrant/projects/sqtd/src/configfile.h:318
+msgid "Unknown key"
+msgstr "Неизвестный ключ файла конфигурации"
+
+#: /vagrant/projects/sqtd/src/configfile.h:333
+msgid "Checking configuration"
+msgstr "Проверка конфигурации"
+
+#: /vagrant/projects/sqtd/src/sqtc.cpp:46
 msgid " options "
 msgstr " параметры "
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:47
+#: /vagrant/projects/sqtd/src/sqtc.cpp:47
 msgid " -i --interactive             Interactive mode."
 msgstr " -i --interactive             Интерактивный режим."
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:48
+#: /vagrant/projects/sqtd/src/sqtc.cpp:48
 msgid " -h --help                    Display this usage information."
 msgstr " -h --help                    Отображение справки. "
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:49
+#: /vagrant/projects/sqtd/src/sqtc.cpp:49
 msgid " -l --light-mode              Return OK on error."
 msgstr " -l --light-mode              Возвращать OK при ошибках."
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:50
+#: /vagrant/projects/sqtd/src/sqtc.cpp:50
 msgid " -s --socket   filename       The sqtd socket file to connect (default "
 msgstr ""
 " -s --socket   имяфайла       Имя файла сокета (по умолчанию sqtd.sock)."
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:51
+#: /vagrant/projects/sqtd/src/sqtc.cpp:51
 msgid " -d --debug    filename       The output debug info to specified file. "
 msgstr " -d --debug    имяфайла       Вывести журнал отладки в файл. "
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:57
+#: /vagrant/projects/sqtd/src/sqtc.cpp:57
 msgid "Enter command"
 msgstr "Введите команду"
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:58
+#: /vagrant/projects/sqtd/src/sqtc.cpp:58
 msgid "The available commands is:"
 msgstr "Возможны следующие команды:"
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:59
+#: /vagrant/projects/sqtd/src/sqtc.cpp:59
 msgid "help               - show this help"
 msgstr "help               - Отображение справки"
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:60
+#: /vagrant/projects/sqtd/src/sqtc.cpp:60
 msgid "config             - show current sqtd config"
 msgstr "config             - показать текущую конфигурацию"
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:61
+#: /vagrant/projects/sqtd/src/sqtc.cpp:61
 msgid "limits [USERNAME]  - show limits  for all or for one user"
 msgstr ""
 "limits [USERNAME]  - показать ограничения для всех или для одного "
 "пользователя"
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:62
+#: /vagrant/projects/sqtd/src/sqtc.cpp:62
 msgid "traf   [USERNAME]  - show traffic for all or for one user"
 msgstr ""
 "traf   [USERNAME]  - показать трафик для всех или для одного пользователя"
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:63
+#: /vagrant/projects/sqtd/src/sqtc.cpp:63
 msgid ""
 "user    USERNAME   - check user status (OK -can access , ERR -can not access)"
 msgstr ""
 "user    USERNAME   - проверка статуса (OK - доступ открыт , ERR -доступ "
 "закрыт)"
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:64
+#: /vagrant/projects/sqtd/src/sqtc.cpp:64
 msgid "quit               - exit program"
 msgstr "quit               - выход из программы"
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:65
+#: /vagrant/projects/sqtd/src/sqtc.cpp:65
 msgid "Format of USERNAME : domain\\login, where \\ is domain delimiter"
 msgstr ""
 "Формат USERNAME : домен\\логин, где \\ - разделитель домена и имени "
 "пользователя"
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:90
+#: /vagrant/projects/sqtd/src/sqtc.cpp:90
 msgid "Can not connect to the socket"
 msgstr "Невозможносоединение с сокетом"
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:91
+#: /vagrant/projects/sqtd/src/sqtc.cpp:91
 msgid "Check the sqtd is started and socket file exists"
 msgstr "Проверьте, запущен ли sqtd и наличие и права  сокет файла"
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:154
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:159
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:171
+#: /vagrant/projects/sqtd/src/sqtc.cpp:154
+#: /vagrant/projects/sqtd/src/sqtc.cpp:159
+#: /vagrant/projects/sqtd/src/sqtc.cpp:171
 msgid "Return default value (can be changed with --lightmode option)"
-msgstr "Возврат значения по умолчанию (может быть изменено параметром командной строки --lightmode )"
+msgstr ""
+"Возврат значения по умолчанию (может быть изменено параметром командной "
+"строки --lightmode )"
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:166
+#: /vagrant/projects/sqtd/src/sqtc.cpp:166
 msgid "Response"
 msgstr "Ответ"
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:285
+#: /vagrant/projects/sqtd/src/sqtc.cpp:285
 msgid "Invalid command"
 msgstr "Неизвестная команда"
 
-#: /home/vvi/projects/sqtd/src/sqtc.cpp:294
+#: /vagrant/projects/sqtd/src/sqtc.cpp:294
 msgid "Query"
 msgstr "Запрос"
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:69
+msgid "Error reading socket"
+msgstr "Ошибка чтения сокета"
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:225
+msgid "Starting"
+msgstr "Запуск"
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:237
+msgid "Go to daemon mode"
+msgstr "Переход в режим демона"
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:243
+msgid "Can not start as a daemon"
+msgstr "Запуск демона невозможен "
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:247
+msgid "Opening pid file"
+msgstr "Открытие файла идентификатора процесса "
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:250
+msgid "Can not open pid file"
+msgstr "Невозможно открыть файл идентификатора процесса"
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:253
+msgid "Write pid to the pid file"
+msgstr "Запись идентификатора процесса в файл"
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:258
+msgid "Set session id"
+msgstr "Установка идентификатора сессии"
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:260
+msgid "Changing working directory"
+msgstr "Смена рабочего каталога"
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:271
+msgid "Can not create  socket"
+msgstr "Невозможно создание сокета"
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:272
+msgid "Error starting"
+msgstr "Ошибка запуска"
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:273
+#: /vagrant/projects/sqtd/src/sqtd.cpp:300
+msgid "Exit"
+msgstr "Выход"
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:285
+msgid "Can not calculate user traffic"
+msgstr "Невозможно рассчитать трафик"
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:287
+msgid "Reconfiguring sqtd"
+msgstr "Реконфигурация sqtd"
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:290
+msgid "Can not reconfigure sqtd"
+msgstr "Реконфигурация sqtd невозможна "
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:292
+msgid "Waiting"
+msgstr "Ожидание"
+
+#: /vagrant/projects/sqtd/src/sqtd.cpp:292
+msgid "s"
+msgstr "сек"
+
+#: /vagrant/projects/sqtd/src/tcounter.h:60
+msgid "Calculating user traffic"
+msgstr "Вычисление трафика пользователей "
+
+#: /vagrant/projects/sqtd/src/tcounter.h:72
+msgid "Error reading record from access log file"
+msgstr "Ошибка чтения записи из файла журнала доступа squid"
+
+#: /vagrant/projects/sqtd/src/tcounter.h:74
+msgid "Wrong record "
+msgstr "Ошибочная запись "
+
+#: /vagrant/projects/sqtd/src/tcounter.h:101
+msgid "Can not open  squid access log file"
+msgstr "Невозможно открыть файл журнала доступа squid"
+
+#: /vagrant/projects/sqtd/src/tlogger.h:78
+msgid "Can not open log file"
+msgstr "Невозможно открыть журнал"
+
+#: /vagrant/projects/sqtd/src/tlogparser.h:39
+msgid "Opening the file"
+msgstr "Открытие файла"
+
+#: /vagrant/projects/sqtd/src/tlogparser.h:42
+msgid "Can not open file"
+msgstr "Невозможно открыть файл"
+
+#: /vagrant/projects/sqtd/src/tlogparser.h:53
+msgid "Start from position"
+msgstr "Обработка с позиции"
+
+#: /vagrant/projects/sqtd/src/tlogparser.h:58
+msgid "The  position is"
+msgstr "Позиция"
+
+#: /vagrant/projects/sqtd/src/tlogparser.h:59
+msgid "The last read record"
+msgstr "Последняя обработанная запись"
+
+#: /vagrant/projects/sqtd/src/tlogparser.h:60
+msgid "The record at position"
+msgstr "Запись на позиции"
+
+#: /vagrant/projects/sqtd/src/tlogparser.h:61
+msgid "Starting read from begin of the file"
+msgstr "Обработка с начала файла"

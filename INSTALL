@@ -28,15 +28,16 @@ To uninstall program
 2    Uninstall program (make uninstall)
 3.   Check /usr/sharedoc/sqtd-* directory and remove it if unnecessary  (for default configuration)
 4.   Remove /var/lib/sqtd directory if unnecessary.
-5.   Remove /var/lib/sqtd directory if unnecessary.
+
 
 
 III. Installation for gentoo (www.gentoo.org)
 
 You can use  sqtd-*.ebuild file from source directory 
 
-IV.  Package for other *NIX 
-
+IV.  Package for other *NIX
+   You can make deb package from source  by "make package" or use prebuild one (for amd64).
+   
    Sorry, I can not create and support binary package for other *nix. 
    I believe, you can create it from source.
 
