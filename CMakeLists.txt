@@ -177,6 +177,19 @@ install ( DIRECTORY ${PROJECT_BINARY_DIR}/var/sqtd
           DESTINATION ${VAR_DIR}/lib 
 )
 
+SET(CPACK_GENERATOR "DEB")
+SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "Vershinin Vladimir <varshininvi@gmail.com") #required
+
+
+SET(CPACK_DEBIAN_PACKAGE_NAME     "sqtd")
+SET(CPACK_DEBIAN_PACKAGE_VERSION  "1.0.2+stretch") 
+SET(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "amd64") 
+SET(CPACK_DEBIAN_PACKAGE_DESCRIPTION "Squod quota traffic daemon")
+
+INCLUDE(CPack)
+ 
+
+
 #Adding unininstall target
 configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
